@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../Layout.astro';
+import { t, type Locale } from '../../i18n/strings';
+import { localeUrl } from '../../i18n/urls';
+import { siteSchema, type SiteConfig } from '../../content/config';
+import yaml from 'js-yaml';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const s = t(lang);
+
+// Astro 5 i18n routing strips locale dots from slugs (home.hi.md → slug "homehi"),
+// making getEntry()'s slug-based lookup unreliable. Use getCollection + filter on
+// the stable file id (e.g. "home.en.md") instead.
+const pages = await getCollection('pages');
+const entry = pages.find(p => p.id === `home.${lang}.md`);
+if (!entry) throw new Error(`Missing pages/home.${lang}.md`);
+const { Content } = await entry.render();
+
+// Resolve relative to project root — import.meta.url points to compiled chunks during build.
+const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
+const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
+---
+<Layout lang={lang} title={entry.data.title}>
+  <section class="hero">
+    <h1>{site.coupleNames.partner1} &amp; {site.coupleNames.partner2}</h1>
+    <p class="date">27 February 2027 · {site.venue.city}, {site.venue.country}</p>
+    <Content />
+    <div class="cta-row">
+      <a class="button" href={localeUrl(lang, '/rsvp/')}>{s.nav.rsvp}</a>
+      <a class="button button-secondary" href={localeUrl(lang, '/schedule/')}>{s.nav.schedule}</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero { text-align: center; padding: 2rem 0 3rem; }
+  .date { font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-text-muted); margin-bottom: 1.5rem; }
+  .cta-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .button-secondary { background: var(--color-accent); color: var(--color-text); }
+  .button-secondary:hover { background: var(--color-accent-light); }
+</style>
