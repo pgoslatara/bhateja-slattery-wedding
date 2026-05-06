@@ -1,0 +1,54 @@
+---
+import { t, type Locale } from '../i18n/strings';
+import { localeUrl } from '../i18n/urls';
+import LangToggle from './LangToggle.astro';
+
+interface Props { lang: Locale; currentPath: string }
+const { lang, currentPath } = Astro.props;
+const s = t(lang);
+---
+<header class="site-header">
+  <a class="brand" href={localeUrl(lang, '/')}>Apeksha &amp; Padraic</a>
+  <nav class="primary-nav" aria-label="Primary">
+    <a href={localeUrl(lang, '/schedule/')}>{s.nav.schedule}</a>
+    <a href={localeUrl(lang, '/travel/')}>{s.nav.travel}</a>
+    <a href={localeUrl(lang, '/rsvp/')}>{s.nav.rsvp}</a>
+    <a href={localeUrl(lang, '/faq/')}>{s.nav.faq}</a>
+    <a href={localeUrl(lang, '/photos/')}>{s.nav.photos}</a>
+  </nav>
+  <LangToggle lang={lang} currentPath={currentPath} />
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+  .brand {
+    font-family: var(--font-display);
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .primary-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .primary-nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.5rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .primary-nav a:hover { color: var(--color-primary); }
+</style>

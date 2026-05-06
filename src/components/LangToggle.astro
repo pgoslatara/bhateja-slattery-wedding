@@ -1,0 +1,23 @@
+---
+import type { Locale } from '../i18n/strings';
+import { otherLocaleUrlForCurrent } from '../i18n/urls';
+
+interface Props { lang: Locale; currentPath: string }
+const { lang, currentPath } = Astro.props;
+const otherUrl = otherLocaleUrlForCurrent(lang, currentPath);
+const otherLabel = lang === 'en' ? 'हिंदी' : 'EN';
+---
+<a class="lang-toggle" href={otherUrl} hreflang={lang === 'en' ? 'hi' : 'en'}>{otherLabel}</a>
+
+<style>
+  .lang-toggle {
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+</style>

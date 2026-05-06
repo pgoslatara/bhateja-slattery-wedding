@@ -1,0 +1,38 @@
+---
+import { t, type Locale } from '../i18n/strings';
+import { siteSchema, type SiteConfig } from '../content/config';
+import yaml from 'js-yaml';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const s = t(lang);
+
+// Resolve relative to project root — import.meta.url points to compiled chunks during build.
+const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
+const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
+const waLink = `https://wa.me/${site.contactWhatsApp.replace(/\D/g, '')}`;
+---
+<footer class="site-footer">
+  <div class="garland" aria-hidden="true"></div>
+  <p>{site.weddingDate} · {site.venue.city}, {site.venue.country}</p>
+  <p>{s.footer.contactPrefix} <a href={waLink}>{site.contactWhatsApp}</a></p>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 3rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+  }
+  .garland {
+    height: 24px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 50%, var(--color-accent) 100%);
+    margin: -2rem -1rem 1.5rem;
+    opacity: 0.7;
+  }
+  .site-footer a { color: var(--color-primary); }
+</style>
