@@ -59,7 +59,7 @@ dist/
   "type": "module",
   "private": true,
   "engines": {
-    "node": ">=22.11 <23"
+    "node": ">=22.11"
   },
   "scripts": {
     "dev": "astro dev",
@@ -166,7 +166,7 @@ npm install
 npm run build
 ```
 
-Expected: `npm install` completes; `npm run build` succeeds and writes `./dist/website-wedding/index.html`.
+Expected: `npm install` completes; `npm run build` succeeds and writes `./dist/index.html`. (Astro's `base` config controls URL prefix at runtime — links resolve under `/website-wedding/` — but does not nest the build output. GitHub Pages serves `./dist` under the repo path automatically.)
 
 - [ ] **Step 9: Commit**
 
