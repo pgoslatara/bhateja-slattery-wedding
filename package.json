@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "engines": {
-    "node": ">=22.11 <23"
+    "node": ">=22.11"
   },
   "scripts": {
     "dev": "astro dev",
