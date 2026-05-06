@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../Layout.astro';
+import type { Locale } from '../../i18n/strings';
+import { t } from '../../i18n/strings';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const s = t(lang);
+
+const all = await getCollection('schedule', e => e.id.endsWith(`.${lang}.md`));
+const day1 = all.filter(e => e.data.day === 1).sort((a, b) => a.data.order - b.data.order);
+const day2 = all.filter(e => e.data.day === 2).sort((a, b) => a.data.order - b.data.order);
+
+const dayLabel = (n: 1 | 2) => {
+  if (lang === 'en') return n === 1 ? 'Day 1 — 26 February 2027' : 'Day 2 — 27 February 2027';
+  return n === 1 ? 'दिन 1 — 26 फ़रवरी 2027' : 'दिन 2 — 27 फ़रवरी 2027';
+};
+---
+<Layout lang={lang} title={s.nav.schedule}>
+  <h1>{s.nav.schedule}</h1>
+  <div class="days">
+    {[{ n: 1 as const, items: day1 }, { n: 2 as const, items: day2 }].map(({ n, items }) => (
+      <section>
+        <h2>{dayLabel(n)}</h2>
+        {items.length === 0 && <p class="subtitle">TBD</p>}
+        {items.map(async (entry) => {
+          const { Content } = await entry.render();
+          return (
+            <article class="card schedule-event">
+              <header>
+                <h3>{entry.data.name}</h3>
+                <p class="time">
+                  {entry.data.startTime}
+                  {entry.data.endTime && entry.data.endTime !== entry.data.startTime ? ` – ${entry.data.endTime}` : ''}
+                </p>
+                {entry.data.location && <p class="subtitle">{entry.data.location}</p>}
+                {entry.data.dressCode && <p class="subtitle"><strong>{lang === 'en' ? 'Dress code' : 'ड्रेस कोड'}:</strong> {entry.data.dressCode}</p>}
+              </header>
+              <Content />
+            </article>
+          );
+        })}
+      </section>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .days { display: grid; gap: 2rem; }
+  @media (min-width: 1024px) { .days { grid-template-columns: 1fr 1fr; } }
+  .schedule-event { margin-bottom: 1rem; }
+  .schedule-event .time { font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-primary); margin: 0 0 0.25rem; }
+</style>
