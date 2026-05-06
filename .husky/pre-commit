@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Run translation parity check before allowing commit.
+npm run i18n:check
