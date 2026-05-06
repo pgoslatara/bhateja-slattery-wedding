@@ -16,6 +16,25 @@ const currentPath = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>{pageTitle}</title>
+    <script is:inline define:vars={{ baseUrl: import.meta.env.BASE_URL ?? '/' }}>
+      (function () {
+        try {
+          var stored = localStorage.getItem('wedding_lang');
+          var browserLang = (navigator.language || 'en').toLowerCase();
+          var preferred = stored || (browserLang.indexOf('hi') === 0 ? 'hi' : 'en');
+          if (!stored) localStorage.setItem('wedding_lang', preferred);
+          var path = location.pathname;
+          var trimmedBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+          var rest = path.startsWith(trimmedBase) ? path.slice(trimmedBase.length) : path;
+          var onHindi = rest === '/hi' || rest.indexOf('/hi/') === 0;
+          if (preferred === 'hi' && !onHindi) {
+            location.replace(trimmedBase + '/hi' + (rest === '/' ? '/' : rest));
+          } else if (preferred === 'en' && onHindi) {
+            location.replace(trimmedBase + (rest.replace(/^\/hi/, '') || '/'));
+          }
+        } catch (e) { /* fail open */ }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
