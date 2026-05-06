@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../Layout.astro';
+import { t, type Locale } from '../../i18n/strings';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const s = t(lang);
+
+const items = (await getCollection('faq', e => e.id.endsWith(`.${lang}.md`))).sort((a, b) => a.data.order - b.data.order);
+---
+<Layout lang={lang} title={s.nav.faq}>
+  <h1>{s.nav.faq}</h1>
+  <div class="faq-list">
+    {items.map(async (entry) => {
+      const { Content } = await entry.render();
+      return (
+        <details class="card faq-item">
+          <summary>{entry.data.question}</summary>
+          <div class="faq-body">
+            <Content />
+          </div>
+        </details>
+      );
+    })}
+  </div>
+</Layout>
+
+<style>
+  .faq-list { display: grid; gap: 0.75rem; }
+  .faq-item summary {
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.25rem 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .faq-body { padding: 0.5rem 0 0; }
+</style>
