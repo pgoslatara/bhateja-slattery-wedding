@@ -1,0 +1,12 @@
+coupleNames:
+  partner1: Apeksha
+  partner2: Padraic
+weddingDate: '2027-02-27'
+venue:
+  name: TBD
+  addressShort: Gurgaon, India
+  city: Gurgaon
+  country: India
+  mapUrl: 'https://maps.google.com/?q=Gurgaon'
+contactWhatsApp: '+919000000000'
+# photosAlbumUrl filled in post-wedding
