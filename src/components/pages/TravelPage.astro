@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../Layout.astro';
+import { t, type Locale } from '../../i18n/strings';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const s = t(lang);
+
+const pages = await getCollection('pages');
+const entry = pages.find(p => p.id === `travel.${lang}.md`);
+if (!entry) throw new Error(`Missing pages/travel.${lang}.md`);
+const { Content } = await entry.render();
+---
+<Layout lang={lang} title={s.nav.travel}>
+  <h1>{entry.data.title}</h1>
+  <article class="card">
+    <Content />
+  </article>
+</Layout>
