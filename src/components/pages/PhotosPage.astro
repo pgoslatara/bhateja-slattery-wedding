@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../Layout.astro';
+import { t, type Locale } from '../../i18n/strings';
+import { siteSchema, type SiteConfig } from '../../content/config';
+import yaml from 'js-yaml';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const s = t(lang);
+
+const pages = await getCollection('pages');
+const entry = pages.find(p => p.id === `photos.${lang}.md`);
+if (!entry) throw new Error(`Missing pages/photos.${lang}.md`);
+const { Content } = await entry.render();
+
+const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
+const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
+---
+<Layout lang={lang} title={s.nav.photos}>
+  <h1>{s.nav.photos}</h1>
+  {site.photosAlbumUrl ? (
+    <p>
+      <a class="button" href={site.photosAlbumUrl} target="_blank" rel="noopener">{lang === 'en' ? 'View album' : 'एल्बम देखें'}</a>
+    </p>
+  ) : (
+    <article class="card">
+      <Content />
+    </article>
+  )}
+</Layout>
