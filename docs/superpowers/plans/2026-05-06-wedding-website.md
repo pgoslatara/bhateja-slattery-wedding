@@ -598,11 +598,14 @@ test('reports missing English pair', () => {
   }
 });
 
+// At this point, only file-pairing is validated. The hash field is not enforced yet —
+// Task 7 adds the hash check AND replaces this test with a stronger "clean tree with valid hash"
+// version (so don't worry if removing the placeholder enHash here looks under-tested for a moment).
 test('clean tree returns no errors', () => {
   const dir = makeContentDir();
   try {
     dir.write('schedule/01-event.en.md', '---\nday: 1\norder: 1\nname: x\nstartTime: TBD\nendTime: TBD\n---\nbody\n');
-    dir.write('schedule/01-event.hi.md', '---\nday: 1\norder: 1\nname: y\nstartTime: TBD\nendTime: TBD\nenHash: 0000000000000000000000000000000000000000000000000000000000000000\n---\nbody\n');
+    dir.write('schedule/01-event.hi.md', '---\nday: 1\norder: 1\nname: y\nstartTime: TBD\nendTime: TBD\n---\nbody\n');
     const errors = runCheck({ contentRoot: dir.root });
     assert.equal(errors.length, 0);
   } finally {
@@ -610,6 +613,8 @@ test('clean tree returns no errors', () => {
   }
 });
 ```
+
+**Important:** Task 7 will add hash enforcement, at which point this "clean tree" test must be removed or updated to include a real `enHash`. The new "clean tree with valid hash" test in Task 7 supersedes it — when implementing Task 7, **delete this test** to avoid a stale assertion.
 
 - [ ] **Step 2: Run test — expect failure**
 
@@ -844,7 +849,9 @@ function parseFrontmatter(text) {
     let value = line.slice(colonIdx + 1).trim();
     if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
       value = value.slice(1, -1);
-    } else if (/^-?\d+$/.test(value)) {
+    } else if (/^-?\d+$/.test(value) && value.length <= 15) {
+      // Only coerce short digit strings — long ones (e.g. an all-digit SHA256 hash)
+      // would lose precision as JS floats and break the enHash check.
       value = Number(value);
     }
     out[key] = value;
