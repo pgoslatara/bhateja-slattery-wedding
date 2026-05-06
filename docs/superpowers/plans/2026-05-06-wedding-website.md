@@ -67,7 +67,7 @@ dist/
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "test": "node --test tests",
+    "test": "node --test 'tests/**/*.test.mjs'",
     "i18n:check": "node scripts/i18n-check.mjs",
     "i18n:rehash": "node scripts/i18n-rehash.mjs",
     "script:push": "clasp push",
@@ -2284,7 +2284,7 @@ The TypeScript file is imported by `node --test` via Node's experimental TS supp
 `package.json`:
 
 ```json
-"test": "node --experimental-strip-types --no-warnings --test tests"
+"test": "node --experimental-strip-types --no-warnings --test 'tests/**/*.test.mjs'"
 ```
 
 (Replaces the previous `"test": "node --test tests"` line.)
