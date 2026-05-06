@@ -1897,6 +1897,8 @@ git commit -m "feat: home page with hero and CTAs"
 
 - [ ] **Step 1: Create `src/components/pages/SchedulePage.astro`**
 
+> **Note**: Astro 5 i18n routing strips locale dots from the URL slug, but the content-collection `id` field still contains the raw filename (e.g. `01-mehendi.en.md`). Filter on `id.endsWith('.${lang}.md')` — see HomePage.astro from Task 13 for the working pattern.
+
 ```astro
 ---
 import { getCollection } from 'astro:content';
@@ -1908,7 +1910,7 @@ interface Props { lang: Locale }
 const { lang } = Astro.props;
 const s = t(lang);
 
-const all = await getCollection('schedule', e => e.id.endsWith(`.${lang}`));
+const all = await getCollection('schedule', e => e.id.endsWith(`.${lang}.md`));
 const day1 = all.filter(e => e.data.day === 1).sort((a, b) => a.data.order - b.data.order);
 const day2 = all.filter(e => e.data.day === 2).sort((a, b) => a.data.order - b.data.order);
 
@@ -1995,9 +1997,11 @@ git commit -m "feat: schedule page with two-day timeline"
 
 - [ ] **Step 1: Create `src/components/pages/TravelPage.astro`**
 
+> **Note**: Use `getCollection('pages').find(p => p.id === 'travel.${lang}.md')` instead of `getEntry`. Astro 5 i18n routing breaks slug-based lookups for files containing locale dots — see HomePage.astro from Task 13 for the working pattern.
+
 ```astro
 ---
-import { getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Layout from '../Layout.astro';
 import { t, type Locale } from '../../i18n/strings';
 
@@ -2005,8 +2009,9 @@ interface Props { lang: Locale }
 const { lang } = Astro.props;
 const s = t(lang);
 
-const entry = await getEntry('pages', `travel.${lang}`);
-if (!entry) throw new Error(`Missing pages/travel.${lang}`);
+const pages = await getCollection('pages');
+const entry = pages.find(p => p.id === `travel.${lang}.md`);
+if (!entry) throw new Error(`Missing pages/travel.${lang}.md`);
 const { Content } = await entry.render();
 ---
 <Layout lang={lang} title={s.nav.travel}>
@@ -2070,7 +2075,7 @@ interface Props { lang: Locale }
 const { lang } = Astro.props;
 const s = t(lang);
 
-const items = (await getCollection('faq', e => e.id.endsWith(`.${lang}`))).sort((a, b) => a.data.order - b.data.order);
+const items = (await getCollection('faq', e => e.id.endsWith(`.${lang}.md`))).sort((a, b) => a.data.order - b.data.order);
 ---
 <Layout lang={lang} title={s.nav.faq}>
   <h1>{s.nav.faq}</h1>
@@ -2148,24 +2153,28 @@ git commit -m "feat: FAQ page with accordions"
 
 - [ ] **Step 1: Create `src/components/pages/PhotosPage.astro`**
 
+> **Note**: Use `getCollection('pages').find(...)` instead of `getEntry` (Astro 5 i18n slug issue), and read `site.yaml` via `process.cwd()` (Vite-bundled component limitation). Both patterns are established in HomePage.astro from Task 13 — copy from there.
+
 ```astro
 ---
-import { getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Layout from '../Layout.astro';
 import { t, type Locale } from '../../i18n/strings';
 import { siteSchema, type SiteConfig } from '../../content/config';
 import yaml from 'js-yaml';
 import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 const s = t(lang);
 
-const entry = await getEntry('pages', `photos.${lang}`);
-if (!entry) throw new Error(`Missing pages/photos.${lang}`);
+const pages = await getCollection('pages');
+const entry = pages.find(p => p.id === `photos.${lang}.md`);
+if (!entry) throw new Error(`Missing pages/photos.${lang}.md`);
 const { Content } = await entry.render();
 
-const siteRaw = readFileSync(new URL('../../content/site.yaml', import.meta.url), 'utf8');
+const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
 const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
 ---
 <Layout lang={lang} title={s.nav.photos}>
