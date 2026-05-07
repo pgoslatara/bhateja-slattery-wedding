@@ -1,0 +1,26 @@
+name: PR checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run i18n:check
+      - run: npx astro sync
+      - run: npx astro check
+      - run: npm test
+      - run: npm run build
+        env:
+          PUBLIC_APPS_SCRIPT_URL: https://example.invalid/exec
+          SITE_URL: https://example.github.io
