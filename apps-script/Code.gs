@@ -39,7 +39,10 @@ function doPost(e) {
 }
 
 function doGet() {
-  return jsonResponse({ status: 'error', code: 'invalid_origin' }, 405);
+  // ContentService has no HTTP status-code setter — Apps Script web apps
+  // always respond 200 unless they throw. Returning an error code in the
+  // body is the closest we can get for "method not allowed".
+  return jsonResponse({ status: 'error', code: 'invalid_origin' });
 }
 
 function jsonResponse(obj) {
