@@ -13,9 +13,17 @@ function loadLib() {
 
 test('parsePayload returns ok for valid JSON', () => {
   const { parsePayload } = loadLib();
-  const r = parsePayload('{"leadName":"X","whatsapp":"+919999999999","day1Attending":"yes","day2Attending":"no","accommodation":"sorted","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":""}');
+  const r = parsePayload('{"leadName":"X","whatsapp":"+919999999999","day1Attending":"yes","day2Attending":"no","accommodation":"sorted","requiresVisa":"no","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":""}');
   assert.equal(r.ok, true);
   assert.equal(r.value.leadName, 'X');
+  assert.equal(r.value.requiresVisa, 'no');
+});
+
+test('parsePayload returns invalid_payload when requiresVisa missing', () => {
+  const { parsePayload } = loadLib();
+  const r = parsePayload('{"leadName":"X","whatsapp":"+919999999999","day1Attending":"yes","day2Attending":"no","accommodation":"sorted","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":""}');
+  assert.equal(r.ok, false);
+  assert.equal(r.code, 'invalid_payload');
 });
 
 test('parsePayload returns invalid_payload for missing required fields', () => {

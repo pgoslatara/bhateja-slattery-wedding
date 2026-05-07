@@ -22,6 +22,7 @@ function readForm(form: HTMLFormElement): RsvpInput {
     arrival: String(fd.get('arrival') ?? ''),
     departure: String(fd.get('departure') ?? ''),
     accommodation: (fd.get('accommodation') as RsvpInput['accommodation']) ?? '',
+    requiresVisa: (fd.get('requiresVisa') as RsvpInput['requiresVisa']) ?? '',
     whatsapp: String(fd.get('whatsapp') ?? ''),
     notes: String(fd.get('notes') ?? ''),
     honeypot: String(fd.get('favourite_pet') ?? '')

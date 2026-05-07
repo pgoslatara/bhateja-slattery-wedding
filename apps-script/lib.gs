@@ -35,6 +35,9 @@ function parsePayload(rawBody) {
   if (['sorted', 'recommended', 'help'].indexOf(data.accommodation) === -1) {
     return { ok: false, code: 'invalid_payload' };
   }
+  if (data.requiresVisa !== 'yes' && data.requiresVisa !== 'no') {
+    return { ok: false, code: 'invalid_payload' };
+  }
   return { ok: true, value: data };
 }
 

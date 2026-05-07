@@ -12,6 +12,7 @@ const baseValid = {
   arrival: '',
   departure: '',
   accommodation: 'sorted',
+  requiresVisa: 'no',
   whatsapp: '+919999999999',
   notes: '',
   honeypot: ''
@@ -50,4 +51,10 @@ test('strips empty additional guests', () => {
   const r = validateRsvp({ ...baseValid, additionalGuests: ['', '  ', 'Real Person'] });
   assert.equal(r.ok, true);
   assert.deepEqual(r.value.additionalGuests, ['Real Person']);
+});
+
+test('passes requiresVisa through unchanged', () => {
+  const r = validateRsvp({ ...baseValid, requiresVisa: 'yes' });
+  assert.equal(r.ok, true);
+  assert.equal(r.value.requiresVisa, 'yes');
 });

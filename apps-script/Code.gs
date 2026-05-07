@@ -1,5 +1,5 @@
 var ALLOWED_ORIGINS = [
-  'https://example.github.io'  // Replace with the deployed origin once known.
+  'https://pgoslatara.github.io'  // Replace with the deployed origin once known.
 ];
 var THROTTLE_WINDOW_MS = 10000;
 var SUBMISSIONS_TAB = 'submissions';
@@ -54,7 +54,8 @@ function createSubmissionsSheet() {
   var sheet = ss.insertSheet(SUBMISSIONS_TAB);
   sheet.appendRow([
     'timestamp', 'lead_name', 'additional_guests', 'day1_attending', 'day2_attending',
-    'dietary', 'dietary_other', 'arrival', 'departure', 'accommodation', 'whatsapp', 'notes', 'raw_json'
+    'dietary', 'dietary_other', 'arrival', 'departure', 'accommodation', 'whatsapp', 'notes', 'raw_json',
+    'requires_visa'
   ]);
   return sheet;
 }
@@ -86,6 +87,7 @@ function appendRow(sheet, nowMs, d) {
     d.accommodation,
     d.whatsapp,
     d.notes || '',
-    JSON.stringify(d)
+    JSON.stringify(d),
+    d.requiresVisa || ''
   ]);
 }

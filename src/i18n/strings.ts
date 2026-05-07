@@ -41,6 +41,7 @@ export const strings = {
         recommended: "I'd like to stay at the recommended hotel",
         help: 'I need help booking'
       },
+      visaQuestion: 'Will you need a visa to enter India?',
       whatsapp: 'WhatsApp number',
       whatsappPlaceholder: '+91 …',
       notes: 'Anything else?',
@@ -104,6 +105,7 @@ export const strings = {
         recommended: 'मुझे सुझाए गए होटल में रहना है',
         help: 'मुझे बुकिंग में मदद चाहिए'
       },
+      visaQuestion: 'क्या आपको भारत में प्रवेश के लिए वीज़ा की आवश्यकता होगी?',
       whatsapp: 'व्हाट्सऐप नंबर',
       whatsappPlaceholder: '+91 …',
       notes: 'और कुछ?',

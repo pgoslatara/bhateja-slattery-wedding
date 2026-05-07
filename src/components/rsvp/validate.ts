@@ -8,6 +8,7 @@ export type RsvpInput = {
   arrival: string;
   departure: string;
   accommodation: 'sorted' | 'recommended' | 'help' | '';
+  requiresVisa: 'yes' | 'no' | '';
   whatsapp: string;
   notes: string;
   honeypot: string;
@@ -56,6 +57,7 @@ export function validateRsvp(raw: RsvpInput): Validated {
       arrival: cap(trim(raw.arrival)),
       departure: cap(trim(raw.departure)),
       accommodation: raw.accommodation,
+      requiresVisa: raw.requiresVisa,
       whatsapp,
       notes: cap(trim(raw.notes)),
       honeypot: ''

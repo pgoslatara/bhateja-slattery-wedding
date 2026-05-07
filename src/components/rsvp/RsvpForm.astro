@@ -61,6 +61,12 @@ const s = t(lang).rsvp;
     ))}
   </fieldset>
 
+  <fieldset class="field">
+    <legend>{s.visaQuestion}</legend>
+    <label><input type="radio" name="requiresVisa" value="yes" required /> {s.yes}</label>
+    <label><input type="radio" name="requiresVisa" value="no" /> {s.no}</label>
+  </fieldset>
+
   <div class="field">
     <label for="whatsapp">{s.whatsapp}</label>
     <input id="whatsapp" name="whatsapp" type="tel" placeholder={s.whatsappPlaceholder} required maxlength="20" />
