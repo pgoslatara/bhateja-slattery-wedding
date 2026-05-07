@@ -12,7 +12,7 @@ export const strings = {
       photos: 'Photos'
     },
     footer: {
-      contactPrefix: 'Questions? Message us on WhatsApp'
+      contactPrefix: 'Questions, complaints, or marriage advice? WhatsApp us'
     },
     donations: {
       eurLabel: 'EUR (Euro)',
@@ -53,13 +53,13 @@ export const strings = {
       whatsappPlaceholder: '+91 …',
       notes: 'Anything else?',
       submit: 'Send RSVP',
-      submitting: 'Submitting your RSVP…',
+      submitting: 'Locking you in…',
       successTitle: 'Thank you!',
       successBody:
-        '{name}, Apeksha and Padraic have your RSVP. To change anything, just resubmit. We\'ll be in touch on WhatsApp closer to the date.',
+        'Got it, {name}. You\'re officially on the list. Try not to be late — Apeksha will notice. Change your answer anytime by resubmitting; we\'ll WhatsApp closer to the date.',
       errors: {
         invalid_payload: 'Please check the highlighted fields and resubmit.',
-        throttled: 'Looks like you just submitted — please wait a few seconds and try again.',
+        throttled: 'Slow down — you just submitted. Try again in a few seconds.',
         network: 'Something went wrong — please try again, or message us on WhatsApp.',
         internal: 'Something went wrong — please try again, or message us on WhatsApp.',
         invalid_origin: 'Something went wrong — please try again, or message us on WhatsApp.',
@@ -92,7 +92,7 @@ export const strings = {
       photos: 'तस्वीरें'
     },
     footer: {
-      contactPrefix: 'कोई प्रश्न? व्हाट्सऐप पर संदेश भेजें:'
+      contactPrefix: 'कोई सवाल, शिकायत, या शादी की सलाह? व्हाट्सऐप करें:'
     },
     donations: {
       eurLabel: 'EUR (यूरो)',
@@ -133,13 +133,13 @@ export const strings = {
       whatsappPlaceholder: '+91 …',
       notes: 'और कुछ?',
       submit: 'RSVP भेजें',
-      submitting: 'आपका RSVP भेजा जा रहा है…',
+      submitting: 'आपकी कुर्सी पक्की कर रहे हैं…',
       successTitle: 'धन्यवाद!',
       successBody:
-        '{name}, अपेक्षा और पैड्रिक को आपका RSVP मिल गया है। कुछ बदलना हो तो फिर से भेज दीजिए। शादी के क़रीब हम व्हाट्सऐप पर संपर्क करेंगे।',
+        'मिल गया, {name}। आप आधिकारिक तौर पर सूची में हैं। देर मत करना — अपेक्षा देख लेगी। कुछ बदलना हो तो फिर से भेज दीजिए; शादी के क़रीब व्हाट्सऐप पर संपर्क करेंगे।',
       errors: {
         invalid_payload: 'कृपया चिह्नित फ़ील्ड जाँचें और फिर से भेजें।',
-        throttled: 'लगता है आपने अभी-अभी भेजा है — कुछ सेकंड रुककर फिर कोशिश करें।',
+        throttled: 'धीरे-धीरे — आपने अभी-अभी भेजा है। कुछ सेकंड बाद फिर कोशिश करें।',
         network: 'कुछ गड़बड़ हुई — फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',
         internal: 'कुछ गड़बड़ हुई — फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',
         invalid_origin: 'कुछ गड़बड़ हुई — फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',

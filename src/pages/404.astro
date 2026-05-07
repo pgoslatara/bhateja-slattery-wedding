@@ -1,0 +1,53 @@
+---
+import Layout from '../components/Layout.astro';
+---
+<Layout lang="en" title="Page not found">
+  <section class="not-found">
+    <h1>404 — this page got cold feet.</h1>
+    <p>Maybe it eloped. Try one of these instead:</p>
+    <ul class="lost-and-found">
+      <li><a href="/website-wedding/">Home</a></li>
+      <li><a href="/website-wedding/schedule/">Schedule</a></li>
+      <li><a href="/website-wedding/travel/">Travel</a></li>
+      <li><a href="/website-wedding/rsvp/">RSVP</a></li>
+      <li><a href="/website-wedding/donations/">Donations</a></li>
+      <li><a href="/website-wedding/faq/">FAQ</a></li>
+      <li><a href="/website-wedding/photos/">Photos</a></li>
+    </ul>
+    <p class="subtitle">If you think this page should exist, WhatsApp us — possibly we lost it.</p>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+  }
+  .not-found h1 {
+    color: var(--color-primary);
+    text-shadow: 0 1px 2px rgba(253, 245, 212, 0.7);
+  }
+  .lost-and-found {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+    max-width: 32rem;
+  }
+  .lost-and-found a {
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .lost-and-found a:hover {
+    background: var(--color-accent-light);
+  }
+</style>
