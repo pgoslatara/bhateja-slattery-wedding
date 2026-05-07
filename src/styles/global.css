@@ -43,6 +43,8 @@ main { max-width: var(--max-content); margin: 0 auto; padding: 1.5rem 1rem; }
   min-height: 44px;
 }
 .button:hover { background: var(--color-primary-dark); }
+.button-secondary { background: var(--color-accent); color: var(--color-text); }
+.button-secondary:hover { background: var(--color-accent-light); }
 
 input, select, textarea {
   font: inherit;

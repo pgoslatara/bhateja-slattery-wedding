@@ -1,0 +1,21 @@
+---
+import Layout from '../Layout.astro';
+import RsvpForm from '../rsvp/RsvpForm.astro';
+import { t, type Locale } from '../../i18n/strings';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const s = t(lang);
+const appsScriptUrl = import.meta.env.PUBLIC_APPS_SCRIPT_URL ?? '';
+---
+<Layout lang={lang} title={s.nav.rsvp}>
+  <h1>{s.rsvp.formTitle}</h1>
+  {appsScriptUrl ? (
+    <RsvpForm lang={lang} appsScriptUrl={appsScriptUrl} />
+  ) : (
+    <p class="error-text">{lang === 'en' ? 'RSVP endpoint not configured. Set PUBLIC_APPS_SCRIPT_URL.' : 'RSVP endpoint कॉन्फ़िगर नहीं है।'}</p>
+  )}
+  <script>
+    import '../rsvp/client';
+  </script>
+</Layout>
