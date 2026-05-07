@@ -2671,7 +2671,9 @@ const appsScriptUrl = import.meta.env.PUBLIC_APPS_SCRIPT_URL ?? '';
     <p class="error-text">{lang === 'en' ? 'RSVP endpoint not configured. Set PUBLIC_APPS_SCRIPT_URL.' : 'RSVP endpoint कॉन्फ़िगर नहीं है।'}</p>
   )}
   <script>
-    import '../../rsvp/client';
+    // RsvpPage lives at src/components/pages/, client at src/components/rsvp/, so the
+    // relative path from this file is `../rsvp/client` (one level up to components/, then into rsvp/).
+    import '../rsvp/client';
   </script>
 </Layout>
 ```
