@@ -1,78 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
   <!--
-    Subtle decorative frieze — alternating windmills and bicycles in stylised
-    line-art, evoking Amsterdam (where Apeksha and Padraic live). Used as a
-    thin band at the top of every page in Layout.astro. Themed via
-    currentColor; the consuming element sets a low opacity to keep it
-    decorative rather than eye-catching.
+    Decorative scatter — windmills and bicycles in stylised line-art at
+    varied positions, sizes and slight rotations. Used as a top-third
+    page accent in Layout.astro; the consumer applies a vertical mask
+    gradient to fade the lower portion. Themed via currentColor.
   -->
-  <g fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-
-    <!-- Windmill 1 -->
-    <g transform="translate(80, 0)">
-      <path d="M -8 36 L 8 36 L 5 18 L -5 18 Z" stroke="none"/>
-      <path d="M -5 18 L 5 18 L 0 14 Z" stroke="none"/>
-      <line x1="-10" y1="4" x2="10" y2="24" stroke-width="1.8"/>
-      <line x1="-10" y1="24" x2="10" y2="4" stroke-width="1.8"/>
-      <circle cx="0" cy="14" r="1.8" stroke="none"/>
+  <defs>
+    <g id="windmill" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Sails (X cross through hub at 0,0) -->
+      <line x1="-22" y1="-22" x2="22" y2="22" stroke-width="2.6"/>
+      <line x1="-22" y1="22" x2="22" y2="-22" stroke-width="2.6"/>
+      <!-- Hub -->
+      <circle cx="0" cy="0" r="3" stroke="none"/>
+      <!-- Cap (block under hub) -->
+      <rect x="-7" y="2" width="14" height="7" stroke="none"/>
+      <!-- Tower trapezoid -->
+      <path d="M -7 9 L 7 9 L 11 34 L -11 34 Z" stroke="none"/>
     </g>
-
-    <!-- Bicycle 1 -->
-    <g transform="translate(240, 0)" fill="none" stroke-width="1.6">
-      <circle cx="-12" cy="28" r="7"/>
-      <circle cx="12" cy="28" r="7"/>
-      <path d="M -12 28 L 0 16 L 12 28"/>
-      <path d="M 0 16 L -2 28"/>
-      <path d="M 12 16 L 14 14"/>
-      <line x1="-4" y1="14" x2="2" y2="14" stroke-width="1.4"/>
+    <g id="bicycle" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Wheels -->
+      <circle cx="-18" cy="12" r="10"/>
+      <circle cx="18" cy="12" r="10"/>
+      <!-- Frame: top tube + down tube -->
+      <path d="M -18 12 L 0 -2 L 18 12"/>
+      <!-- Seat tube -->
+      <path d="M 0 -2 L -3 12"/>
+      <!-- Handlebar -->
+      <path d="M 18 -2 L 22 -6"/>
+      <!-- Saddle -->
+      <line x1="-6" y1="-6" x2="3" y2="-6" stroke-width="1.8"/>
     </g>
+  </defs>
 
-    <!-- Windmill 2 -->
-    <g transform="translate(400, 0)">
-      <path d="M -8 36 L 8 36 L 5 18 L -5 18 Z" stroke="none"/>
-      <path d="M -5 18 L 5 18 L 0 14 Z" stroke="none"/>
-      <line x1="-10" y1="4" x2="10" y2="24" stroke-width="1.8"/>
-      <line x1="-10" y1="24" x2="10" y2="4" stroke-width="1.8"/>
-      <circle cx="0" cy="14" r="1.8" stroke="none"/>
-    </g>
+  <!-- Top band: dense, mostly upright -->
+  <use href="#windmill" transform="translate(120 80) rotate(-8)"/>
+  <use href="#bicycle"  transform="translate(310 110) rotate(5)"/>
+  <use href="#windmill" transform="translate(510 75) rotate(12)"/>
+  <use href="#bicycle"  transform="translate(710 100) rotate(-7)"/>
+  <use href="#windmill" transform="translate(900 85) rotate(6) scale(1.05)"/>
+  <use href="#bicycle"  transform="translate(1080 110) rotate(-10)"/>
 
-    <!-- Bicycle 2 -->
-    <g transform="translate(560, 0)" fill="none" stroke-width="1.6">
-      <circle cx="-12" cy="28" r="7"/>
-      <circle cx="12" cy="28" r="7"/>
-      <path d="M -12 28 L 0 16 L 12 28"/>
-      <path d="M 0 16 L -2 28"/>
-      <path d="M 12 16 L 14 14"/>
-      <line x1="-4" y1="14" x2="2" y2="14" stroke-width="1.4"/>
-    </g>
+  <!-- Middle band: medium density, more tilt -->
+  <use href="#windmill" transform="translate(220 230) rotate(4)"/>
+  <use href="#bicycle"  transform="translate(450 250) rotate(-9) scale(1.1)"/>
+  <use href="#windmill" transform="translate(740 240) rotate(10)"/>
+  <use href="#bicycle"  transform="translate(970 270) rotate(-4)"/>
 
-    <!-- Windmill 3 -->
-    <g transform="translate(720, 0)">
-      <path d="M -8 36 L 8 36 L 5 18 L -5 18 Z" stroke="none"/>
-      <path d="M -5 18 L 5 18 L 0 14 Z" stroke="none"/>
-      <line x1="-10" y1="4" x2="10" y2="24" stroke-width="1.8"/>
-      <line x1="-10" y1="24" x2="10" y2="4" stroke-width="1.8"/>
-      <circle cx="0" cy="14" r="1.8" stroke="none"/>
-    </g>
-
-    <!-- Bicycle 3 -->
-    <g transform="translate(880, 0)" fill="none" stroke-width="1.6">
-      <circle cx="-12" cy="28" r="7"/>
-      <circle cx="12" cy="28" r="7"/>
-      <path d="M -12 28 L 0 16 L 12 28"/>
-      <path d="M 0 16 L -2 28"/>
-      <path d="M 12 16 L 14 14"/>
-      <line x1="-4" y1="14" x2="2" y2="14" stroke-width="1.4"/>
-    </g>
-
-    <!-- Windmill 4 -->
-    <g transform="translate(1040, 0)">
-      <path d="M -8 36 L 8 36 L 5 18 L -5 18 Z" stroke="none"/>
-      <path d="M -5 18 L 5 18 L 0 14 Z" stroke="none"/>
-      <line x1="-10" y1="4" x2="10" y2="24" stroke-width="1.8"/>
-      <line x1="-10" y1="24" x2="10" y2="4" stroke-width="1.8"/>
-      <circle cx="0" cy="14" r="1.8" stroke="none"/>
-    </g>
-
-  </g>
+  <!-- Bottom band: sparse, will fade out via mask -->
+  <use href="#windmill" transform="translate(380 350) rotate(6) scale(0.95)"/>
+  <use href="#bicycle"  transform="translate(840 360) rotate(-8)"/>
 </svg>
