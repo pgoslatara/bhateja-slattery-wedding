@@ -104,14 +104,19 @@ const currentPath = Astro.url.pathname;
     );
     pointer-events: none;
   }
-  /* Body, header, main, footer all need to render *above* the fixed
-     background — z-index makes them paint on the layer in front of it. */
+  /* Body is the positioning anchor for the absolute-positioned scatter. */
+  body {
+    position: relative;
+  }
+  /* Header, main, footer render *above* both the fixed bottom background
+     and the absolute-positioned top scatter — z-index puts them on the
+     layer in front. Bumped to 2 so they're unambiguously above the
+     frieze (which sits at z-index 1) and the bottom painting (at 0). */
   body > header,
   body > main,
-  body > footer,
-  body > .site-frieze {
+  body > footer {
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
   /* Footer sits on top of the figures' feet area; give it a solid backing
      so its text is fully readable. */
@@ -120,13 +125,19 @@ const currentPath = Astro.url.pathname;
   }
   /*
     Amsterdam-themed scatter (windmills + bicycles) over the top third
-    of each page. Inline-flow so it scrolls naturally with the page;
-    a vertical mask gradient fades the lower portion so the motifs
-    "thin out" as the eye travels down. Sits behind page content via
-    negative margin — the header overlays the upper portion.
+    of each page. Position-absolute so it doesn't take any layout space
+    (the header sits on top of it visually) and so it can never block
+    pointer events on the header even when overlapping. A vertical
+    mask gradient fades the lower portion of the scatter so the motifs
+    "thin out" as the eye travels down. Scrolls with the page rather
+    than fixed to the viewport (no `position: fixed`) — the user sees
+    them at the top of each page and they slide off-screen on scroll.
   */
   .site-frieze {
-    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 33vh;
     min-height: 240px;
     max-height: 420px;
@@ -134,13 +145,10 @@ const currentPath = Astro.url.pathname;
     opacity: 0.7;
     overflow: hidden;
     pointer-events: none;
+    z-index: 1;
     /* Fade vertically: opaque at top, transparent at bottom */
     -webkit-mask-image: linear-gradient(180deg, black 0%, black 25%, transparent 100%);
     mask-image: linear-gradient(180deg, black 0%, black 25%, transparent 100%);
-    /* Negative bottom margin pulls the page content up over the lower
-       (already-faded) portion of the scatter, so the frieze doesn't
-       push the header down by a full third of the viewport. */
-    margin-bottom: calc(-33vh + 60px);
   }
   .site-frieze :global(svg) {
     width: 100%;
