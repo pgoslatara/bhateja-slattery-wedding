@@ -74,7 +74,9 @@ async function submit(state: FormState) {
     const res = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(validation.value)
+      // Origin is sent in the body because Apps Script web apps don't expose
+      // request headers — server reads it from `data.origin` for the allow-list check.
+      body: JSON.stringify({ ...validation.value, origin: window.location.origin })
     });
     const data = await res.json().catch(() => ({ status: 'error', code: 'internal' }));
     if (data.status === 'ok') {

@@ -5,19 +5,18 @@ var THROTTLE_WINDOW_MS = 10000;
 var SUBMISSIONS_TAB = 'submissions';
 
 function doPost(e) {
-  var origin = (e && e.parameter && e.parameter.origin)
-    || (e && e.requestHeaders && e.requestHeaders['Origin'])
-    || '';
-  if (!isAllowedOrigin(origin, ALLOWED_ORIGINS)) {
-    return jsonResponse({ status: 'error', code: 'invalid_origin' });
-  }
-
   var rawBody = e && e.postData && e.postData.contents;
   var parsed = parsePayload(rawBody);
   if (!parsed.ok) {
     return jsonResponse({ status: 'error', code: parsed.code });
   }
   var data = parsed.value;
+
+  // Origin is read from the body — Apps Script web apps don't expose request
+  // headers, so the client (src/components/rsvp/client.ts) sends location.origin.
+  if (!isAllowedOrigin(data.origin || '', ALLOWED_ORIGINS)) {
+    return jsonResponse({ status: 'error', code: 'invalid_origin' });
+  }
 
   var lock = LockService.getScriptLock();
   try { lock.waitLock(5000); } catch (lockErr) {
