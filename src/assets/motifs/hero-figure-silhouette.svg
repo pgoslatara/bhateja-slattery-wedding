@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <!--
+    Stylised silhouette of a single figure standing in a field, arms
+    outstretched horizontally — evokes the iconic Bollywood
+    welcoming/embracing pose without being a tracing of any specific
+    person. Replace this file with a commissioned illustration when one
+    is available; consumers reference src/assets/motifs/hero-figure-silhouette.svg
+    via Astro's ?raw import in src/components/pages/HomePage.astro.
+    Uses currentColor so the consuming component can theme it via CSS.
+  -->
+  <g fill="currentColor">
+    <ellipse cx="300" cy="65" rx="26" ry="30" />
+    <path d="
+      M 280 95
+      Q 300 102 320 95
+      L 322 112
+      L 340 118
+      L 555 95
+      Q 568 95 568 105
+      Q 568 115 555 115
+      L 340 132
+      L 340 240
+      L 352 380
+      L 322 380
+      L 308 250
+      L 292 250
+      L 278 380
+      L 248 380
+      L 260 240
+      L 260 132
+      L 45 115
+      Q 32 115 32 105
+      Q 32 95 45 95
+      L 260 118
+      L 278 112
+      Z
+    "/>
+  </g>
+</svg>
