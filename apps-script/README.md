@@ -63,16 +63,27 @@ columns are:
 
 Per the spec, the working view for tracking RSVPs is the *latest* submission
 per WhatsApp number (guests can resubmit to update their answers). Create a
-`latest` tab manually with this single-cell formula in `A1`:
+`latest` tab manually and paste two formulas — one for the header, one for
+the body. Splitting them avoids a Sheets array-literal column-mismatch error
+that occurs when stacking the header onto a single-row FILTER result.
+
+**In `A1`** (header — copies the column labels from `submissions`):
+
+```
+=submissions!A1:M1
+```
+
+**In `A2`** (body — deduped, latest-per-WhatsApp rows, spills downward):
 
 ```
 =IFERROR(
   LET(
     raw,  SORT(FILTER(submissions!A2:M, submissions!A2:A <> ""), 1, FALSE),
     keys, INDEX(raw, 0, 11),
-    mask, MATCH(keys, keys, 0) = SEQUENCE(ROWS(keys)),
-    { submissions!A1:M1 ; FILTER(raw, mask) }
-  ))
+    mask, ARRAYFORMULA(MATCH(keys, keys, 0)) = SEQUENCE(ROWS(keys)),
+    FILTER(raw, mask)
+  )
+)
 ```
 
 How it works:
@@ -80,10 +91,11 @@ How it works:
 1. `FILTER(submissions!A2:M, ...)` drops empty trailing rows.
 2. `SORT(..., 1, FALSE)` orders all submissions by timestamp **descending** —
    newest first.
-3. `MATCH(keys, keys, 0) = SEQUENCE(ROWS(keys))` is the canonical
-   "first-occurrence" mask. Because the rows are already sorted newest-first,
-   the first occurrence of each WhatsApp number is its *latest* submission.
-4. The header row from `submissions` is prepended so the columns stay labelled.
+3. `ARRAYFORMULA(MATCH(keys, keys, 0)) = SEQUENCE(ROWS(keys))` is the
+   canonical "first-occurrence" mask. The `ARRAYFORMULA` wrap is required
+   because Sheets' `MATCH` doesn't natively iterate over an array first
+   argument. Because the rows are already sorted newest-first, the first
+   occurrence of each WhatsApp number is its *latest* submission.
 
 The view updates live as new rows land in `submissions`. If a guest resubmits
 with the same WhatsApp number, their newer row replaces the older one in
