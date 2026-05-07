@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../Layout.astro';
 import { t, type Locale } from '../../i18n/strings';
 import { localeUrl } from '../../i18n/urls';
@@ -7,8 +8,7 @@ import { siteSchema, type SiteConfig } from '../../content/config';
 import yaml from 'js-yaml';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import mustardField from '../../assets/motifs/hero-mustard-field.svg?raw';
-import figureSilhouette from '../../assets/motifs/hero-figure-silhouette.svg?raw';
+import heroImage from '../../assets/motifs/hero-mustard-field-figure.jpg';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -28,10 +28,15 @@ const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
 ---
 <Layout lang={lang} title={entry.data.title}>
   <section class="hero">
-    <div class="hero-art" aria-hidden="true">
-      <div class="hero-field" set:html={mustardField}></div>
-      <div class="hero-silhouette" set:html={figureSilhouette}></div>
-    </div>
+    <Image
+      class="hero-bg"
+      src={heroImage}
+      alt=""
+      width={2400}
+      quality={80}
+      loading="eager"
+      decoding="async"
+    />
     <div class="hero-content">
       <h1>{site.coupleNames.partner1} &amp; {site.coupleNames.partner2}</h1>
       <p class="date">27 February 2027 · {site.venue.city}, {site.venue.country}</p>
@@ -46,56 +51,44 @@ const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
 
 <style>
   .hero {
+    /* Full-bleed: break out of <main>'s max-width by extending to the viewport edges. */
     position: relative;
-    text-align: center;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     overflow: hidden;
-    border-radius: var(--radius-card);
-    margin: 1rem 0 3rem;
-    min-height: 420px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 3rem;
+    aspect-ratio: 21 / 9;
+    min-height: 380px;
+    max-height: 70vh;
   }
-  .hero-art {
+  .hero-bg {
     position: absolute;
     inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .hero-field {
-    position: absolute;
-    inset: 0;
-  }
-  .hero-field :global(svg) {
     width: 100%;
     height: 100%;
-    display: block;
-  }
-  .hero-silhouette {
-    position: absolute;
-    bottom: 4%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 38%;
-    max-width: 280px;
-    color: var(--color-primary-dark);
-    opacity: 0.9;
-  }
-  .hero-silhouette :global(svg) {
-    width: 100%;
-    height: auto;
-    display: block;
+    object-fit: cover;
+    z-index: 0;
   }
   .hero-content {
     position: relative;
     z-index: 1;
-    padding: 3rem 1rem 6rem;
+    max-width: var(--max-content);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
     background: linear-gradient(
       180deg,
-      rgba(253, 245, 212, 0.95) 0%,
-      rgba(253, 245, 212, 0.6) 45%,
-      rgba(253, 245, 212, 0) 75%
+      rgba(253, 245, 212, 0.85) 0%,
+      rgba(253, 245, 212, 0.55) 50%,
+      rgba(253, 245, 212, 0) 100%
     );
+    min-height: 100%;
   }
   .hero-content :global(h1) {
     color: var(--color-primary-dark);
+    text-shadow: 0 1px 2px rgba(253, 245, 212, 0.6);
   }
   .date { font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-text); margin-bottom: 1.5rem; }
   .cta-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
