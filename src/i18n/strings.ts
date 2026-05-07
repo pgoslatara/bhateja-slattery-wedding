@@ -7,11 +7,18 @@ export const strings = {
       schedule: 'Schedule',
       travel: 'Travel',
       rsvp: 'RSVP',
+      donations: 'Donations',
       faq: 'FAQ',
       photos: 'Photos'
     },
     footer: {
       contactPrefix: 'Questions? Message us on WhatsApp'
+    },
+    donations: {
+      eurLabel: 'EUR (Euro)',
+      usdLabel: 'USD (US Dollar)',
+      inrLabel: 'INR (Indian Rupee)',
+      placeholderHint: 'Transfer details to follow — please check back closer to the date.'
     },
     rsvp: {
       formTitle: 'RSVP',
@@ -74,11 +81,18 @@ export const strings = {
       schedule: 'कार्यक्रम',
       travel: 'यात्रा',
       rsvp: 'जवाब दें',
+      donations: 'दान',
       faq: 'सामान्य प्रश्न',
       photos: 'तस्वीरें'
     },
     footer: {
       contactPrefix: 'कोई प्रश्न? व्हाट्सऐप पर संदेश भेजें:'
+    },
+    donations: {
+      eurLabel: 'EUR (यूरो)',
+      usdLabel: 'USD (अमेरिकी डॉलर)',
+      inrLabel: 'INR (भारतीय रुपया)',
+      placeholderHint: 'ट्रांसफर विवरण जल्द ही उपलब्ध होगा — कृपया तिथि के क़रीब फिर से देखें।'
     },
     rsvp: {
       formTitle: 'RSVP — कृपया जवाब दें',
