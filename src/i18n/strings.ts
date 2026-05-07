@@ -11,7 +11,7 @@ export const strings = {
       photos: 'Photos'
     },
     footer: {
-      contactPrefix: 'Questions? Message us on WhatsApp:'
+      contactPrefix: 'Questions? Message us on WhatsApp'
     },
     rsvp: {
       formTitle: 'RSVP',
@@ -63,6 +63,9 @@ export const strings = {
     },
     photos: {
       placeholder: 'Photos coming soon. Check back after 27 February 2027.'
+    },
+    home: {
+      locationDisplay: 'Gurgaon, India'
     }
   },
   hi: {
@@ -127,6 +130,9 @@ export const strings = {
     },
     photos: {
       placeholder: 'तस्वीरें जल्द आएँगी। 27 फ़रवरी 2027 के बाद ज़रूर देखें।'
+    },
+    home: {
+      locationDisplay: 'गुड़गांव, भारत'
     }
   }
 } as const;

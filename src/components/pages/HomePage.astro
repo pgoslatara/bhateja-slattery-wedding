@@ -23,11 +23,20 @@ const { Content } = await entry.render();
 // Resolve relative to project root — import.meta.url points to compiled chunks during build.
 const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
 const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
+
+// Format the wedding date in the active locale. Construct from components so
+// the date isn't shifted by the local timezone interpretation of midnight UTC.
+const [y, m, d] = site.weddingDate.split('-').map(Number);
+const dateLine = new Intl.DateTimeFormat(lang === 'hi' ? 'hi-IN' : 'en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+}).format(new Date(y, m - 1, d));
 ---
 <Layout lang={lang} title={entry.data.title}>
   <section class="hero">
     <h1>{site.coupleNames.partner1} &amp; {site.coupleNames.partner2}</h1>
-    <p class="date">27 February 2027 · {site.venue.city}, {site.venue.country}</p>
+    <p class="date">{dateLine} · {s.home.locationDisplay}</p>
     <Content />
     <div class="cta-row">
       <a class="button" href={localeUrl(lang, '/rsvp/')}>{s.nav.rsvp}</a>
