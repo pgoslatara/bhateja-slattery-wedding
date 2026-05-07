@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <!--
+    Subtle decorative frieze — alternating windmills and bicycles in stylised
+    line-art, evoking Amsterdam (where Apeksha and Padraic live). Used as a
+    thin band at the top of every page in Layout.astro. Themed via
+    currentColor; the consuming element sets a low opacity to keep it
+    decorative rather than eye-catching.
+  -->
+  <g fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Windmill 1 -->
+    <g transform="translate(80, 0)">
+      <path d="M -8 36 L 8 36 L 5 18 L -5 18 Z" stroke="none"/>
+      <path d="M -5 18 L 5 18 L 0 14 Z" stroke="none"/>
+      <line x1="-10" y1="4" x2="10" y2="24" stroke-width="1.8"/>
+      <line x1="-10" y1="24" x2="10" y2="4" stroke-width="1.8"/>
+      <circle cx="0" cy="14" r="1.8" stroke="none"/>
+    </g>
+
+    <!-- Bicycle 1 -->
+    <g transform="translate(240, 0)" fill="none" stroke-width="1.6">
+      <circle cx="-12" cy="28" r="7"/>
+      <circle cx="12" cy="28" r="7"/>
+      <path d="M -12 28 L 0 16 L 12 28"/>
+      <path d="M 0 16 L -2 28"/>
+      <path d="M 12 16 L 14 14"/>
+      <line x1="-4" y1="14" x2="2" y2="14" stroke-width="1.4"/>
+    </g>
+
+    <!-- Windmill 2 -->
+    <g transform="translate(400, 0)">
+      <path d="M -8 36 L 8 36 L 5 18 L -5 18 Z" stroke="none"/>
+      <path d="M -5 18 L 5 18 L 0 14 Z" stroke="none"/>
+      <line x1="-10" y1="4" x2="10" y2="24" stroke-width="1.8"/>
+      <line x1="-10" y1="24" x2="10" y2="4" stroke-width="1.8"/>
+      <circle cx="0" cy="14" r="1.8" stroke="none"/>
+    </g>
+
+    <!-- Bicycle 2 -->
+    <g transform="translate(560, 0)" fill="none" stroke-width="1.6">
+      <circle cx="-12" cy="28" r="7"/>
+      <circle cx="12" cy="28" r="7"/>
+      <path d="M -12 28 L 0 16 L 12 28"/>
+      <path d="M 0 16 L -2 28"/>
+      <path d="M 12 16 L 14 14"/>
+      <line x1="-4" y1="14" x2="2" y2="14" stroke-width="1.4"/>
+    </g>
+
+    <!-- Windmill 3 -->
+    <g transform="translate(720, 0)">
+      <path d="M -8 36 L 8 36 L 5 18 L -5 18 Z" stroke="none"/>
+      <path d="M -5 18 L 5 18 L 0 14 Z" stroke="none"/>
+      <line x1="-10" y1="4" x2="10" y2="24" stroke-width="1.8"/>
+      <line x1="-10" y1="24" x2="10" y2="4" stroke-width="1.8"/>
+      <circle cx="0" cy="14" r="1.8" stroke="none"/>
+    </g>
+
+    <!-- Bicycle 3 -->
+    <g transform="translate(880, 0)" fill="none" stroke-width="1.6">
+      <circle cx="-12" cy="28" r="7"/>
+      <circle cx="12" cy="28" r="7"/>
+      <path d="M -12 28 L 0 16 L 12 28"/>
+      <path d="M 0 16 L -2 28"/>
+      <path d="M 12 16 L 14 14"/>
+      <line x1="-4" y1="14" x2="2" y2="14" stroke-width="1.4"/>
+    </g>
+
+    <!-- Windmill 4 -->
+    <g transform="translate(1040, 0)">
+      <path d="M -8 36 L 8 36 L 5 18 L -5 18 Z" stroke="none"/>
+      <path d="M -5 18 L 5 18 L 0 14 Z" stroke="none"/>
+      <line x1="-10" y1="4" x2="10" y2="24" stroke-width="1.8"/>
+      <line x1="-10" y1="24" x2="10" y2="4" stroke-width="1.8"/>
+      <circle cx="0" cy="14" r="1.8" stroke="none"/>
+    </g>
+
+  </g>
+</svg>
