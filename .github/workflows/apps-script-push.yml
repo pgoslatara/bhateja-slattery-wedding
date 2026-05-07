@@ -1,0 +1,29 @@
+name: Apps Script — push
+
+on:
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - name: Configure clasp credentials
+        run: |
+          echo "$CLASP_AUTH" > ~/.clasprc.json
+          chmod 600 ~/.clasprc.json
+        env:
+          CLASP_AUTH: ${{ secrets.CLASP_AUTH }}
+      - name: Configure clasp project
+        run: |
+          echo "{\"scriptId\":\"$APPS_SCRIPT_ID\",\"rootDir\":\"./apps-script\"}" > .clasp.json
+        env:
+          APPS_SCRIPT_ID: ${{ secrets.APPS_SCRIPT_ID }}
+      - run: npx clasp push --force
+      - name: Note
+        run: echo "Note - this only pushes the source. To make changes live, follow the manual deploy step in apps-script/README.md."
