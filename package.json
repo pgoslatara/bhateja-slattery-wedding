@@ -20,9 +20,11 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@types/qrcode": "^1.5.6",
     "astro": "^5.0.0",
     "js-yaml": "^4.1.1",
-    "lucide-static": "^0.460.0"
+    "lucide-static": "^0.460.0",
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",

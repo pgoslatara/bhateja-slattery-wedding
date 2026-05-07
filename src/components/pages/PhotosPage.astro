@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import QRCode from 'qrcode';
 import Layout from '../Layout.astro';
 import { t, type Locale } from '../../i18n/strings';
 import { siteSchema, type SiteConfig } from '../../content/config';
@@ -18,16 +19,92 @@ const { Content } = await entry.render();
 
 const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
 const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
+
+const albums = site.photoAlbums;
+const qrOptions = {
+  type: 'svg' as const,
+  width: 220,
+  margin: 1,
+  color: { dark: '#2A1810', light: '#FFFFFF' }
+};
+const googleQR = albums?.googlePhotos
+  ? await QRCode.toString(albums.googlePhotos, qrOptions)
+  : null;
+const icloudQR = albums?.icloud
+  ? await QRCode.toString(albums.icloud, qrOptions)
+  : null;
+const hasAnyAlbum = Boolean(googleQR || icloudQR);
 ---
 <Layout lang={lang} title={s.nav.photos}>
   <h1>{s.nav.photos}</h1>
-  {site.photosAlbumUrl ? (
-    <p>
-      <a class="button" href={site.photosAlbumUrl} target="_blank" rel="noopener">{lang === 'en' ? 'View album' : 'एल्बम देखें'}</a>
-    </p>
+  {hasAnyAlbum ? (
+    <div class="album-platforms">
+      {googleQR && albums?.googlePhotos && (
+        <article class="card platform-card">
+          <h3>{s.photos.googleHeader}</h3>
+          <p class="subtitle">{s.photos.googleHint}</p>
+          <div class="qr" set:html={googleQR}></div>
+          <p class="open-link">
+            <a href={albums.googlePhotos} target="_blank" rel="noopener">{s.photos.googleOpen}</a>
+          </p>
+        </article>
+      )}
+      {icloudQR && albums?.icloud && (
+        <article class="card platform-card">
+          <h3>{s.photos.icloudHeader}</h3>
+          <p class="subtitle">{s.photos.icloudHint}</p>
+          <div class="qr" set:html={icloudQR}></div>
+          <p class="open-link">
+            <a href={albums.icloud} target="_blank" rel="noopener">{s.photos.icloudOpen}</a>
+          </p>
+        </article>
+      )}
+    </div>
   ) : (
     <article class="card">
       <Content />
     </article>
   )}
 </Layout>
+
+<style>
+  .album-platforms {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  @media (min-width: 768px) {
+    .album-platforms { grid-template-columns: 1fr 1fr; }
+  }
+  .platform-card {
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .platform-card h3 {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    margin: 0 0 0.5rem;
+  }
+  .platform-card .subtitle {
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+  }
+  .qr {
+    margin: 0 auto 1rem;
+    max-width: 220px;
+    background: #FFFFFF;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+  .qr :global(svg) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .open-link { margin: 0; }
+  .open-link a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+</style>

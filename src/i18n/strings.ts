@@ -69,7 +69,13 @@ export const strings = {
       }
     },
     photos: {
-      placeholder: 'Photos coming soon. Check back after 27 February 2027.'
+      placeholder: 'Photos coming soon. Check back after 27 February 2027.',
+      googleHeader: 'Android & web users',
+      googleHint: 'Scan with your phone camera to view and upload photos via Google Photos.',
+      googleOpen: 'Open Google Photos album',
+      icloudHeader: 'iPhone & iPad users',
+      icloudHint: 'Scan with your iPhone camera to view photos in iCloud. Uploading requires an Apple device with the album invite accepted.',
+      icloudOpen: 'Open iCloud album'
     },
     home: {
       locationDisplay: 'Gurgaon, India'
@@ -143,7 +149,13 @@ export const strings = {
       }
     },
     photos: {
-      placeholder: 'तस्वीरें जल्द आएँगी। 27 फ़रवरी 2027 के बाद ज़रूर देखें।'
+      placeholder: 'तस्वीरें जल्द आएँगी। 27 फ़रवरी 2027 के बाद ज़रूर देखें।',
+      googleHeader: 'Android और वेब उपयोगकर्ता',
+      googleHint: 'अपने फ़ोन के कैमरे से स्कैन करें और Google Photos में तस्वीरें देखें या अपलोड करें।',
+      googleOpen: 'Google Photos एल्बम खोलें',
+      icloudHeader: 'iPhone और iPad उपयोगकर्ता',
+      icloudHint: 'अपने iPhone के कैमरे से स्कैन करें और iCloud में तस्वीरें देखें। अपलोड करने के लिए Apple डिवाइस और एल्बम का निमंत्रण आवश्यक है।',
+      icloudOpen: 'iCloud एल्बम खोलें'
     },
     home: {
       locationDisplay: 'गुड़गांव, भारत'
