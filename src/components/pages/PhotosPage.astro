@@ -37,7 +37,10 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
 ---
 <Layout lang={lang} title={s.nav.photos}>
   <h1>{s.nav.photos}</h1>
-  {hasAnyAlbum ? (
+  <article class="card intro">
+    <Content />
+  </article>
+  {hasAnyAlbum && (
     <div class="album-platforms">
       {googleQR && albums?.googlePhotos && (
         <article class="card platform-card">
@@ -60,10 +63,6 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
         </article>
       )}
     </div>
-  ) : (
-    <article class="card">
-      <Content />
-    </article>
   )}
 </Layout>
 
