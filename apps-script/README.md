@@ -66,30 +66,38 @@ per WhatsApp number (guests can resubmit to update their answers). Create a
 `latest` tab manually with this single-cell formula in `A1`:
 
 ```
-=ARRAYFORMULA(
-  IFERROR(
-    SORT(
-      QUERY(
-        {submissions!A:M, ARRAYFORMULA(MATCH(submissions!K:K, submissions!K:K, 0))},
-        "SELECT Col1,Col2,Col3,Col4,Col5,Col6,Col7,Col8,Col9,Col10,Col11,Col12,Col13 WHERE Col14 = ROW(Col14) AND Col1 IS NOT NULL ORDER BY Col1 DESC LABEL Col1 'timestamp', Col2 'lead_name', Col3 'additional_guests', Col4 'day1', Col5 'day2', Col6 'dietary', Col7 'dietary_other', Col8 'arrival', Col9 'departure', Col10 'accommodation', Col11 'whatsapp', Col12 'notes', Col13 'raw_json'",
-        1),
-      2, TRUE)))
+=IFERROR(
+  LET(
+    raw,  SORT(FILTER(submissions!A2:M, submissions!A2:A <> ""), 1, FALSE),
+    keys, INDEX(raw, 0, 11),
+    mask, MATCH(keys, keys, 0) = SEQUENCE(ROWS(keys)),
+    { submissions!A1:M1 ; FILTER(raw, mask) }
+  ))
 ```
 
-This uses `MATCH(K:K, K:K, 0)` to keep only each WhatsApp number's first
-occurrence (because `submissions` is appended chronologically, that's the
-oldest), then sorts by `lead_name`. To get the *newest* per WhatsApp instead,
-sort `submissions` descending by timestamp first or use a more elaborate
-formula. For ~60 guests either approach is fine.
+How it works:
+
+1. `FILTER(submissions!A2:M, ...)` drops empty trailing rows.
+2. `SORT(..., 1, FALSE)` orders all submissions by timestamp **descending** —
+   newest first.
+3. `MATCH(keys, keys, 0) = SEQUENCE(ROWS(keys))` is the canonical
+   "first-occurrence" mask. Because the rows are already sorted newest-first,
+   the first occurrence of each WhatsApp number is its *latest* submission.
+4. The header row from `submissions` is prepended so the columns stay labelled.
+
+The view updates live as new rows land in `submissions`. If a guest resubmits
+with the same WhatsApp number, their newer row replaces the older one in
+`latest` automatically. The full audit trail is always preserved in
+`submissions`.
 
 ## Manual smoke test
 
 After every redeploy, post a test payload from the terminal:
 
 ```bash
-curl -X POST "$PUBLIC_APPS_SCRIPT_URL" \
+curl -L -X POST "$PUBLIC_APPS_SCRIPT_URL" \
   -H "Content-Type: text/plain" \
-  -d '{"leadName":"Test","whatsapp":"+919999999999","day1Attending":"yes","day2Attending":"no","accommodation":"sorted","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":"","origin":"https://<your-username>.github.io"}'
+  -d '{"leadName":"Test","whatsapp":"+919999999999","day1Attending":"yes","day2Attending":"no","accommodation":"sorted","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":"","origin":"https://pgoslatara.github.io"}'
 ```
 
 Expected: `{"status":"ok"}` and a new row in the `submissions` tab. The
