@@ -30,6 +30,22 @@
       <!-- Saddle -->
       <line x1="-6" y1="-6" x2="3" y2="-6" stroke-width="1.8"/>
     </g>
+    <!--
+      The misfit: a stroopwafel — round Dutch waffle cookie. Hidden among
+      the windmills and bicycles as a small reward for observant guests.
+      One per scatter. Cross-hatched grid pattern; circular outline.
+    -->
+    <g id="stroopwafel" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+      <circle cx="0" cy="0" r="14"/>
+      <line x1="-12" y1="-7" x2="12" y2="-7"/>
+      <line x1="-13" y1="-3" x2="13" y2="-3"/>
+      <line x1="-13" y1="3" x2="13" y2="3"/>
+      <line x1="-12" y1="7" x2="12" y2="7"/>
+      <line x1="-7" y1="-12" x2="-7" y2="12"/>
+      <line x1="-3" y1="-13" x2="-3" y2="13"/>
+      <line x1="3" y1="-13" x2="3" y2="13"/>
+      <line x1="7" y1="-12" x2="7" y2="12"/>
+    </g>
   </defs>
 
   <!-- Top band: dense, mostly upright -->
@@ -49,4 +65,7 @@
   <!-- Bottom band: sparse, will fade out via mask -->
   <use href="#windmill" transform="translate(380 350) rotate(6) scale(0.95)"/>
   <use href="#bicycle"  transform="translate(840 360) rotate(-8)"/>
+
+  <!-- The single stroopwafel hiding in the scatter. -->
+  <use href="#stroopwafel" transform="translate(1100 240) rotate(18)"/>
 </svg>

@@ -32,11 +32,17 @@ const dateLine = new Intl.DateTimeFormat(lang === 'hi' ? 'hi-IN' : 'en-GB', {
   month: 'long',
   year: 'numeric'
 }).format(new Date(y, m - 1, d));
+
+// Countdown messages are picked client-side based on days-until-wedding.
+// Pre-computed messages object passed via define:vars to the inline script.
+const countdownMessages = s.home.countdown;
+const weddingISO = site.weddingDate;
 ---
 <Layout lang={lang} title={entry.data.title}>
   <section class="hero">
     <h1>{site.coupleNames.partner1} &amp; {site.coupleNames.partner2}</h1>
     <p class="date">{dateLine} · {s.home.locationDisplay}</p>
+    <p class="countdown" data-countdown></p>
     <Content />
     <div class="cta-row">
       <a class="button" href={localeUrl(lang, '/rsvp/')}>{s.nav.rsvp}</a>
@@ -45,13 +51,64 @@ const dateLine = new Intl.DateTimeFormat(lang === 'hi' ? 'hi-IN' : 'en-GB', {
   </section>
 </Layout>
 
+<script is:inline define:vars={{ messages: countdownMessages, weddingISO }}>
+  (function () {
+    var target = document.querySelector('[data-countdown]');
+    if (!target) return;
+    var parts = weddingISO.split('-').map(Number);
+    var wedding = new Date(parts[0], parts[1] - 1, parts[2]);
+    wedding.setHours(0, 0, 0, 0);
+    var now = new Date();
+    now.setHours(0, 0, 0, 0);
+    var msPerDay = 1000 * 60 * 60 * 24;
+    var days = Math.round((wedding.getTime() - now.getTime()) / msPerDay);
+
+    var key, useN = false;
+    if (days > 365)      { key = 'moreThanYear'; useN = true; }
+    else if (days === 365) { key = 'oneYear'; }
+    else if (days > 30)  { key = 'months';      useN = true; }
+    else if (days === 30){ key = 'nervous'; }
+    else if (days > 7)   { key = 'listMaking';  useN = true; }
+    else if (days === 7) { key = 'weekOut'; }
+    else if (days > 1)   { key = 'finalDays';   useN = true; }
+    else if (days === 1) { key = 'tomorrow'; }
+    else if (days === 0) { key = 'today'; }
+    else                  { key = 'past'; }
+
+    var message = messages[key] || '';
+    if (useN) message = message.replace('{n}', String(days));
+    target.textContent = message;
+  })();
+</script>
+
 <style>
   .hero { text-align: center; padding: 2rem 0 3rem; }
   .hero :global(h1) {
     color: var(--color-primary-dark);
     text-shadow: 0 1px 2px rgba(253, 245, 212, 0.7);
   }
-  .date { font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-text); margin-bottom: 1.5rem; }
+  .date {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease, color 0.3s ease, letter-spacing 0.3s ease;
+    cursor: default;
+    display: inline-block;
+  }
+  .date:hover {
+    transform: scale(1.04);
+    color: var(--color-primary);
+    letter-spacing: 0.02em;
+  }
+  .countdown {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin: 0 0 1.25rem;
+    min-height: 1.4em;
+  }
+  .countdown:empty { margin: 0; min-height: 0; }
   .cta-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
   .button-secondary { background: var(--color-accent); color: var(--color-text); }
   .button-secondary:hover { background: var(--color-accent-light); }

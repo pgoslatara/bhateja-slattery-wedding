@@ -78,7 +78,19 @@ export const strings = {
       icloudOpen: 'Open iCloud album'
     },
     home: {
-      locationDisplay: 'Gurgaon, India'
+      locationDisplay: 'Gurgaon, India',
+      countdown: {
+        moreThanYear: '{n} days. More than a year to overthink things.',
+        oneYear: 'One year today.',
+        months: '{n} days to go.',
+        nervous: '30 days. We\'re getting nervous.',
+        listMaking: '{n} days. Apeksha is making lists.',
+        weekOut: '7 days. Almost there.',
+        finalDays: '{n} days. Try not to lose your invitation.',
+        tomorrow: 'Tomorrow. See you there.',
+        today: 'Today\'s the day.',
+        past: 'Done. We\'re married.'
+      }
     }
   },
   hi: {
@@ -158,7 +170,19 @@ export const strings = {
       icloudOpen: 'iCloud एल्बम खोलें'
     },
     home: {
-      locationDisplay: 'गुड़गांव, भारत'
+      locationDisplay: 'गुड़गांव, भारत',
+      countdown: {
+        moreThanYear: '{n} दिन। एक साल से ज़्यादा सोचने का वक़्त।',
+        oneYear: 'एक साल बाकी।',
+        months: '{n} दिन बाकी।',
+        nervous: '30 दिन। हम घबराने लगे हैं।',
+        listMaking: '{n} दिन। अपेक्षा सूचियाँ बना रही है।',
+        weekOut: '7 दिन। बस होने को है।',
+        finalDays: '{n} दिन। निमंत्रण मत खोना।',
+        tomorrow: 'कल। मिलते हैं।',
+        today: 'आज ही दिन है।',
+        past: 'हो गया। हम शादीशुदा हैं।'
+      }
     }
   }
 } as const;

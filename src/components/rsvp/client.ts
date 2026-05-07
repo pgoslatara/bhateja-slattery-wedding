@@ -68,9 +68,11 @@ async function submit(state: FormState) {
   }
 
   submitBtn.disabled = true;
+  submitBtn.setAttribute('aria-busy', 'true');
   const submittingLabel = strings[lang].rsvp.submitting;
   const submitLabel = strings[lang].rsvp.submit;
-  submitBtn.textContent = submittingLabel;
+  const labelEl = submitBtn.querySelector<HTMLElement>('.submit-label');
+  if (labelEl) labelEl.textContent = submittingLabel;
   try {
     const res = await fetch(endpoint, {
       method: 'POST',
@@ -94,7 +96,8 @@ async function submit(state: FormState) {
     showError(form, 'network', lang);
   } finally {
     submitBtn.disabled = false;
-    submitBtn.textContent = submitLabel;
+    submitBtn.removeAttribute('aria-busy');
+    if (labelEl) labelEl.textContent = submitLabel;
   }
 }
 
