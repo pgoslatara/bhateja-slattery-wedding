@@ -3249,7 +3249,9 @@ jobs:
           CLASP_AUTH: ${{ secrets.CLASP_AUTH }}
       - name: Configure clasp project
         run: |
-          echo '{"scriptId":"${{ secrets.APPS_SCRIPT_ID }}","rootDir":"./apps-script"}' > .clasp.json
+          echo "{\"scriptId\":\"$APPS_SCRIPT_ID\",\"rootDir\":\"./apps-script\"}" > .clasp.json
+        env:
+          APPS_SCRIPT_ID: ${{ secrets.APPS_SCRIPT_ID }}
       - run: npx clasp push --force
       - name: Note
         run: echo "Note - this only pushes the source. To make changes live, follow the manual deploy step in apps-script/README.md."
