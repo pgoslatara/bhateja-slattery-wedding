@@ -1352,7 +1352,7 @@ export const strings = {
       photos: 'Photos'
     },
     footer: {
-      contactPrefix: 'Questions? Message us on WhatsApp:'
+      contactPrefix: 'Questions? Message us on WhatsApp'
     },
     rsvp: {
       formTitle: 'RSVP',
@@ -1415,7 +1415,7 @@ export const strings = {
       photos: 'तस्वीरें'
     },
     footer: {
-      contactPrefix: 'कोई प्रश्न? व्हाट्सऐप पर संदेश भेजें:'
+      contactPrefix: 'कोई प्रश्न? व्हाट्सऐप पर संदेश भेजें'
     },
     rsvp: {
       formTitle: 'RSVP — कृपया जवाब दें',
@@ -1584,7 +1584,7 @@ const waLink = `https://wa.me/${site.contactWhatsApp.replace(/\D/g, '')}`;
 <footer class="site-footer">
   <div class="garland" aria-hidden="true"></div>
   <p>{site.weddingDate} · {site.venue.city}, {site.venue.country}</p>
-  <p>{s.footer.contactPrefix} <a href={waLink}>{site.contactWhatsApp}</a></p>
+  <p>{s.footer.contactPrefix}</p>
 </footer>
 
 <style>
