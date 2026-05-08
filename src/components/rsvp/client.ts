@@ -89,6 +89,10 @@ async function submit(state: FormState) {
       form.hidden = true;
       successPanel.hidden = false;
       successPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Move focus so screen-reader users hear the success panel announced
+      // and keyboard users land inside the new content rather than on the
+      // (now hidden) submit button.
+      successPanel.focus();
     } else {
       showError(form, data.code ?? 'internal', lang);
     }
