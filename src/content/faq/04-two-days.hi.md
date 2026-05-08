@@ -1,7 +1,7 @@
 ---
 order: 4
 question: दो दिन क्यों?
-enHash: 3b3cfcbfea6064698ccb487b4ca26df9a1bd53630176c7588b3ead58cb3605b9
+enHash: 96814ad336abea678dcb7e2671d5911ebbab655e7ed7cf3f36d3c31b0c6b55da
 ---
 
 एक काफ़ी नहीं था।
