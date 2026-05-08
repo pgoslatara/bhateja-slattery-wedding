@@ -39,7 +39,7 @@ export function validateRsvp(raw: RsvpInput): Validated {
 
   const whatsapp = trim(raw.whatsapp).replace(/\s+/g, '');
   if (!whatsapp) errors.whatsapp = 'whatsappRequired';
-  else if (!/^\+\d{6,15}$/.test(whatsapp)) errors.whatsapp = 'whatsappFormat';
+  else if (!/^\+\d{10,15}$/.test(whatsapp)) errors.whatsapp = 'whatsappFormat';
 
   if (Object.keys(errors).length > 0) return { ok: false, errors };
 

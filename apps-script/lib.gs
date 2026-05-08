@@ -22,8 +22,8 @@ function parsePayload(rawBody) {
   if (!data || typeof data.leadName !== 'string' || data.leadName.trim() === '') {
     return { ok: false, code: 'invalid_payload' };
   }
-  // WhatsApp number must start with + and contain 6–15 digits.
-  if (typeof data.whatsapp !== 'string' || !/^\+\d{6,15}$/.test(data.whatsapp)) {
+  // WhatsApp number must start with + and contain 10–15 digits (E.164 minimum is 10 incl. country code).
+  if (typeof data.whatsapp !== 'string' || !/^\+\d{10,15}$/.test(data.whatsapp)) {
     return { ok: false, code: 'invalid_payload' };
   }
   if (data.day1Attending !== 'yes' && data.day1Attending !== 'no') {
