@@ -12,7 +12,6 @@ const s = t(lang);
 // Resolve relative to project root — import.meta.url points to compiled chunks during build.
 const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
 const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
-const waLink = `https://wa.me/${site.contactWhatsApp.replace(/\D/g, '')}`;
 ---
 <footer class="site-footer">
   <div class="garland" aria-hidden="true"></div>
