@@ -17,7 +17,7 @@ const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
   <div class="garland" aria-hidden="true"></div>
   <p>{site.weddingDate} · {site.venue.city}, {site.venue.country}</p>
   <p>{s.footer.contactPrefix}</p>
-  <p class="tagline" data-tagline></p>
+  <p class="tagline" data-tagline aria-live="polite"></p>
 </footer>
 
 <script is:inline define:vars={{ taglines: s.footer.taglines }}>
