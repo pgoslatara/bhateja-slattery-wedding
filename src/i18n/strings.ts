@@ -15,7 +15,7 @@ export const strings = {
       contactPrefix: 'Questions, complaints, or marriage advice? WhatsApp us',
       taglines: [
         'Bears. Beets. Bollywood.',
-        'Identity theft is not a joke, Padraic.',
+        'Identity theft is not a joke, Pádraic.',
         'Love is not blind. We checked.',
         'On the 27th of February, my whole world will change.',
         'Apeksha will notice if you\'re late.',
@@ -93,7 +93,7 @@ export const strings = {
         oneYear: 'One year today.',
         months: '{n} days to go.',
         nervous: '30 days. We\'re nervous (more than is normal, even by Bollywood standards).',
-        listMaking: '{n} days. Apeksha is making lists. Padraic is on his fifteenth Office rewatch.',
+        listMaking: '{n} days. Apeksha is making lists. Pádraic is on his fifteenth Office rewatch.',
         weekOut: '7 days. Almost there.',
         finalDays: '{n} days. Try not to lose your invitation.',
         tomorrow: 'Tomorrow. See you there.',
@@ -105,7 +105,7 @@ export const strings = {
         apekshaLabel: 'Apeksha',
         apekshaBody:
           'Rewatching The Office for the [redacted]th time. DDLJ on weekend rotation. Re-litigating Salt Lake City. Considered applying for Love Is Blind, then remembered we already met.',
-        padraicLabel: 'Padraic',
+        padraicLabel: 'Pádraic',
         padraicBody: 'Building spreadsheets. Stockpiling stroopwafels. Mostly tagging along.'
       }
     }
@@ -124,7 +124,7 @@ export const strings = {
       contactPrefix: 'कोई सवाल, शिकायत, या शादी की सलाह? व्हाट्सऐप करें:',
       taglines: [
         'Bears. Beets. Bollywood.',
-        'Padraic, यह identity theft है। मज़ाक नहीं।',
+        'Pádraic, यह identity theft है। मज़ाक नहीं।',
         'Love is blind नहीं है। हमने जाँच लिया।',
         '27 फ़रवरी को हमारी पूरी दुनिया बदल जाएगी।',
         'देर मत करना — अपेक्षा देख लेगी।',
@@ -202,7 +202,7 @@ export const strings = {
         oneYear: 'एक साल बाकी।',
         months: '{n} दिन बाकी।',
         nervous: '30 दिन। हम घबराए हुए हैं (Bollywood के हिसाब से भी ज़्यादा)।',
-        listMaking: '{n} दिन। अपेक्षा सूचियाँ बना रही है। Padraic पंद्रहवीं बार The Office देख रहा है।',
+        listMaking: '{n} दिन। अपेक्षा सूचियाँ बना रही है। Pádraic पंद्रहवीं बार The Office देख रहा है।',
         weekOut: '7 दिन। बस होने को है।',
         finalDays: '{n} दिन। निमंत्रण मत खोना।',
         tomorrow: 'कल। मिलते हैं।',
