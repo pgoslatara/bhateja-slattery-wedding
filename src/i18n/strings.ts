@@ -12,7 +12,15 @@ export const strings = {
       photos: 'Photos'
     },
     footer: {
-      contactPrefix: 'Questions, complaints, or marriage advice? WhatsApp us'
+      contactPrefix: 'Questions, complaints, or marriage advice? WhatsApp us',
+      taglines: [
+        'Bears. Beets. Bollywood.',
+        'Identity theft is not a joke, Padraic.',
+        'Love is not blind. We checked.',
+        'On the 27th of February, my whole world will change.',
+        'Apeksha will notice if you\'re late.',
+        'We considered Love Is Blind: Gurgaon Edition. Then we remembered we already met.'
+      ]
     },
     donations: {
       eurLabel: 'EUR (Euro)',
@@ -83,13 +91,21 @@ export const strings = {
         moreThanYear: '{n} days. More than a year to overthink things.',
         oneYear: 'One year today.',
         months: '{n} days to go.',
-        nervous: '30 days. We\'re getting nervous.',
-        listMaking: '{n} days. Apeksha is making lists.',
+        nervous: '30 days. We\'re nervous (more than is normal, even by Bollywood standards).',
+        listMaking: '{n} days. Apeksha is making lists. Padraic is on his fifteenth Office rewatch.',
         weekOut: '7 days. Almost there.',
         finalDays: '{n} days. Try not to lose your invitation.',
         tomorrow: 'Tomorrow. See you there.',
         today: 'Today\'s the day.',
         past: 'Done. We\'re married.'
+      },
+      moodBoard: {
+        title: 'What we\'re (allegedly) doing to get ready',
+        apekshaLabel: 'Apeksha',
+        apekshaBody:
+          'Rewatching The Office for the [redacted]th time. DDLJ on weekend rotation. Re-litigating Salt Lake City. Considered applying for Love Is Blind, then remembered we already met.',
+        padraicLabel: 'Padraic',
+        padraicBody: 'Building spreadsheets. Stockpiling stroopwafels. Mostly tagging along.'
       }
     }
   },
@@ -104,7 +120,15 @@ export const strings = {
       photos: 'तस्वीरें'
     },
     footer: {
-      contactPrefix: 'कोई सवाल, शिकायत, या शादी की सलाह? व्हाट्सऐप करें:'
+      contactPrefix: 'कोई सवाल, शिकायत, या शादी की सलाह? व्हाट्सऐप करें:',
+      taglines: [
+        'Bears. Beets. Bollywood.',
+        'Padraic, यह identity theft है। मज़ाक नहीं।',
+        'Love is blind नहीं है। हमने जाँच लिया।',
+        '27 फ़रवरी को हमारी पूरी दुनिया बदल जाएगी।',
+        'देर मत करना — अपेक्षा देख लेगी।',
+        'Love Is Blind: Gurgaon Edition पर सोचा था। फिर याद आया कि हम पहले से मिल चुके हैं।'
+      ]
     },
     donations: {
       eurLabel: 'EUR (यूरो)',
@@ -175,13 +199,21 @@ export const strings = {
         moreThanYear: '{n} दिन। एक साल से ज़्यादा सोचने का वक़्त।',
         oneYear: 'एक साल बाकी।',
         months: '{n} दिन बाकी।',
-        nervous: '30 दिन। हम घबराने लगे हैं।',
-        listMaking: '{n} दिन। अपेक्षा सूचियाँ बना रही है।',
+        nervous: '30 दिन। हम घबराए हुए हैं (Bollywood के हिसाब से भी ज़्यादा)।',
+        listMaking: '{n} दिन। अपेक्षा सूचियाँ बना रही है। Padraic पंद्रहवीं बार The Office देख रहा है।',
         weekOut: '7 दिन। बस होने को है।',
         finalDays: '{n} दिन। निमंत्रण मत खोना।',
         tomorrow: 'कल। मिलते हैं।',
         today: 'आज ही दिन है।',
         past: 'हो गया। हम शादीशुदा हैं।'
+      },
+      moodBoard: {
+        title: 'शादी की तैयारी में हम (कथित रूप से) क्या कर रहे हैं',
+        apekshaLabel: 'अपेक्षा',
+        apekshaBody:
+          'The Office को [गुप्त] बार दोबारा देख रही है। हर वीकेंड DDLJ। Salt Lake City पर बहस जारी है। Love Is Blind के लिए apply करने का सोचा था, फिर याद आया कि हम पहले से मिल चुके हैं।',
+        padraicLabel: 'पैड्रिक',
+        padraicBody: 'Spreadsheets बना रहे हैं। Stroopwafels जमा कर रहे हैं। ज़्यादातर साथ-साथ चल रहे हैं।'
       }
     }
   }

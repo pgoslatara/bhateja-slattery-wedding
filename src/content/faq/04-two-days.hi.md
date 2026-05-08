@@ -1,7 +1,9 @@
 ---
 order: 4
 question: दो दिन क्यों?
-enHash: f4f955950a1a4bfb28b8e49e6817da50dc4878e9ec2b233a14cc2f68281b9ce9
+enHash: 3b3cfcbfea6064698ccb487b4ca26df9a1bd53630176c7588b3ead58cb3605b9
 ---
 
 एक काफ़ी नहीं था।
+
+*पैड्रिक कहते हैं:* मैं बहस हार गया। अब शांति है।

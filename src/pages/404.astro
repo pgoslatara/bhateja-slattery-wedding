@@ -15,6 +15,7 @@ import Layout from '../components/Layout.astro';
       <li><a href="/website-wedding/photos/">Photos</a></li>
     </ul>
     <p class="subtitle">If you think this page should exist, WhatsApp us — possibly we lost it.</p>
+    <p class="attrib"><em>— Michael Scott, probably.</em></p>
   </section>
 </Layout>
 
@@ -49,5 +50,10 @@ import Layout from '../components/Layout.astro';
   }
   .lost-and-found a:hover {
     background: var(--color-accent-light);
+  }
+  .attrib {
+    margin-top: 1.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
   }
 </style>

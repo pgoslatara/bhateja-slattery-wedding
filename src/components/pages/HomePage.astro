@@ -49,6 +49,19 @@ const weddingISO = site.weddingDate;
       <a class="button button-secondary" href={localeUrl(lang, '/schedule/')}>{s.nav.schedule}</a>
     </div>
   </section>
+  <aside class="mood-board" aria-label={s.home.moodBoard.title}>
+    <h2>{s.home.moodBoard.title}</h2>
+    <div class="mood-grid">
+      <div class="mood-col">
+        <h3>{s.home.moodBoard.apekshaLabel}</h3>
+        <p>{s.home.moodBoard.apekshaBody}</p>
+      </div>
+      <div class="mood-col">
+        <h3>{s.home.moodBoard.padraicLabel}</h3>
+        <p>{s.home.moodBoard.padraicBody}</p>
+      </div>
+    </div>
+  </aside>
 </Layout>
 
 <script is:inline define:vars={{ messages: countdownMessages, weddingISO }}>
@@ -112,4 +125,40 @@ const weddingISO = site.weddingDate;
   .cta-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
   .button-secondary { background: var(--color-accent); color: var(--color-text); }
   .button-secondary:hover { background: var(--color-accent-light); }
+
+  .mood-board {
+    max-width: 40rem;
+    margin: 2rem auto 0;
+    padding: 1.25rem 1.5rem 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: rgba(253, 245, 212, 0.55);
+  }
+  .mood-board h2 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: var(--color-primary-dark);
+    margin: 0 0 1rem;
+    text-align: center;
+  }
+  .mood-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 32rem) {
+    .mood-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  }
+  .mood-col h3 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-primary);
+    margin: 0 0 0.35rem;
+  }
+  .mood-col p {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
 </style>

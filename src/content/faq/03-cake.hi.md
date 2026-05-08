@@ -1,7 +1,11 @@
 ---
 order: 3
 question: क्या केक होगा?
-enHash: 1049815dce0dbaf89a6d68b38a330cfcfbf9cebdad32e7b5a4a2f1924873cbd4
+enHash: 28141a240f1d91c21e799543ece6a37e440de5ea568a9743e192444ccb845ab8
 ---
 
 प्रश्न समझ में आ गया है। हाँ।
+
+*अपेक्षा कहती हैं:* Tiramisu और Goa-style sponge। मुझसे चुनने को मत कहो।
+
+*पैड्रिक कहते हैं:* इस मामले में मेरा वोट नहीं है।

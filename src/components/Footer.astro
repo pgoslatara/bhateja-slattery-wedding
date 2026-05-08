@@ -17,8 +17,18 @@ const waLink = `https://wa.me/${site.contactWhatsApp.replace(/\D/g, '')}`;
 <footer class="site-footer">
   <div class="garland" aria-hidden="true"></div>
   <p>{site.weddingDate} · {site.venue.city}, {site.venue.country}</p>
-  <p>{s.footer.contactPrefix} <a href={waLink}>{site.contactWhatsApp}</a></p>
+  <p>{s.footer.contactPrefix}</p>
+  <p class="tagline" data-tagline></p>
 </footer>
+
+<script is:inline define:vars={{ taglines: s.footer.taglines }}>
+  (function () {
+    var target = document.querySelector('[data-tagline]');
+    if (!target || !taglines || !taglines.length) return;
+    var pick = taglines[Math.floor(Math.random() * taglines.length)];
+    target.textContent = pick;
+  })();
+</script>
 
 <style>
   .site-footer {
@@ -35,4 +45,12 @@ const waLink = `https://wa.me/${site.contactWhatsApp.replace(/\D/g, '')}`;
     opacity: 0.7;
   }
   .site-footer a { color: var(--color-primary); }
+  .tagline {
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+    min-height: 1.4em;
+    opacity: 0.9;
+  }
+  .tagline:empty { margin-top: 0; min-height: 0; }
 </style>
