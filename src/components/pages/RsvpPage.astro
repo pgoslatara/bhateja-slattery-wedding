@@ -13,7 +13,7 @@ const appsScriptUrl = import.meta.env.PUBLIC_APPS_SCRIPT_URL ?? '';
   {appsScriptUrl ? (
     <RsvpForm lang={lang} appsScriptUrl={appsScriptUrl} />
   ) : (
-    <p class="error-text">{lang === 'en' ? 'RSVP endpoint not configured. Set PUBLIC_APPS_SCRIPT_URL.' : 'RSVP endpoint कॉन्फ़िगर नहीं है।'}</p>
+    <p class="error-text">{s.rsvp.errors.endpointMissing}</p>
   )}
   <script>
     import '../rsvp/client';

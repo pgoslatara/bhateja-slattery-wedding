@@ -73,7 +73,8 @@ export const strings = {
         invalid_origin: 'Something went wrong — please try again, or message us on WhatsApp.',
         whatsappRequired: 'Please enter your WhatsApp number.',
         whatsappFormat: 'WhatsApp number should start with + and a country code.',
-        leadNameRequired: 'Please enter your name.'
+        leadNameRequired: 'Please enter your name.',
+        endpointMissing: 'RSVP endpoint not configured. Set PUBLIC_APPS_SCRIPT_URL.'
       }
     },
     photos: {
@@ -181,7 +182,8 @@ export const strings = {
         invalid_origin: 'कुछ गड़बड़ हुई — फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',
         whatsappRequired: 'कृपया अपना व्हाट्सऐप नंबर दर्ज करें।',
         whatsappFormat: 'व्हाट्सऐप नंबर + और देश-कोड से शुरू होना चाहिए।',
-        leadNameRequired: 'कृपया अपना नाम दर्ज करें।'
+        leadNameRequired: 'कृपया अपना नाम दर्ज करें।',
+        endpointMissing: 'RSVP एंडपॉइंट कॉन्फ़िगर नहीं है। PUBLIC_APPS_SCRIPT_URL सेट करें।'
       }
     },
     photos: {
