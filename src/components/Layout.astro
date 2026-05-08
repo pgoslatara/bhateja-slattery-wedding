@@ -48,6 +48,11 @@ const currentPath = Astro.url.pathname;
   </head>
   <body>
     <a class="skip-link" href="#main">{s.a11y.skipToMain}</a>
+    <div class="site-frieze" aria-hidden="true" set:html={amsterdamFrieze}></div>
+    <Header lang={lang} currentPath={currentPath} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
     <div class="site-bg" aria-hidden="true">
       <Image
         src={siteBackground}
@@ -58,11 +63,6 @@ const currentPath = Astro.url.pathname;
         decoding="async"
       />
     </div>
-    <div class="site-frieze" aria-hidden="true" set:html={amsterdamFrieze}></div>
-    <Header lang={lang} currentPath={currentPath} />
-    <main id="main" tabindex="-1">
-      <slot />
-    </main>
     <Footer lang={lang} />
   </body>
 </html>
@@ -97,22 +97,30 @@ const currentPath = Astro.url.pathname;
      ring it would otherwise show. */
   main:focus { outline: none; }
   /*
-    Site-wide background: the painted couple-in-field anchored to the
-    bottom of the viewport, fixed so it stays visible as the page scrolls.
-    A cream gradient at the top of the image fades it into the body
-    background so text scrolling over the upper portion stays readable.
+    Body is a flex column anchored to viewport height so that on short
+    pages the painted couple block is pushed to the bottom of the viewport
+    rather than floating mid-page; on long pages it simply sits at the
+    end of the document, after content.
+  */
+  body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  body > main { flex: 1 0 auto; }
+  /*
+    Site-wide painted couple block. In normal flow at the bottom of the
+    body so that text content can never scroll over it. A short cream
+    gradient softens the top edge against the page background.
   */
   .site-bg {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
+    position: relative;
+    width: 100%;
     aspect-ratio: 21 / 9;
-    max-height: 65vh;
-    z-index: 0;
-    pointer-events: none;
+    max-height: 40vh;
     overflow: hidden;
+    pointer-events: none;
   }
   .site-bg :global(img) {
     width: 100%;
@@ -121,37 +129,25 @@ const currentPath = Astro.url.pathname;
     object-position: center bottom;
     display: block;
   }
-  .site-bg::after {
+  .site-bg::before {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: 0 0 auto 0;
+    height: 25%;
     background: linear-gradient(
       180deg,
       var(--color-bg) 0%,
-      rgba(253, 245, 212, 0.85) 12%,
-      rgba(253, 245, 212, 0.35) 30%,
-      rgba(253, 245, 212, 0) 55%
+      rgba(253, 245, 212, 0) 100%
     );
     pointer-events: none;
+    z-index: 1;
   }
-  /* Body is the positioning anchor for the absolute-positioned scatter. */
-  body {
-    position: relative;
-  }
-  /* Header, main, footer render *above* both the fixed bottom background
-     and the absolute-positioned top scatter — z-index puts them on the
-     layer in front. Bumped to 2 so they're unambiguously above the
-     frieze (which sits at z-index 1) and the bottom painting (at 0). */
+  /* Header and main keep z-index above the top frieze (z-index 1) so
+     interactive elements aren't blocked by the decorative scatter. */
   body > header,
-  body > main,
-  body > footer {
+  body > main {
     position: relative;
     z-index: 2;
-  }
-  /* Footer sits on top of the figures' feet area; give it a solid backing
-     so its text is fully readable. */
-  body > footer {
-    background: var(--color-bg);
   }
   /*
     Amsterdam-themed scatter (windmills + bicycles) over the top third

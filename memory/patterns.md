@@ -71,8 +71,7 @@ Non-obvious mechanics learnt while building this codebase. Read first; refer bac
 
 ## Visual
 
-- **Site-wide background**: `src/assets/motifs/hero-mustard-field-couple.jpg` (Gemini-generated painting). Rendered via Astro's `<Image>` in `Layout.astro`, `position: fixed` to the viewport bottom, `max-height: 65vh`. A cream gradient overlay (top fade to bottom transparent) keeps text readable as it scrolls over the upper portion of the image.
-- **Footer** has a solid `var(--color-bg)` background to keep contact info readable over the figures' feet.
+- **Couple painting placement**: `src/assets/motifs/hero-mustard-field-couple.jpg` (Gemini-generated) renders as an in-flow block at the bottom of every page (after `<main>`, before `<Footer>`), `aspect-ratio: 21/9` capped at `max-height: 40vh`. Body is `display: flex; flex-direction: column; min-height: 100vh` with `main { flex: 1 0 auto }` so on short pages the painting is pushed to the viewport bottom; on long pages it sits below content. **Earlier iteration used `position: fixed` as a viewport-bottom background, but content cards scrolled over the couple — that's the bug this layout fixes.** A short cream gradient (`.site-bg::before`) softens the top edge against the page bg.
 - All design tokens (colours, fonts, radii) are CSS custom properties in `src/styles/tokens.css`.
 - Hindi typography uses `Tiro Devanagari Hindi` for headings and `Noto Sans Devanagari` for body — switched via `html[lang="hi"]` selector in `tokens.css`.
 
