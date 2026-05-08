@@ -3,12 +3,13 @@ import '../styles/global.css';
 import { Image } from 'astro:assets';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
-import { type Locale } from '../i18n/strings';
+import { t, type Locale } from '../i18n/strings';
 import siteBackground from '../assets/motifs/hero-mustard-field-couple.jpg';
 import amsterdamFrieze from '../assets/motifs/amsterdam-frieze.svg?raw';
 
 interface Props { lang: Locale; title?: string }
 const { lang, title } = Astro.props;
+const s = t(lang);
 const pageTitle = title ? `${title} · Apeksha & Padraic` : 'Apeksha & Padraic';
 const currentPath = Astro.url.pathname;
 ---
@@ -46,6 +47,7 @@ const currentPath = Astro.url.pathname;
     />
   </head>
   <body>
+    <a class="skip-link" href="#main">{s.a11y.skipToMain}</a>
     <div class="site-bg" aria-hidden="true">
       <Image
         src={siteBackground}
@@ -58,7 +60,7 @@ const currentPath = Astro.url.pathname;
     </div>
     <div class="site-frieze" aria-hidden="true" set:html={amsterdamFrieze}></div>
     <Header lang={lang} currentPath={currentPath} />
-    <main>
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <Footer lang={lang} />
@@ -66,6 +68,34 @@ const currentPath = Astro.url.pathname;
 </html>
 
 <style>
+  /*
+    Skip-link: hidden off-screen until focused (e.g. by Tab on first
+    page load), then anchored to the top-left so a keyboard user can
+    activate it to jump past the header into <main>.
+  */
+  .skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    transform: translateY(-200%);
+    background: var(--color-bg);
+    color: var(--color-primary);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    z-index: 100;
+    transition: transform 0.15s ease;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  /* The main element is given tabindex="-1" so it can receive
+     programmatic focus from the skip-link click — strip the focus
+     ring it would otherwise show. */
+  main:focus { outline: none; }
   /*
     Site-wide background: the painted couple-in-field anchored to the
     bottom of the viewport, fixed so it stays visible as the page scrolls.

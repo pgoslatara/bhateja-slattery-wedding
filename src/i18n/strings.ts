@@ -11,6 +11,9 @@ export const strings = {
       faq: 'FAQ',
       photos: 'Photos'
     },
+    a11y: {
+      skipToMain: 'Skip to main content'
+    },
     footer: {
       contactPrefix: 'Questions, complaints, or marriage advice? WhatsApp us',
       taglines: [
@@ -119,6 +122,9 @@ export const strings = {
       donations: 'दान',
       faq: 'सामान्य प्रश्न',
       photos: 'तस्वीरें'
+    },
+    a11y: {
+      skipToMain: 'मुख्य सामग्री पर जाएँ'
     },
     footer: {
       contactPrefix: 'कोई सवाल, शिकायत, या शादी की सलाह? व्हाट्सऐप करें:',
