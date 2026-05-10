@@ -9,4 +9,6 @@ venue:
   country: India
   mapUrl: 'https://maps.google.com/?q=Gurgaon'
 contactWhatsApp: '+919000000000'
-# photosAlbumUrl filled in post-wedding
+photoAlbums:
+  googlePhotos: 'https://photos.app.goo.gl/uxVKPYMef44jPv8E8'
+  icloud: https://www.icloud.com/sharedalbum/#B2AJtdOXm0N8bNu

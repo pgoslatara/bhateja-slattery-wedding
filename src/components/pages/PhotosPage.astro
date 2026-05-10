@@ -25,6 +25,7 @@ const qrOptions = {
   type: 'svg' as const,
   width: 220,
   margin: 1,
+  errorCorrectionLevel: 'H' as const,
   color: { dark: '#2A1810', light: '#FFFFFF' }
 };
 const googleQR = albums?.googlePhotos
@@ -46,7 +47,17 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
         <article class="card platform-card">
           <h3>{s.photos.googleHeader}</h3>
           <p class="subtitle">{s.photos.googleHint}</p>
-          <div class="qr" set:html={googleQR}></div>
+          <div class="qr">
+            <div class="qr-svg" set:html={googleQR}></div>
+            <span class="qr-logo" aria-hidden="true">
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="20" r="13" fill="#FBBC04"/>
+                <circle cx="44" cy="32" r="13" fill="#EA4335"/>
+                <circle cx="32" cy="44" r="13" fill="#4285F4"/>
+                <circle cx="20" cy="32" r="13" fill="#34A853"/>
+              </svg>
+            </span>
+          </div>
           <p class="open-link">
             <a href={albums.googlePhotos} target="_blank" rel="noopener">{s.photos.googleOpen}</a>
           </p>
@@ -56,7 +67,14 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
         <article class="card platform-card">
           <h3>{s.photos.icloudHeader}</h3>
           <p class="subtitle">{s.photos.icloudHint}</p>
-          <div class="qr" set:html={icloudQR}></div>
+          <div class="qr">
+            <div class="qr-svg" set:html={icloudQR}></div>
+            <span class="qr-logo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15z" fill="#1B7EF7"/>
+              </svg>
+            </span>
+          </div>
           <p class="open-link">
             <a href={albums.icloud} target="_blank" rel="noopener">{s.photos.icloudOpen}</a>
           </p>
@@ -89,6 +107,7 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
     font-size: 0.95rem;
   }
   .qr {
+    position: relative;
     margin: 0 auto 1rem;
     max-width: 220px;
     background: #FFFFFF;
@@ -96,9 +115,29 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
     border-radius: 8px;
     border: 1px solid var(--color-border);
   }
-  .qr :global(svg) {
+  .qr-svg :global(svg) {
     width: 100%;
     height: auto;
+    display: block;
+  }
+  .qr-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22%;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 4px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-logo svg {
+    width: 100%;
+    height: 100%;
     display: block;
   }
   .open-link { margin: 0; }
