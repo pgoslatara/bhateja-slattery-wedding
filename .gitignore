@@ -7,3 +7,10 @@ dist/
 .DS_Store
 .clasp.json
 .playwright-mcp/
+
+# Stray Playwright/MCP screenshots that occasionally land at repo root
+# when a tool call omits the directory prefix. Real image assets live
+# under src/ and public/, so a root-only glob is safe.
+/*.png
+/*.jpeg
+/*.jpg
