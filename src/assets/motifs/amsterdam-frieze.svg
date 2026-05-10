@@ -66,6 +66,8 @@
   <use href="#windmill" transform="translate(380 350) rotate(6) scale(0.95)"/>
   <use href="#bicycle"  transform="translate(840 360) rotate(-8)"/>
 
-  <!-- The single stroopwafel hiding in the scatter. -->
-  <use href="#stroopwafel" transform="translate(1100 240) rotate(18)"/>
+  <!--
+    The single stroopwafel hides in the scatter at a random slot,
+    swapped in by Layout.astro at page load. See `.site-frieze` script.
+  -->
 </svg>

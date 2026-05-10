@@ -49,6 +49,17 @@ const currentPath = Astro.url.pathname;
   <body>
     <a class="skip-link" href="#main">{s.a11y.skipToMain}</a>
     <div class="site-frieze" aria-hidden="true" set:html={amsterdamFrieze}></div>
+    <script is:inline>
+      // Pick a random scatter slot and swap it for the stroopwafel,
+      // so the misfit appears in a different windmill/bicycle position
+      // on each page load.
+      (function () {
+        var uses = document.querySelectorAll('.site-frieze svg use');
+        if (!uses.length) return;
+        var pick = uses[Math.floor(Math.random() * uses.length)];
+        pick.setAttribute('href', '#stroopwafel');
+      })();
+    </script>
     <Header lang={lang} currentPath={currentPath} />
     <main id="main" tabindex="-1">
       <slot />
