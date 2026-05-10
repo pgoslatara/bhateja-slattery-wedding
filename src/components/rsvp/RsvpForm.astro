@@ -6,8 +6,6 @@ const { lang, appsScriptUrl } = Astro.props;
 const s = t(lang).rsvp;
 ---
 <form class="rsvp-form card" data-rsvp data-endpoint={appsScriptUrl} data-lang={lang} novalidate>
-  <h2>{s.formTitle}</h2>
-
   <div class="field">
     <label for="leadName">{s.leadName}</label>
     <input id="leadName" name="leadName" type="text" required maxlength="100" />
@@ -102,10 +100,29 @@ const s = t(lang).rsvp;
 <style>
   .rsvp-form .field { margin-bottom: 1.25rem; }
   .rsvp-form fieldset { border: none; padding: 0; }
-  .rsvp-form fieldset legend { font-family: var(--font-heading); font-weight: 600; margin-bottom: 0.5rem; }
-  .rsvp-form label { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; padding-right: 1rem; }
-  .rsvp-form label.block { display: block; padding: 0; min-height: auto; }
-  .rsvp-form label.block span { display: block; margin-bottom: 0.25rem; }
+  /* Field prompts: every "question" on the form uses one shared style —
+     bare <label for=>, fieldset <legend>, and the inner <span> on the
+     "Other" stacked input. Body font, semibold, block-level. */
+  .rsvp-form label[for],
+  .rsvp-form legend,
+  .rsvp-form label.block > span {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  /* Inline option labels (Yes/No, dietary checkboxes): regular weight,
+     sit beside their input on one line. */
+  .rsvp-form fieldset label:not(.block) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    padding-right: 1rem;
+    font-weight: 400;
+  }
+  /* Stacked container for "Other" prompt + free-text input. */
+  .rsvp-form label.block { display: block; padding: 0; }
   [data-additional-guests] input { margin-bottom: 0.5rem; }
 
   /*
