@@ -17,8 +17,8 @@ export const strings = {
     footer: {
       contactPrefix: 'Questions, complaints, or marriage advice? WhatsApp us',
       taglines: [
-        'Bears. Beets. Bollywood.',
-        'Identity theft is not a joke, Pádraic.',
+        'Bears. Beets. Battlestar Galactica.',
+        'Identity theft is not a joke, Jim.',
         'Love is not blind. We checked.',
         'On the 27th of February, my whole world will change.',
         'Apeksha will notice if you\'re late.',
@@ -107,7 +107,7 @@ export const strings = {
         title: 'What we\'re (allegedly) doing to get ready',
         apekshaLabel: 'Apeksha',
         apekshaBody:
-          'Rewatching The Office for the [redacted]th time. DDLJ on weekend rotation. Re-litigating Salt Lake City. Considered applying for Love Is Blind, then remembered we already met.',
+          'Rewatching The Office for the [redacted]th time. DDLJ on weekend rotation. Considered applying for Love Is Blind, then remembered we already met.',
         padraicLabel: 'Pádraic',
         padraicBody: 'Building spreadsheets. Stockpiling stroopwafels. Mostly tagging along.'
       }
@@ -129,8 +129,8 @@ export const strings = {
     footer: {
       contactPrefix: 'कोई सवाल, शिकायत, या शादी की सलाह? व्हाट्सऐप करें:',
       taglines: [
-        'Bears. Beets. Bollywood.',
-        'Pádraic, यह identity theft है। मज़ाक नहीं।',
+        'Bears. Beets. Battlestar Galactica.',
+        'Jim, यह identity theft है। मज़ाक नहीं।',
         'Love is blind नहीं है। हमने जाँच लिया।',
         '27 फ़रवरी को हमारी पूरी दुनिया बदल जाएगी।',
         'देर मत करना — अपेक्षा देख लेगी।',
@@ -219,7 +219,7 @@ export const strings = {
         title: 'शादी की तैयारी में हम (कथित रूप से) क्या कर रहे हैं',
         apekshaLabel: 'अपेक्षा',
         apekshaBody:
-          'The Office को [गुप्त] बार दोबारा देख रही है। हर वीकेंड DDLJ। Salt Lake City पर बहस जारी है। Love Is Blind के लिए apply करने का सोचा था, फिर याद आया कि हम पहले से मिल चुके हैं।',
+          'The Office को [गुप्त] बार दोबारा देख रही है। हर वीकेंड DDLJ। Love Is Blind के लिए apply करने का सोचा था, फिर याद आया कि हम पहले से मिल चुके हैं।',
         padraicLabel: 'पैड्रिक',
         padraicBody: 'Spreadsheets बना रहे हैं। Stroopwafels जमा कर रहे हैं। ज़्यादातर साथ-साथ चल रहे हैं।'
       }
