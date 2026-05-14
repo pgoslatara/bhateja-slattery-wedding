@@ -27,9 +27,11 @@ export const strings = {
     },
     donations: {
       eurLabel: 'EUR (Euro)',
+      eurHint: 'Scan with your European banking app to start a SEPA transfer.',
       usdLabel: 'USD (US Dollar)',
+      usdHint: 'Scan to open a Wise transfer link.',
       inrLabel: 'INR (Indian Rupee)',
-      placeholderHint: 'Transfer details to follow — please check back closer to the date.'
+      inrHint: 'Scan with PhonePe, GPay, Paytm or any UPI app.'
     },
     rsvp: {
       formTitle: 'RSVP',
@@ -139,9 +141,11 @@ export const strings = {
     },
     donations: {
       eurLabel: 'EUR (यूरो)',
+      eurHint: 'अपने यूरोपीय बैंकिंग ऐप से SEPA ट्रांसफ़र शुरू करने के लिए स्कैन करें।',
       usdLabel: 'USD (अमेरिकी डॉलर)',
+      usdHint: 'Wise ट्रांसफ़र लिंक खोलने के लिए स्कैन करें।',
       inrLabel: 'INR (भारतीय रुपया)',
-      placeholderHint: 'ट्रांसफर विवरण जल्द ही उपलब्ध होगा — कृपया तिथि के क़रीब फिर से देखें।'
+      inrHint: 'PhonePe, GPay, Paytm या किसी भी UPI ऐप से स्कैन करें।'
     },
     rsvp: {
       formTitle: 'RSVP — कृपया जवाब दें',

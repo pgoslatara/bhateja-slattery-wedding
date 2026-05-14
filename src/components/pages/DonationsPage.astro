@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import QRCode from 'qrcode';
 import Layout from '../Layout.astro';
 import { t, type Locale } from '../../i18n/strings';
 import { siteSchema, type SiteConfig } from '../../content/config';
@@ -17,59 +18,155 @@ const entry = pages.find(p => p.id === `donations.${lang}.md`);
 if (!entry) throw new Error(`Missing pages/donations.${lang}.md`);
 const { Content } = await entry.render();
 
+const charitiesEntry = pages.find(p => p.id === `charities.${lang}.md`);
+if (!charitiesEntry) throw new Error(`Missing pages/charities.${lang}.md`);
+const { Content: CharitiesContent } = await charitiesEntry.render();
+
 const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
 const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
 
-// Pair label + optional details for each currency. Render a card per currency;
-// if details are filled in (in site.yaml), show them — otherwise show the
-// "details to follow" placeholder.
-const currencies = [
-  { label: s.donations.eurLabel, details: site.donations?.eur?.details },
-  { label: s.donations.usdLabel, details: site.donations?.usd?.details },
-  { label: s.donations.inrLabel, details: site.donations?.inr?.details }
-];
+const qrOptions = {
+  type: 'svg' as const,
+  width: 220,
+  margin: 1,
+  errorCorrectionLevel: 'H' as const,
+  color: { dark: '#2A1810', light: '#FFFFFF' }
+};
+
+// EPC QR (BCD/SCT v002) — recognised by most European banking apps as a SEPA
+// credit-transfer prefill. Spec: European Payments Council EPC069-12.
+function buildEpcPayload(eur: NonNullable<SiteConfig['donations']>['eur']): string {
+  if (!eur) throw new Error('eur block required');
+  return [
+    'BCD',
+    '002',
+    '1',
+    'SCT',
+    eur.bic ?? '',
+    eur.name,
+    eur.iban.replace(/\s+/g, ''),
+    '',
+    '',
+    '',
+    eur.reference ?? ''
+  ].join('\n');
+}
+
+// UPI deep link — opens PhonePe / GPay / Paytm / BHIM with payee prefilled.
+function buildUpiUrl(inr: NonNullable<SiteConfig['donations']>['inr']): string {
+  if (!inr) throw new Error('inr block required');
+  const params = new URLSearchParams({ pa: inr.upi, pn: inr.name, cu: 'INR' });
+  return `upi://pay?${params.toString()}`;
+}
+
+const eurQR = site.donations?.eur
+  ? await QRCode.toString(buildEpcPayload(site.donations.eur), qrOptions)
+  : null;
+const inrQR = site.donations?.inr
+  ? await QRCode.toString(buildUpiUrl(site.donations.inr), qrOptions)
+  : null;
+const usdQR = site.donations?.usd
+  ? await QRCode.toString(site.donations.usd.wiseUrl, qrOptions)
+  : null;
+
+type Card = { qr: string; label: string; hint: string; symbol: string };
+const cards: Card[] = [];
+if (eurQR) cards.push({ qr: eurQR, label: s.donations.eurLabel, hint: s.donations.eurHint, symbol: '€' });
+if (inrQR) cards.push({ qr: inrQR, label: s.donations.inrLabel, hint: s.donations.inrHint, symbol: '₹' });
+if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donations.usdHint, symbol: '$' });
 ---
 <Layout lang={lang} title={entry.data.title}>
   <h1>{entry.data.title}</h1>
   <article class="card intro">
     <Content />
   </article>
-  <div class="currencies">
-    {currencies.map(({ label, details }) => (
-      <article class="card currency-card">
-        <h3>{label}</h3>
-        {details ? (
-          <pre class="details">{details}</pre>
-        ) : (
-          <p class="subtitle">{s.donations.placeholderHint}</p>
-        )}
-      </article>
-    ))}
-  </div>
+  {cards.length > 0 && (
+    <div class="currencies">
+      {cards.map(({ qr, label, hint, symbol }) => (
+        <article class="card currency-card">
+          <h3>{label}</h3>
+          <p class="subtitle">{hint}</p>
+          <div class="qr">
+            <div class="qr-svg" set:html={qr}></div>
+            <span class="qr-logo" aria-hidden="true">
+              <span class="qr-symbol">{symbol}</span>
+            </span>
+          </div>
+        </article>
+      ))}
+    </div>
+  )}
+  <article class="card charities-card">
+    <h2>{charitiesEntry.data.title}</h2>
+    <CharitiesContent />
+  </article>
 </Layout>
 
 <style>
   .intro { margin-bottom: 1.5rem; }
   .currencies {
     display: grid;
-    gap: 1rem;
+    gap: 1.5rem;
     margin-top: 1rem;
   }
   @media (min-width: 768px) {
     .currencies { grid-template-columns: repeat(3, 1fr); }
   }
+  .currency-card {
+    text-align: center;
+    padding: 1.5rem;
+  }
   .currency-card h3 {
     color: var(--color-primary);
     font-family: var(--font-heading);
-    margin-top: 0;
-    margin-bottom: 0.75rem;
+    margin: 0 0 0.5rem;
   }
-  .currency-card .details {
-    font-family: monospace;
-    white-space: pre-wrap;
-    margin: 0;
+  .currency-card .subtitle {
+    margin: 0 0 1rem;
     font-size: 0.95rem;
-    line-height: 1.55;
-    color: var(--color-text);
+  }
+  .qr {
+    position: relative;
+    margin: 0 auto;
+    max-width: 220px;
+    background: #FFFFFF;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+  .qr-svg :global(svg) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .qr-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22%;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 4px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-symbol {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+  .charities-card {
+    margin-top: 1.5rem;
+  }
+  .charities-card h2 {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    margin: 0 0 0.75rem;
   }
 </style>

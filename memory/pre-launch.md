@@ -28,6 +28,7 @@ Items marked ✅ have already been done.
   - After editing each `.en.md`, run `make rehash NAME=<basename>`
 - [ ] Decide whether to expand FAQ + travel content (currently minimal — sufficient for v1, but consider adding gifts and accommodation logistics)
 - [ ] **Photo album setup** — see the [Photo album setup](#photo-album-setup) section below. Two albums (Google Photos + iCloud) cover Android, iPhone, and web users; the Photos page auto-renders QR codes when the URLs are set.
+- [ ] **Donation QR setup** — see the [Donation QR setup](#donation-qr-setup) section below. The Donations page renders a QR code per currency (EUR/INR/USD) and shows no bank text, so the values in `site.yaml` must be correct before going live.
 
 ## Photo album setup
 
@@ -71,6 +72,52 @@ After committing the URL changes, run `make build` locally — the page generate
 
 To test the QR codes: open your phone camera, point at the screen, scan one. Should open the corresponding album.
 
+## Donation QR setup
+
+The Donations page renders one QR code per configured currency in `src/content/site.yaml`. No bank details are rendered as text — guests scan with their banking / payment app. QRs are baked at build time, so any change to the values requires a rebuild + redeploy.
+
+### EUR — EPC SEPA QR
+
+Encodes a SEPA credit-transfer prefill in the European Payments Council BCD/SCT v002 format. Recognised by ING, ABN, Revolut, and most other EU banking apps.
+
+```yaml
+donations:
+  eur:
+    name: A Bhateja & P Slattery   # beneficiary name (required)
+    iban: NL11REVO4168872017       # spaces are stripped automatically (required)
+    bic: REVONL22                  # optional in v002 but most apps prefer it
+    reference: Wedding donation    # appears as remittance text (optional)
+```
+
+### INR — UPI deep link
+
+Encodes a `upi://pay?pa=…&pn=…&cu=INR` link. Scanned by PhonePe, GPay, Paytm, BHIM, etc.
+
+```yaml
+  inr:
+    name: Apeksha Bhateja           # payee display name (required)
+    upi: apeksha@upi                # the UPI ID / VPA (required)
+```
+
+### USD — Wise payment link
+
+No standardised QR exists for ACH/wire, so we encode a Wise "pay me" URL instead. Set this up at [wise.com/pay/me](https://wise.com/pay/me) — it generates a permanent personal link that supports inbound USD (and many other currencies).
+
+```yaml
+  usd:
+    wiseUrl: https://wise.com/pay/me/PADRAICSLATTERY
+```
+
+### Verify
+
+After committing the values, run `make build` locally, then visit `/donations/` and `/hi/donations/`. **Scan each QR with a real device before pushing to main**:
+
+- **EUR**: open your banking app's "scan to pay" feature → confirm payee name, IBAN, BIC, and reference are prefilled correctly.
+- **INR**: open PhonePe / GPay → confirm the payee name and UPI ID match.
+- **USD**: open the camera app on any phone → confirm it offers to open the Wise URL → tap through and confirm the destination account matches.
+
+A wrong IBAN or UPI ID baked into a public QR is hard to recall — verify before pushing to `main` (which auto-deploys via `.github/workflows/deploy.yml`).
+
 ## Quality
 
 - [ ] **Have a native Hindi speaker review** the translations in `src/content/**/*.hi.md` and `src/i18n/strings.ts`. CI catches drift, not bad translations. The Hindi was seeded by an LLM.
@@ -79,7 +126,8 @@ To test the QR codes: open your phone camera, point at the screen, scan one. Sho
 
 After deploy, walk through the test plan in `docs/superpowers/plans/2026-05-06-wedding-website.md` Task 28:
 
-- All 12 pages render (6 EN + 6 HI)
+- All 14 pages render (7 EN + 7 HI)
+- Donation QRs scan cleanly on a real device for each currency (EUR / INR / USD) — see [Donation QR setup](#donation-qr-setup)
 - Language toggle works on every page; auto-detect respects browser locale (`navigator.language`)
 - RSVP form submits successfully (real submission lands in the Sheet's `submissions` tab and the `latest` view picks it up)
 - Throttle works: re-submitting same WhatsApp within 10s returns `{"status":"error","code":"throttled"}`. After 10s it succeeds again.

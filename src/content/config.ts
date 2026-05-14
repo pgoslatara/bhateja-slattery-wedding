@@ -53,9 +53,19 @@ export const siteSchema = z.object({
     icloud: z.string().url().optional()
   }).optional(),
   donations: z.object({
-    eur: z.object({ details: z.string().min(1) }).optional(),
-    usd: z.object({ details: z.string().min(1) }).optional(),
-    inr: z.object({ details: z.string().min(1) }).optional()
+    eur: z.object({
+      name: z.string().min(1),
+      iban: z.string().min(1),
+      bic: z.string().optional(),
+      reference: z.string().optional()
+    }).optional(),
+    inr: z.object({
+      name: z.string().min(1),
+      upi: z.string().min(1)
+    }).optional(),
+    usd: z.object({
+      wiseUrl: z.string().url()
+    }).optional()
   }).optional()
 });
 
