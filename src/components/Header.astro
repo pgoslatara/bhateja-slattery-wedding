@@ -8,48 +8,183 @@ const { lang, currentPath } = Astro.props;
 const s = t(lang);
 ---
 <header class="site-header">
-  <a class="brand" href={localeUrl(lang, '/')}>Apeksha &amp; Pádraic</a>
-  <nav class="primary-nav" aria-label="Primary">
-    <a href={localeUrl(lang, '/schedule/')}>{s.nav.schedule}</a>
-    <a href={localeUrl(lang, '/travel/')}>{s.nav.travel}</a>
-    <a href={localeUrl(lang, '/rsvp/')}>{s.nav.rsvp}</a>
-    <a href={localeUrl(lang, '/donations/')}>{s.nav.donations}</a>
-    <a href={localeUrl(lang, '/faq/')}>{s.nav.faq}</a>
-    <a href={localeUrl(lang, '/photos/')}>{s.nav.photos}</a>
-  </nav>
-  <LangToggle lang={lang} currentPath={currentPath} />
+  <div class="site-header-inner">
+    <a class="brand" href={localeUrl(lang, '/')}>Apeksha &amp; Pádraic</a>
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-open="false">
+      <a href={localeUrl(lang, '/schedule/')}>{s.nav.schedule}</a>
+      <a href={localeUrl(lang, '/travel/')}>{s.nav.travel}</a>
+      <a href={localeUrl(lang, '/rsvp/')}>{s.nav.rsvp}</a>
+      <a href={localeUrl(lang, '/donations/')}>{s.nav.donations}</a>
+      <a href={localeUrl(lang, '/faq/')}>{s.nav.faq}</a>
+      <a href={localeUrl(lang, '/photos/')}>{s.nav.photos}</a>
+    </nav>
+    <div class="header-actions">
+      <LangToggle lang={lang} currentPath={currentPath} />
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label={s.a11y.menu}
+      >
+        <span class="nav-toggle-icon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </div>
 </header>
+
+<script is:inline>
+  (function () {
+    var toggle = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('primary-nav');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      nav.setAttribute('data-open', open ? 'true' : 'false');
+    }
+
+    toggle.addEventListener('click', function () {
+      var open = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+
+    nav.addEventListener('click', function (e) {
+      if (e.target && e.target.tagName === 'A') setOpen(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  })();
+</script>
 
 <style>
   .site-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
     border-bottom: 1px solid var(--color-border);
     background: var(--color-bg);
+  }
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    max-width: 1024px;
+    margin: 0 auto;
   }
   .brand {
     font-family: var(--font-display);
     color: var(--color-primary);
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 700;
     text-decoration: none;
+    white-space: nowrap;
+    margin-right: auto;
   }
-  .primary-nav {
+  .header-actions {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nav-toggle {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-primary);
+  }
+  .nav-toggle-icon {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20px;
+    height: 14px;
+  }
+  .nav-toggle-icon span {
+    display: block;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* Mobile: nav becomes a dropdown panel below the header */
+  .primary-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  .primary-nav[data-open="true"] {
+    display: flex;
   }
   .primary-nav a {
     color: var(--color-text);
     text-decoration: none;
-    padding: 0.5rem;
+    padding: 0.9rem 1rem;
     min-height: 44px;
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+    font-size: 1.05rem;
   }
-  .primary-nav a:hover { color: var(--color-primary); }
+  .primary-nav a:last-child { border-bottom: none; }
+  .primary-nav a:hover { color: var(--color-primary); background: color-mix(in srgb, var(--color-accent-light) 25%, transparent); }
+  .primary-nav a:active { background: color-mix(in srgb, var(--color-accent-light) 40%, transparent); }
+
+  @media (min-width: 720px) {
+    .site-header-inner {
+      padding: 1rem;
+      gap: 1.25rem;
+    }
+    .brand {
+      font-size: 1.25rem;
+    }
+    .nav-toggle {
+      display: none;
+    }
+    .primary-nav,
+    .primary-nav[data-open="false"] {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.25rem 1rem;
+      position: static;
+      background: transparent;
+      border-bottom: none;
+      box-shadow: none;
+    }
+    .primary-nav a {
+      padding: 0.5rem 0.25rem;
+      border-bottom: none;
+      font-size: 1rem;
+      min-height: 0;
+    }
+    .primary-nav a:hover { background: transparent; }
+  }
 </style>

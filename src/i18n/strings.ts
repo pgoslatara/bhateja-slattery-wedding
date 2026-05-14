@@ -12,7 +12,8 @@ export const strings = {
       photos: 'Photos'
     },
     a11y: {
-      skipToMain: 'Skip to main content'
+      skipToMain: 'Skip to main content',
+      menu: 'Menu'
     },
     footer: {
       contactPrefix: 'Questions, complaints, or marriage advice? WhatsApp us',
@@ -126,7 +127,8 @@ export const strings = {
       photos: 'तस्वीरें'
     },
     a11y: {
-      skipToMain: 'मुख्य सामग्री पर जाएँ'
+      skipToMain: 'मुख्य सामग्री पर जाएँ',
+      menu: 'मेनू'
     },
     footer: {
       contactPrefix: 'कोई सवाल, शिकायत, या शादी की सलाह? व्हाट्सऐप करें:',
