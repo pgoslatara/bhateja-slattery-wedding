@@ -33,15 +33,16 @@
       <!-- Saddle -->
       <line x1="-6" y1="-6" x2="3" y2="-6" stroke-width="1.8"/>
     </g>
-    <g id="sunglasses" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <!-- Lenses -->
+    <g id="sunglasses" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Filled lenses — frame and lens share one colour so the
+           silhouette reads as sunglasses rather than spectacles. -->
       <ellipse cx="-13" cy="0" rx="9" ry="7"/>
       <ellipse cx="13" cy="0" rx="9" ry="7"/>
       <!-- Bridge -->
-      <path d="M -4 -1 Q 0 -5 4 -1"/>
+      <path d="M -4 -1 Q 0 -5 4 -1" fill="none"/>
       <!-- Arms -->
-      <line x1="-22" y1="-3" x2="-27" y2="-1"/>
-      <line x1="22" y1="-3" x2="27" y2="-1"/>
+      <line x1="-22" y1="-3" x2="-27" y2="-1" fill="none"/>
+      <line x1="22" y1="-3" x2="27" y2="-1" fill="none"/>
     </g>
     <g id="remote" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <!-- Body -->
