@@ -4,7 +4,7 @@ order: 1
 name: Wedding Ceremony
 startTime: TBD
 endTime: TBD
-dressCode: Formal Indian
+dressCode: Formal Indian and Western formal are welcome
 ---
 
 The wedding ceremony followed by reception. Details to follow.

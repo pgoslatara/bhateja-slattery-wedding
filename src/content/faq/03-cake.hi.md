@@ -1,10 +1,8 @@
 ---
 order: 3
 question: क्या केक होगा?
-enHash: 04388d20ee2b61090b50c987e681a7fd157cb32f6f3c7b7ff585c8a2aa6232be
+enHash: 82edae40630241c7bbb6d5049d88f8585e217172533eacca34041fbb729a0cd3
 ---
-
-प्रश्न समझ में आ गया है। हाँ।
 
 *अपेक्षा कहती हैं:* Tiramisu और Goa-style sponge। मुझसे चुनने को मत कहो।
 
