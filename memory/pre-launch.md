@@ -11,6 +11,7 @@ Items marked ✅ have already been done.
 - [ ] In the Apps Script editor: *Deploy → New deployment → Web app* (Execute as: **Me**, Access: **Anyone**)
 - [ ] Copy the resulting `https://script.google.com/macros/s/.../exec` URL — that's `PUBLIC_APPS_SCRIPT_URL`
 - [ ] After the first real submission lands in `submissions`, manually create the `latest` tab using the **two-cell formula** in `apps-script/README.md` (single-cell variant fails with an array-literal error)
+- [ ] If an older Sheet header already exists from a previous deployment (with `day1_attending` between columns C and E), delete column D from `submissions` and rerun `make script-push` — the column count and `whatsapp` index shifted when the Mehendi event was dropped
 
 ## GitHub setup
 
@@ -23,8 +24,8 @@ Items marked ✅ have already been done.
 ## Content
 
 - ✅ `src/content/site.yaml` couple names + venue updated
-- [ ] Real schedule times in `src/content/schedule/0{1,2}-*.{en,hi}.md` (currently `TBD`)
-  - After editing each `.en.md`, run `make rehash NAME=<basename>`
+- [ ] Real schedule times in `src/content/schedule/02-ceremony.{en,hi}.md` (currently `TBD`)
+  - After editing the `.en.md`, run `make rehash NAME=02-ceremony`
 - [ ] Decide whether to expand FAQ + travel content (currently minimal — sufficient for v1, but consider adding gifts and accommodation logistics)
 - [ ] **Photo album setup** — see the [Photo album setup](#photo-album-setup) section below. Two albums (Google Photos + iCloud) cover Android, iPhone, and web users; the Photos page auto-renders QR codes when the URLs are set.
 - [ ] **Donation QR setup** — see the [Donation QR setup](#donation-qr-setup) section below. The Donations page renders a QR code per currency (EUR/INR/USD) and shows no bank text, so the values in `site.yaml` must be correct before going live.

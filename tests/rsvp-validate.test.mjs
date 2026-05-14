@@ -5,7 +5,6 @@ import { validateRsvp } from '../src/components/rsvp/validate.ts';
 const baseValid = {
   leadName: 'Sandeep',
   additionalGuests: [],
-  day1Attending: 'yes',
   day2Attending: 'yes',
   dietary: [],
   dietaryOther: '',

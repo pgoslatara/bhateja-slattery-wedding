@@ -48,17 +48,16 @@ columns are:
 | 0 | `timestamp` | ISO-8601 string set by the server |
 | 1 | `lead_name` | |
 | 2 | `additional_guests` | JSON array of strings |
-| 3 | `day1_attending` | `yes` / `no` |
-| 4 | `day2_attending` | `yes` / `no` |
-| 5 | `dietary` | JSON array (e.g. `["vegetarian","glutenFree"]`) |
-| 6 | `dietary_other` | Free text |
-| 7 | `arrival` | Free text |
-| 8 | `departure` | Free text |
-| 9 | `accommodation` | `sorted` / `recommended` / `help` |
-| 10 | `whatsapp` | Used as the dedup key |
-| 11 | `notes` | Free text |
-| 12 | `raw_json` | Full original payload (forensic backup) |
-| 13 | `requires_visa` | `yes` / `no` — whether the guest needs an Indian visa |
+| 3 | `day2_attending` | `yes` / `no` |
+| 4 | `dietary` | JSON array (e.g. `["vegetarian","glutenFree"]`) |
+| 5 | `dietary_other` | Free text |
+| 6 | `arrival` | Free text |
+| 7 | `departure` | Free text |
+| 8 | `accommodation` | `sorted` / `recommended` / `help` |
+| 9 | `whatsapp` | Used as the dedup key |
+| 10 | `notes` | Free text |
+| 11 | `raw_json` | Full original payload (forensic backup) |
+| 12 | `requires_visa` | `yes` / `no` — whether the guest needs an Indian visa |
 
 ### Add a `latest` view
 
@@ -71,7 +70,7 @@ that occurs when stacking the header onto a single-row FILTER result.
 **In `A1`** (header — copies the column labels from `submissions`):
 
 ```
-=submissions!A1:N1
+=submissions!A1:M1
 ```
 
 **In `A2`** (body — deduped, latest-per-WhatsApp rows, spills downward):
@@ -79,8 +78,8 @@ that occurs when stacking the header onto a single-row FILTER result.
 ```
 =IFERROR(
   LET(
-    raw,  SORT(FILTER(submissions!A2:N, submissions!A2:A <> ""), 1, FALSE),
-    keys, INDEX(raw, 0, 11),
+    raw,  SORT(FILTER(submissions!A2:M, submissions!A2:A <> ""), 1, FALSE),
+    keys, INDEX(raw, 0, 10),
     mask, ARRAYFORMULA(MATCH(keys, keys, 0)) = SEQUENCE(ROWS(keys)),
     FILTER(raw, mask)
   )
@@ -96,9 +95,9 @@ How it works:
    canonical "first-occurrence" mask. The `ARRAYFORMULA` wrap is required
    because Sheets' `MATCH` doesn't natively iterate over an array first
    argument. Because the rows are already sorted newest-first, the first
-   occurrence of each WhatsApp number is its *latest* submission. `INDEX(raw, 0, 11)`
-   still keys on column 11 (`whatsapp`); the new `requires_visa` column at
-   position 14 doesn't shift anything.
+   occurrence of each WhatsApp number is its *latest* submission. `INDEX(raw, 0, 10)`
+   keys on column 10 (`whatsapp`); the trailing `requires_visa` column doesn't
+   shift anything.
 
 The view updates live as new rows land in `submissions`. If a guest resubmits
 with the same WhatsApp number, their newer row replaces the older one in
@@ -112,7 +111,7 @@ After every redeploy, post a test payload from the terminal:
 ```bash
 curl -L -X POST "$PUBLIC_APPS_SCRIPT_URL" \
   -H "Content-Type: text/plain" \
-  -d '{"leadName":"Test","whatsapp":"+919999999999","day1Attending":"yes","day2Attending":"no","accommodation":"sorted","requiresVisa":"no","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":"","origin":"https://pgoslatara.github.io"}'
+  -d '{"leadName":"Test","whatsapp":"+919999999999","day2Attending":"yes","accommodation":"sorted","requiresVisa":"no","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":"","origin":"https://pgoslatara.github.io"}'
 ```
 
 Expected: `{"status":"ok"}` and a new row in the `submissions` tab. The

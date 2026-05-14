@@ -53,7 +53,7 @@ function createSubmissionsSheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.insertSheet(SUBMISSIONS_TAB);
   sheet.appendRow([
-    'timestamp', 'lead_name', 'additional_guests', 'day1_attending', 'day2_attending',
+    'timestamp', 'lead_name', 'additional_guests', 'day2_attending',
     'dietary', 'dietary_other', 'arrival', 'departure', 'accommodation', 'whatsapp', 'notes', 'raw_json',
     'requires_visa'
   ]);
@@ -64,7 +64,7 @@ function lookupLastSubmissionMs(sheet, whatsapp) {
   var rows = sheet.getDataRange().getValues();
   var lastMs = null;
   for (var i = 1; i < rows.length; i++) {
-    if (rows[i][10] === whatsapp) {
+    if (rows[i][9] === whatsapp) {
       var ts = rows[i][0];
       var ms = ts instanceof Date ? ts.getTime() : Number(ts);
       if (!lastMs || ms > lastMs) lastMs = ms;
@@ -78,7 +78,6 @@ function appendRow(sheet, nowMs, d) {
     new Date(nowMs).toISOString(),
     d.leadName,
     JSON.stringify(d.additionalGuests || []),
-    d.day1Attending,
     d.day2Attending,
     JSON.stringify(d.dietary || []),
     d.dietaryOther || '',

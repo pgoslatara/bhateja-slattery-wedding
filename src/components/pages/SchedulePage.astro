@@ -16,14 +16,15 @@ const dayLabel = (n: 1 | 2) => {
   if (lang === 'en') return n === 1 ? 'Day 1 — 26 February 2027' : 'Day 2 — 27 February 2027';
   return n === 1 ? 'दिन 1 — 26 फ़रवरी 2027' : 'दिन 2 — 27 फ़रवरी 2027';
 };
+
+const days = [{ n: 1 as const, items: day1 }, { n: 2 as const, items: day2 }].filter(d => d.items.length > 0);
 ---
 <Layout lang={lang} title={s.nav.schedule}>
   <h1>{s.nav.schedule}</h1>
   <div class="days">
-    {[{ n: 1 as const, items: day1 }, { n: 2 as const, items: day2 }].map(({ n, items }) => (
+    {days.map(({ n, items }) => (
       <section>
         <h2>{dayLabel(n)}</h2>
-        {items.length === 0 && <p class="subtitle">TBD</p>}
         {items.map(async (entry) => {
           const { Content } = await entry.render();
           return (

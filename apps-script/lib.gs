@@ -26,9 +26,6 @@ function parsePayload(rawBody) {
   if (typeof data.whatsapp !== 'string' || !/^\+\d{10,15}$/.test(data.whatsapp)) {
     return { ok: false, code: 'invalid_payload' };
   }
-  if (data.day1Attending !== 'yes' && data.day1Attending !== 'no') {
-    return { ok: false, code: 'invalid_payload' };
-  }
   if (data.day2Attending !== 'yes' && data.day2Attending !== 'no') {
     return { ok: false, code: 'invalid_payload' };
   }

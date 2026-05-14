@@ -2,7 +2,7 @@
 
 ## What this is
 
-Bilingual (English + Hindi) wedding website for **Apeksha and Padraic**. Wedding date: **27 February 2027** at a single venue in **Gurgaon, India**. Two-day event (mehendi 26 Feb, ceremony 27 Feb). About 60 guests, mostly India + some in Europe.
+Bilingual (English + Hindi) wedding website for **Apeksha and Padraic**. Wedding date: **27 February 2027** at a single venue in **Gurgaon, India**. About 60 guests, mostly India + some in Europe.
 
 The couple lives in **Amsterdam** — that's the personal context behind any "where they live" decorative touches.
 

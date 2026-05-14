@@ -1,7 +1,6 @@
 export type RsvpInput = {
   leadName: string;
   additionalGuests: string[];
-  day1Attending: 'yes' | 'no' | '';
   day2Attending: 'yes' | 'no' | '';
   dietary: string[];
   dietaryOther: string;
@@ -50,7 +49,6 @@ export function validateRsvp(raw: RsvpInput): Validated {
     value: {
       leadName: cap(leadName),
       additionalGuests,
-      day1Attending: raw.day1Attending,
       day2Attending: raw.day2Attending,
       dietary: (raw.dietary ?? []).map(trim).filter(Boolean),
       dietaryOther: cap(trim(raw.dietaryOther)),
