@@ -47,7 +47,6 @@ export const siteSchema = z.object({
     country: z.string().min(1),
     mapUrl: z.string().url()
   }),
-  contactWhatsApp: z.string().regex(/^\+\d{6,15}$/),
   photoAlbums: z.object({
     googlePhotos: z.string().url().optional(),
     icloud: z.string().url().optional()

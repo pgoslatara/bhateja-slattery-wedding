@@ -23,7 +23,6 @@ Items marked ✅ have already been done.
 ## Content
 
 - ✅ `src/content/site.yaml` couple names + venue updated
-- [ ] Real `contactWhatsApp` in `src/content/site.yaml` (currently `+919000000000` placeholder)
 - [ ] Real schedule times in `src/content/schedule/0{1,2}-*.{en,hi}.md` (currently `TBD`)
   - After editing each `.en.md`, run `make rehash NAME=<basename>`
 - [ ] Decide whether to expand FAQ + travel content (currently minimal — sufficient for v1, but consider adding gifts and accommodation logistics)
