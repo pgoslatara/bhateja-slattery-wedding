@@ -145,7 +145,7 @@ For every `*.en.md` there must be a corresponding `*.hi.md` (and vice versa). En
 // astro.config.mjs
 export default defineConfig({
   site: 'https://<github-username>.github.io',
-  base: '/website-wedding',
+  base: '/bhateja-slattery-wedding',
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'hi'],
@@ -386,7 +386,7 @@ All motifs as inline SVG, stored in `src/assets/motifs/`, hand-crafted or source
 ### 10.1 Repository layout (deployment-relevant)
 
 ```text
-website-wedding/
+bhateja-slattery-wedding/
 ├── .github/workflows/
 │   ├── deploy.yml                # build + deploy to GitHub Pages on push to main
 │   ├── pr-checks.yml             # i18n parity, type-check, build sanity
@@ -489,7 +489,7 @@ clean:       ## Remove build artifacts and node_modules
 ### 10.4 GitHub Pages configuration
 
 - Source: GitHub Actions
-- Custom domain: none (default `<user>.github.io/website-wedding`); choose an unobtrusive repo name to keep the URL non-obvious
+- Custom domain: none (default `<user>.github.io/bhateja-slattery-wedding`); choose an unobtrusive repo name to keep the URL non-obvious
 - Force HTTPS: on
 - `noindex` enforced via meta tag + `public/robots.txt`
 

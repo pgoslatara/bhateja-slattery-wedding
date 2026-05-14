@@ -4,7 +4,7 @@ const SITE_URL = process.env.SITE_URL ?? 'https://example.github.io';
 
 export default defineConfig({
   site: SITE_URL,
-  base: '/website-wedding',
+  base: '/bhateja-slattery-wedding',
   trailingSlash: 'always',
   i18n: {
     defaultLocale: 'en',

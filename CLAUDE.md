@@ -1,6 +1,6 @@
 # Claude — project guide
 
-This is a bilingual (English + Hindi) wedding website for Apeksha and Padraic, deployed to GitHub Pages at `https://pgoslatara.github.io/website-wedding/`.
+This is a bilingual (English + Hindi) wedding website for Apeksha and Padraic, deployed to GitHub Pages at `https://pgoslatara.github.io/bhateja-slattery-wedding/`.
 
 ## Read first
 

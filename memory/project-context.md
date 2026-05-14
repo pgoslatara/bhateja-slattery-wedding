@@ -12,7 +12,7 @@ The user is **Padraic Slattery** (the groom — `partner2` in `site.yaml`). Data
 
 ## Tech stack
 
-- **Astro 5** static site → **GitHub Pages** under `https://pgoslatara.github.io/website-wedding/`
+- **Astro 5** static site → **GitHub Pages** under `https://pgoslatara.github.io/bhateja-slattery-wedding/`
 - **TypeScript** components, **Zod** schemas for content validation
 - **Markdown/YAML** content with CI-enforced translation parity
 - **Google Apps Script** web app + **Google Sheet** as the RSVP backend

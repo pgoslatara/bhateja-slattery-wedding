@@ -10,7 +10,7 @@
 
 **Conventions used throughout this plan:**
 - Couple's name order is **always "Apeksha and Padraic"** (or "Apeksha & Padraic"). The Zod `coupleNames` object uses `partner1: "Apeksha"`, `partner2: "Padraic"`.
-- Repository name is assumed `website-wedding`. The `base` URL is `/website-wedding`. If you choose a different repo name, change it in `astro.config.mjs` and the workflow files; nothing else needs to change.
+- Repository name is assumed `bhateja-slattery-wedding`. The `base` URL is `/bhateja-slattery-wedding`. If you choose a different repo name, change it in `astro.config.mjs` and the workflow files; nothing else needs to change.
 - The deployed origin used in the Apps Script allow-list is parameterised via a `SITE_URL` env var at build time — the placeholder used through development is `https://example.github.io` and gets overridden in CI.
 - Commits use Conventional Commits style (`feat:`, `chore:`, `test:`, `docs:`, `ci:`).
 
@@ -54,7 +54,7 @@ dist/
 
 ```json
 {
-  "name": "website-wedding",
+  "name": "bhateja-slattery-wedding",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -106,7 +106,7 @@ const SITE_URL = process.env.SITE_URL ?? 'https://example.github.io';
 
 export default defineConfig({
   site: SITE_URL,
-  base: '/website-wedding',
+  base: '/bhateja-slattery-wedding',
   trailingSlash: 'always',
   i18n: {
     defaultLocale: 'en',
@@ -143,7 +143,7 @@ const lang = 'en';
 - [ ] **Step 7: Create skeleton `README.md`**
 
 ```markdown
-# website-wedding
+# bhateja-slattery-wedding
 
 Wedding website for Apeksha and Padraic — 27 February 2027, Gurgaon.
 
@@ -166,7 +166,7 @@ npm install
 npm run build
 ```
 
-Expected: `npm install` completes; `npm run build` succeeds and writes `./dist/index.html`. (Astro's `base` config controls URL prefix at runtime — links resolve under `/website-wedding/` — but does not nest the build output. GitHub Pages serves `./dist` under the repo path automatically.)
+Expected: `npm install` completes; `npm run build` succeeds and writes `./dist/index.html`. (Astro's `base` config controls URL prefix at runtime — links resolve under `/bhateja-slattery-wedding/` — but does not nest the build output. GitHub Pages serves `./dist` under the repo path automatically.)
 
 - [ ] **Step 9: Commit**
 
@@ -192,7 +192,7 @@ Disallow: /
 - [ ] **Step 2: Verify build still succeeds**
 
 Run: `npm run build`
-Expected: PASS. After build, `dist/website-wedding/robots.txt` exists.
+Expected: PASS. After build, `dist/bhateja-slattery-wedding/robots.txt` exists.
 
 The `<meta name="robots">` tag is already in `src/pages/index.astro`; it will move into the shared `Layout` component in Task 11.
 
@@ -1696,7 +1696,7 @@ import Layout from '../components/Layout.astro';
 - [ ] **Step 9: Verify build**
 
 Run: `npm run build`
-Expected: PASS. Open `dist/website-wedding/index.html` and confirm it includes the header, footer, lang toggle, and Apeksha-and-Padraic branding.
+Expected: PASS. Open `dist/bhateja-slattery-wedding/index.html` and confirm it includes the header, footer, lang toggle, and Apeksha-and-Padraic branding.
 
 - [ ] **Step 10: Commit**
 
@@ -1786,10 +1786,10 @@ const otherLabel = lang === 'en' ? 'हिंदी' : 'EN';
 - [ ] **Step 3: Build and manually verify**
 
 Run: `npm run build && npm run preview`
-Expected: dev preview at `http://localhost:4321/website-wedding/`. Manually check:
-- Visit `/website-wedding/` — sees English version.
-- Click the `हिंदी` toggle — URL becomes `/website-wedding/hi/`, content stays Hindi-empty (the placeholder index has no Hindi version yet — that's fine; we'll add `src/pages/hi/index.astro` in Task 14).
-- Reload `/website-wedding/` — auto-redirects to `/website-wedding/hi/` because preference is now `hi`.
+Expected: dev preview at `http://localhost:4321/bhateja-slattery-wedding/`. Manually check:
+- Visit `/bhateja-slattery-wedding/` — sees English version.
+- Click the `हिंदी` toggle — URL becomes `/bhateja-slattery-wedding/hi/`, content stays Hindi-empty (the placeholder index has no Hindi version yet — that's fine; we'll add `src/pages/hi/index.astro` in Task 14).
+- Reload `/bhateja-slattery-wedding/` — auto-redirects to `/bhateja-slattery-wedding/hi/` because preference is now `hi`.
 - Click `EN` — back to root, preference flipped.
 
 For now, since `src/pages/hi/index.astro` doesn't exist, clicking the toggle from the home page returns 404 — that's expected and resolves at Task 14.
@@ -1877,7 +1877,7 @@ import HomePage from '../../components/pages/HomePage.astro';
 - [ ] **Step 4: Verify build**
 
 Run: `npm run build`
-Expected: PASS. Both `dist/website-wedding/index.html` and `dist/website-wedding/hi/index.html` exist.
+Expected: PASS. Both `dist/bhateja-slattery-wedding/index.html` and `dist/bhateja-slattery-wedding/hi/index.html` exist.
 
 - [ ] **Step 5: Commit**
 
@@ -1977,7 +1977,7 @@ import SchedulePage from '../../components/pages/SchedulePage.astro';
 - [ ] **Step 4: Verify build**
 
 Run: `npm run build`
-Expected: PASS. `dist/website-wedding/schedule/index.html` and `dist/website-wedding/hi/schedule/index.html` exist with both events listed under the correct day.
+Expected: PASS. `dist/bhateja-slattery-wedding/schedule/index.html` and `dist/bhateja-slattery-wedding/hi/schedule/index.html` exist with both events listed under the correct day.
 
 - [ ] **Step 5: Commit**
 
@@ -2729,7 +2729,7 @@ Run:
 PUBLIC_APPS_SCRIPT_URL=https://example.invalid/exec npm run build
 ```
 
-Expected: PASS. The form is rendered into both `dist/website-wedding/rsvp/index.html` and `dist/website-wedding/hi/rsvp/index.html`.
+Expected: PASS. The form is rendered into both `dist/bhateja-slattery-wedding/rsvp/index.html` and `dist/bhateja-slattery-wedding/hi/rsvp/index.html`.
 
 - [ ] **Step 6: Commit**
 
@@ -3212,7 +3212,7 @@ git add .github/workflows/deploy.yml
 git commit -m "ci: add GitHub Pages deploy workflow"
 ```
 
-Push to `main`, watch the Actions tab. Expected: `build` then `deploy` jobs succeed; the site is live at `https://<owner>.github.io/website-wedding/`.
+Push to `main`, watch the Actions tab. Expected: `build` then `deploy` jobs succeed; the site is live at `https://<owner>.github.io/bhateja-slattery-wedding/`.
 
 ---
 
@@ -3353,7 +3353,7 @@ git commit -m "chore: add Makefile for common workflows"
 - [ ] **Step 1: Replace `README.md` with the full version**
 
 ```markdown
-# website-wedding
+# bhateja-slattery-wedding
 
 Wedding website for **Apeksha and Padraic** — 27 February 2027, Gurgaon.
 Bilingual (English + Hindi), static, deployed to GitHub Pages.
@@ -3367,7 +3367,7 @@ Plan: `docs/superpowers/plans/2026-05-06-wedding-website.md`
 
 ```bash
 make setup      # install deps + initialise husky hook
-make dev        # http://localhost:4321/website-wedding/
+make dev        # http://localhost:4321/bhateja-slattery-wedding/
 ```
 
 ## Common tasks
@@ -3473,7 +3473,7 @@ Push to `main` (or run the deploy workflow from the Actions tab via *Run workflo
 
 - [ ] **Step 3: Visit the site and walk every page**
 
-Open `https://<owner>.github.io/website-wedding/`. Confirm:
+Open `https://<owner>.github.io/bhateja-slattery-wedding/`. Confirm:
 
 - [ ] Home page renders with names, date, two CTAs.
 - [ ] Schedule page lists Mehendi (Day 1) and Wedding (Day 2).
@@ -3497,7 +3497,7 @@ Submit the form with a fake but realistic payload. Expected:
 
 - [ ] **Step 5: Verify privacy posture**
 
-`curl https://<owner>.github.io/website-wedding/robots.txt` → returns `Disallow: /`.
+`curl https://<owner>.github.io/bhateja-slattery-wedding/robots.txt` → returns `Disallow: /`.
 
 - [ ] **Step 6: Drop in the SRK silhouette asset (if available)**
 

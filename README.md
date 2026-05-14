@@ -1,4 +1,4 @@
-# website-wedding
+# bhateja-slattery-wedding
 
 Wedding website for **Apeksha and Padraic** — 27 February 2027, Gurgaon.
 Bilingual (English + Hindi), static, deployed to GitHub Pages.
@@ -12,7 +12,7 @@ Plan: `docs/superpowers/plans/2026-05-06-wedding-website.md`
 
 ```bash
 make setup      # install deps + initialise husky hook
-make dev        # http://localhost:4321/website-wedding/
+make dev        # http://localhost:4321/bhateja-slattery-wedding/
 ```
 
 ## Common tasks

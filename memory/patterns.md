@@ -5,7 +5,7 @@ Non-obvious mechanics learnt while building this codebase. Read first; refer bac
 ## Conventions
 
 - Couple's name order is **always "Apeksha and Padraic"** (or "Apeksha & Padraic"). Never the other order.
-- Repo deploys to GitHub Pages under `/website-wedding`. `astro.config.mjs` sets `base: '/website-wedding'`.
+- Repo deploys to GitHub Pages under `/bhateja-slattery-wedding`. `astro.config.mjs` sets `base: '/bhateja-slattery-wedding'`.
 - All content lives in `src/content/` as paired `.en.md` / `.hi.md` files.
 - Tests use Node's built-in `node:test` runner with `--experimental-strip-types` for `.ts` test fixtures.
 - Pre-commit hook runs `npm run i18n:check` only (fast). Full check is `make check` (i18n + types + tests).
@@ -18,7 +18,7 @@ Non-obvious mechanics learnt while building this codebase. Read first; refer bac
 
 - **`import.meta.url` in components**: Inside Astro/Vite-bundled components, `import.meta.url` resolves to the compiled chunk path, not the source file. To read a source file at build time (e.g. `site.yaml`), use `resolve(process.cwd(), 'src/content/site.yaml')`.
 
-- **Build output path**: `astro.config.mjs`'s `base` controls URL prefix at runtime, not the output directory. Build produces `./dist/index.html` directly — GitHub Pages serves it under `/website-wedding/` automatically.
+- **Build output path**: `astro.config.mjs`'s `base` controls URL prefix at runtime, not the output directory. Build produces `./dist/index.html` directly — GitHub Pages serves it under `/bhateja-slattery-wedding/` automatically.
 
 - **Astro `Image` from `astro:assets`** auto-optimises raster images at build (3 MB JPEG → ~200 KB WebP). Pattern: `import x from '../assets/x.jpg'; <Image src={x} width={2400} quality={80} loading="eager" decoding="async" />`.
 

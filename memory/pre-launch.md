@@ -83,7 +83,7 @@ After deploy, walk through the test plan in `docs/superpowers/plans/2026-05-06-w
 - Language toggle works on every page; auto-detect respects browser locale (`navigator.language`)
 - RSVP form submits successfully (real submission lands in the Sheet's `submissions` tab and the `latest` view picks it up)
 - Throttle works: re-submitting same WhatsApp within 10s returns `{"status":"error","code":"throttled"}`. After 10s it succeeds again.
-- `curl https://pgoslatara.github.io/website-wedding/robots.txt` → `User-agent: *` / `Disallow: /`
+- `curl https://pgoslatara.github.io/bhateja-slattery-wedding/robots.txt` → `User-agent: *` / `Disallow: /`
 - Lighthouse mobile audit: accessibility score ≥ 95
 - Tag the release: `git tag -a v1.0.0 -m "Wedding site v1.0.0 — public launch"; git push origin v1.0.0`
 
