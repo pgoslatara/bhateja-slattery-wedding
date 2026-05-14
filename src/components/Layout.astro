@@ -50,12 +50,16 @@ const currentPath = Astro.url.pathname;
     <a class="skip-link" href="#main">{s.a11y.skipToMain}</a>
     <div class="site-frieze" aria-hidden="true" set:html={amsterdamFrieze}></div>
     <script is:inline>
-      // Pick a random scatter slot and swap it for the stroopwafel,
-      // so the misfit appears in a different windmill/bicycle position
-      // on each page load.
+      // Randomise the symbol in each scatter slot on every page load,
+      // then force exactly one slot to be the stroopwafel misfit.
       (function () {
         var uses = document.querySelectorAll('.site-frieze svg use');
         if (!uses.length) return;
+        var symbols = ['#windmill', '#bicycle', '#sunglasses', '#remote', '#book'];
+        for (var i = 0; i < uses.length; i++) {
+          var sym = symbols[Math.floor(Math.random() * symbols.length)];
+          uses[i].setAttribute('href', sym);
+        }
         var pick = uses[Math.floor(Math.random() * uses.length)];
         pick.setAttribute('href', '#stroopwafel');
       })();
@@ -161,31 +165,33 @@ const currentPath = Astro.url.pathname;
     z-index: 2;
   }
   /*
-    Amsterdam-themed scatter (windmills + bicycles) over the top third
-    of each page. Position-absolute so it doesn't take any layout space
-    (the header sits on top of it visually) and so it can never block
-    pointer events on the header even when overlapping. A vertical
-    mask gradient fades the lower portion of the scatter so the motifs
-    "thin out" as the eye travels down. Scrolls with the page rather
-    than fixed to the viewport (no `position: fixed`) — the user sees
-    them at the top of each page and they slide off-screen on scroll.
+    Amsterdam-themed scatter (windmills, bicycles, sunglasses, remotes,
+    books — and one hidden stroopwafel) over the upper portion of each
+    page. Position-absolute so it doesn't take any layout space (the
+    header sits on top of it visually) and so it can never block
+    pointer events on the header even when overlapping. Sized in vh so
+    it always stops well clear of the painted couple block at the foot
+    of the page; a vertical mask gradient fades the lower portion of
+    the scatter so the motifs "thin out" as the eye travels down.
+    Scrolls with the page rather than fixed to the viewport (no
+    `position: fixed`).
   */
   .site-frieze {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 33vh;
-    min-height: 240px;
-    max-height: 420px;
+    height: 58vh;
+    min-height: 280px;
+    max-height: 720px;
     color: var(--color-accent);
     opacity: 0.7;
     overflow: hidden;
     pointer-events: none;
     z-index: 1;
     /* Fade vertically: opaque at top, transparent at bottom */
-    -webkit-mask-image: linear-gradient(180deg, black 0%, black 25%, transparent 100%);
-    mask-image: linear-gradient(180deg, black 0%, black 25%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, black 0%, black 20%, transparent 100%);
+    mask-image: linear-gradient(180deg, black 0%, black 20%, transparent 100%);
   }
   .site-frieze :global(svg) {
     width: 100%;
