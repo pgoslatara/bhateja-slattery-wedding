@@ -75,17 +75,14 @@ To test the QR codes: open your phone camera, point at the screen, scan one. Sho
 
 The Donations page renders one QR code per configured currency in `src/content/site.yaml`. No bank details are rendered as text — guests scan with their banking / payment app. QRs are baked at build time, so any change to the values requires a rebuild + redeploy.
 
-### EUR — EPC SEPA QR
+### EUR — Revolut payment link
 
-Encodes a SEPA credit-transfer prefill in the European Payments Council BCD/SCT v002 format. Recognised by ING, ABN, Revolut, and most other EU banking apps.
+Encodes a `https://revolut.me/<handle>` URL. Scanning with any camera app opens the link, which lets the sender pay from Revolut (or any card) without needing IBAN/BIC details.
 
 ```yaml
 donations:
   eur:
-    name: A Bhateja & P Slattery   # beneficiary name (required)
-    iban: NL11REVO4168872017       # spaces are stripped automatically (required)
-    bic: REVONL22                  # optional in v002 but most apps prefer it
-    reference: Wedding donation    # appears as remittance text (optional)
+    revolutUrl: https://revolut.me/pgslattery
 ```
 
 ### INR — UPI deep link
@@ -111,7 +108,7 @@ No standardised QR exists for ACH/wire, so we encode a Wise "pay me" URL instead
 
 After committing the values, run `make build` locally, then visit `/donations/` and `/hi/donations/`. **Scan each QR with a real device before pushing to main**:
 
-- **EUR**: open your banking app's "scan to pay" feature → confirm payee name, IBAN, BIC, and reference are prefilled correctly.
+- **EUR**: open the camera app on any phone → confirm it offers to open the Revolut URL → tap through and confirm the destination handle matches.
 - **INR**: open PhonePe / GPay → confirm the payee name and UPI ID match.
 - **USD**: open the camera app on any phone → confirm it offers to open the Wise URL → tap through and confirm the destination account matches.
 

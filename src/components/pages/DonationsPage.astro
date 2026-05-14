@@ -33,25 +33,6 @@ const qrOptions = {
   color: { dark: '#2A1810', light: '#FFFFFF' }
 };
 
-// EPC QR (BCD/SCT v002) — recognised by most European banking apps as a SEPA
-// credit-transfer prefill. Spec: European Payments Council EPC069-12.
-function buildEpcPayload(eur: NonNullable<SiteConfig['donations']>['eur']): string {
-  if (!eur) throw new Error('eur block required');
-  return [
-    'BCD',
-    '002',
-    '1',
-    'SCT',
-    eur.bic ?? '',
-    eur.name,
-    eur.iban.replace(/\s+/g, ''),
-    '',
-    '',
-    '',
-    eur.reference ?? ''
-  ].join('\n');
-}
-
 // UPI deep link — opens PhonePe / GPay / Paytm / BHIM with payee prefilled.
 function buildUpiUrl(inr: NonNullable<SiteConfig['donations']>['inr']): string {
   if (!inr) throw new Error('inr block required');
@@ -60,7 +41,7 @@ function buildUpiUrl(inr: NonNullable<SiteConfig['donations']>['inr']): string {
 }
 
 const eurQR = site.donations?.eur
-  ? await QRCode.toString(buildEpcPayload(site.donations.eur), qrOptions)
+  ? await QRCode.toString(site.donations.eur.revolutUrl, qrOptions)
   : null;
 const inrQR = site.donations?.inr
   ? await QRCode.toString(buildUpiUrl(site.donations.inr), qrOptions)

@@ -28,7 +28,7 @@ export const strings = {
     },
     donations: {
       eurLabel: 'EUR (Euro)',
-      eurHint: 'Scan with your European banking app to start a SEPA transfer.',
+      eurHint: 'Scan to open a Revolut payment link.',
       usdLabel: 'USD (US Dollar)',
       usdHint: 'Scan to open a Wise transfer link.',
       inrLabel: 'INR (Indian Rupee)',
@@ -143,7 +143,7 @@ export const strings = {
     },
     donations: {
       eurLabel: 'EUR (यूरो)',
-      eurHint: 'अपने यूरोपीय बैंकिंग ऐप से SEPA ट्रांसफ़र शुरू करने के लिए स्कैन करें।',
+      eurHint: 'Revolut भुगतान लिंक खोलने के लिए स्कैन करें।',
       usdLabel: 'USD (अमेरिकी डॉलर)',
       usdHint: 'Wise ट्रांसफ़र लिंक खोलने के लिए स्कैन करें।',
       inrLabel: 'INR (भारतीय रुपया)',

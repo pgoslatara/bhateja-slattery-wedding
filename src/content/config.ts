@@ -53,10 +53,7 @@ export const siteSchema = z.object({
   }).optional(),
   donations: z.object({
     eur: z.object({
-      name: z.string().min(1),
-      iban: z.string().min(1),
-      bic: z.string().optional(),
-      reference: z.string().optional()
+      revolutUrl: z.string().url()
     }).optional(),
     inr: z.object({
       name: z.string().min(1),

@@ -3,10 +3,7 @@ coupleNames:
   partner2: Pádraic Slattery
 donations:
   eur:
-    name: A Bhateja & P Slattery
-    iban: NL11REVO4168872017
-    bic: REVONL22
-    reference: Wedding donation
+    revolutUrl: https://revolut.me/pgslattery
   inr:
     name: Apeksha Bhateja
     upi: apeksha@upi # Replace with your real UPI ID
