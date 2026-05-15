@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../Layout.astro';
 import { t, type Locale } from '../../i18n/strings';
+import { anchorFromEntryId } from '../../lib/anchors';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -14,9 +15,18 @@ const items = (await getCollection('faq', e => e.id.endsWith(`.${lang}.md`))).so
   <div class="faq-list">
     {items.map(async (entry) => {
       const { Content } = await entry.render();
+      const anchorId = anchorFromEntryId(entry.id);
       return (
-        <details class="card faq-item">
-          <summary>{entry.data.question}</summary>
+        <details class="card faq-item deep-link-target" id={anchorId}>
+          <summary>
+            <span class="faq-question">{entry.data.question}</span>
+            <a
+              class="anchor-link"
+              href={`#${anchorId}`}
+              aria-label={s.a11y.copyLink}
+              data-anchor-link
+            >#</a>
+          </summary>
           <div class="faq-body">
             <Content />
           </div>
@@ -37,6 +47,8 @@ const items = (await getCollection('faq', e => e.id.endsWith(`.${lang}.md`))).so
     min-height: 44px;
     display: flex;
     align-items: center;
+    gap: 0.5rem;
   }
+  .faq-question { flex: 1 1 auto; }
   .faq-body { padding: 0.5rem 0 0; }
 </style>

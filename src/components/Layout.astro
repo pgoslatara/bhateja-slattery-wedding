@@ -68,6 +68,71 @@ const currentPath = Astro.url.pathname;
     <main id="main" tabindex="-1">
       <slot />
     </main>
+    <script is:inline>
+      // Deep-link UX: when the URL has a hash, open any matched <details>
+      // and (re)trigger the highlight pulse. Also intercept clicks on
+      // [data-anchor-link] so re-clicking the same anchor replays the
+      // animation and clicking inside a <summary> doesn't toggle it.
+      (function () {
+        function targetFromHash() {
+          if (!location.hash) return null;
+          try {
+            return document.getElementById(decodeURIComponent(location.hash.slice(1)));
+          } catch (e) { return null; }
+        }
+        function reveal(el) {
+          if (!el) return;
+          var details = el.closest && el.closest('details');
+          if (details) details.open = true;
+          if (el.tagName === 'DETAILS') el.open = true;
+          // Replay the pulse by toggling a class on the next frame.
+          el.classList.remove('anchor-flash');
+          void el.offsetWidth;
+          el.classList.add('anchor-flash');
+          el.addEventListener('animationend', function once() {
+            el.classList.remove('anchor-flash');
+            el.removeEventListener('animationend', once);
+          });
+          requestAnimationFrame(function () {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        }
+        // On page load: handle the initial hash (if any).
+        window.addEventListener('load', function () {
+          var el = targetFromHash();
+          if (el) reveal(el);
+        });
+        // In-page hash changes (clicking another anchor link).
+        window.addEventListener('hashchange', function () {
+          var el = targetFromHash();
+          if (el) reveal(el);
+        });
+        // Intercept anchor-link clicks: stop the summary toggle, update
+        // the hash, copy the share URL to the clipboard if available.
+        document.addEventListener('click', function (e) {
+          var link = e.target && e.target.closest && e.target.closest('[data-anchor-link]');
+          if (!link) return;
+          e.preventDefault();
+          e.stopPropagation();
+          var href = link.getAttribute('href') || '';
+          var id = href.indexOf('#') === 0 ? href.slice(1) : href;
+          if (!id) return;
+          var el = document.getElementById(id);
+          if (!el) return;
+          var fullUrl = location.origin + location.pathname + location.search + '#' + id;
+          if (location.hash === '#' + id) {
+            // Same target — replay manually since hashchange won't fire.
+            reveal(el);
+          } else {
+            history.pushState(null, '', '#' + id);
+            reveal(el);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(fullUrl).catch(function () { /* ignore */ });
+          }
+        });
+      })();
+    </script>
     <div class="site-bg" aria-hidden="true">
       <Image
         src={siteBackground}

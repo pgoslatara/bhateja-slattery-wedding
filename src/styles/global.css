@@ -68,3 +68,51 @@ input, select, textarea {
 
 /* Honeypot — hidden from users, present in DOM for bots */
 .honeypot { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+
+/*
+  Deep-link targets: each gets a stable id so URLs like /faq/#dress-code
+  jump straight to the section. The sticky header is ~64px tall, so add
+  scroll-margin-top to keep the target clear of it on navigation.
+*/
+.deep-link-target { scroll-margin-top: 80px; }
+
+/*
+  Small "#" anchor links next to FAQ / schedule / donations headings.
+  Faint by default, full-strength on hover/focus or when the parent is
+  the current URL target.
+*/
+.anchor-link {
+  text-decoration: none;
+  color: var(--color-text-muted);
+  opacity: 0.35;
+  font-weight: 400;
+  font-size: 0.9em;
+  padding: 0 0.25rem;
+  border-radius: 4px;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+.anchor-link:hover,
+.anchor-link:focus-visible {
+  opacity: 1;
+  color: var(--color-primary);
+  outline: none;
+}
+.deep-link-target:target .anchor-link { opacity: 1; color: var(--color-primary); }
+
+/*
+  Highlight pulse: runs once when an element first matches the URL hash
+  (page load or in-page navigation). The .anchor-flash class is toggled
+  by JS to replay the animation on repeated clicks of the same anchor.
+*/
+@keyframes anchor-target-pulse {
+  0%   { box-shadow: 0 0 0 4px var(--color-accent-light); background-color: color-mix(in srgb, var(--color-accent-light) 35%, var(--color-surface)); }
+  100% { box-shadow: 0 0 0 0 transparent;                 background-color: var(--color-surface); }
+}
+.deep-link-target:target,
+.deep-link-target.anchor-flash {
+  animation: anchor-target-pulse 2.4s ease-out 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .deep-link-target:target,
+  .deep-link-target.anchor-flash { animation: none; }
+}

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../Layout.astro';
 import type { Locale } from '../../i18n/strings';
 import { t } from '../../i18n/strings';
+import { anchorFromEntryId } from '../../lib/anchors';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -21,10 +22,19 @@ const dateLabel = lang === 'en' ? '27 February 2027' : '27 फ़रवरी 20
         <h2>{dateLabel}</h2>
         {items.map(async (entry) => {
           const { Content } = await entry.render();
+          const anchorId = anchorFromEntryId(entry.id);
           return (
-            <article class="card schedule-event">
+            <article class="card schedule-event deep-link-target" id={anchorId}>
               <header>
-                <h3>{entry.data.name}</h3>
+                <h3>
+                  <span>{entry.data.name}</span>
+                  <a
+                    class="anchor-link"
+                    href={`#${anchorId}`}
+                    aria-label={s.a11y.copyLink}
+                    data-anchor-link
+                  >#</a>
+                </h3>
                 <p class="time">
                   {entry.data.startTime}
                   {entry.data.endTime && entry.data.endTime !== entry.data.startTime ? ` – ${entry.data.endTime}` : ''}
@@ -45,4 +55,6 @@ const dateLabel = lang === 'en' ? '27 February 2027' : '27 फ़रवरी 20
   .days { display: grid; gap: 2rem; }
   .schedule-event { margin-bottom: 1rem; }
   .schedule-event .time { font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-primary); margin: 0 0 0.25rem; }
+  .schedule-event h3 { display: flex; align-items: baseline; gap: 0.5rem; }
+  .schedule-event h3 > span { flex: 1 1 auto; }
 </style>

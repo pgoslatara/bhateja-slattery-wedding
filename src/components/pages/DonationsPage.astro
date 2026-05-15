@@ -50,11 +50,11 @@ const usdQR = site.donations?.usd
   ? await QRCode.toString(site.donations.usd.wiseUrl, qrOptions)
   : null;
 
-type Card = { qr: string; label: string; hint: string; symbol: string };
+type Card = { qr: string; label: string; hint: string; symbol: string; anchorId: string };
 const cards: Card[] = [];
-if (eurQR) cards.push({ qr: eurQR, label: s.donations.eurLabel, hint: s.donations.eurHint, symbol: '€' });
-if (inrQR) cards.push({ qr: inrQR, label: s.donations.inrLabel, hint: s.donations.inrHint, symbol: '₹' });
-if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donations.usdHint, symbol: '$' });
+if (eurQR) cards.push({ qr: eurQR, label: s.donations.eurLabel, hint: s.donations.eurHint, symbol: '€', anchorId: 'eur' });
+if (inrQR) cards.push({ qr: inrQR, label: s.donations.inrLabel, hint: s.donations.inrHint, symbol: '₹', anchorId: 'inr' });
+if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donations.usdHint, symbol: '$', anchorId: 'usd' });
 ---
 <Layout lang={lang} title={entry.data.title}>
   <h1>{entry.data.title}</h1>
@@ -63,9 +63,17 @@ if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donation
   </article>
   {cards.length > 0 && (
     <div class="currencies">
-      {cards.map(({ qr, label, hint, symbol }) => (
-        <article class="card currency-card">
-          <h3>{label}</h3>
+      {cards.map(({ qr, label, hint, symbol, anchorId }) => (
+        <article class="card currency-card deep-link-target" id={anchorId}>
+          <h3>
+            <span>{label}</span>
+            <a
+              class="anchor-link"
+              href={`#${anchorId}`}
+              aria-label={s.a11y.copyLink}
+              data-anchor-link
+            >#</a>
+          </h3>
           <p class="subtitle">{hint}</p>
           <div class="qr">
             <div class="qr-svg" set:html={qr}></div>
@@ -101,6 +109,10 @@ if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donation
     color: var(--color-primary);
     font-family: var(--font-heading);
     margin: 0 0 0.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.4rem;
   }
   .currency-card .subtitle {
     margin: 0 0 1rem;

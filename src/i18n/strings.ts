@@ -13,7 +13,8 @@ export const strings = {
     },
     a11y: {
       skipToMain: 'Skip to main content',
-      menu: 'Menu'
+      menu: 'Menu',
+      copyLink: 'Copy link to this section'
     },
     footer: {
       contactPrefix: 'Questions, complaints, or marriage advice? WhatsApp us',
@@ -127,7 +128,8 @@ export const strings = {
     },
     a11y: {
       skipToMain: 'मुख्य सामग्री पर जाएँ',
-      menu: 'मेनू'
+      menu: 'मेनू',
+      copyLink: 'इस सेक्शन का लिंक कॉपी करें'
     },
     footer: {
       contactPrefix: 'कोई सवाल, शिकायत, या शादी की सलाह? व्हाट्सऐप करें:',
