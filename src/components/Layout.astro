@@ -74,6 +74,18 @@ const currentPath = Astro.url.pathname;
       // [data-anchor-link] so re-clicking the same anchor replays the
       // animation and clicking inside a <summary> doesn't toggle it.
       (function () {
+        // Localise the aria-label on any auto-generated anchor link
+        // (e.g. from rehype-autolink-headings, which can't read the
+        // page's lang at build time).
+        var lang = document.documentElement.lang || 'en';
+        var copyLinkLabel = lang === 'hi'
+          ? 'इस सेक्शन का लिंक कॉपी करें'
+          : 'Copy link to this section';
+        document.querySelectorAll('[data-anchor-link]').forEach(function (el) {
+          if (!el.getAttribute('aria-label')) {
+            el.setAttribute('aria-label', copyLinkLabel);
+          }
+        });
         function targetFromHash() {
           if (!location.hash) return null;
           try {

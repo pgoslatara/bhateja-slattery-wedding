@@ -68,7 +68,13 @@ if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donation
 ---
 <Layout lang={lang} title={entry.data.title}>
   <h1>{entry.data.title}</h1>
-  <article class="card intro">
+  <article class="card intro deep-link-target" id="donations-intro">
+    <a
+      class="anchor-link anchor-link-floating"
+      href="#donations-intro"
+      aria-label={s.a11y.copyLink}
+      data-anchor-link
+    >#</a>
     <Content />
   </article>
   {cards.length > 0 && (
@@ -95,14 +101,22 @@ if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donation
       ))}
     </div>
   )}
-  <article class="card charities-card">
-    <h2>{charitiesEntry.data.title}</h2>
+  <article class="card charities-card deep-link-target" id="charities">
+    <h2>
+      <span>{charitiesEntry.data.title}</span>
+      <a
+        class="anchor-link"
+        href="#charities"
+        aria-label={s.a11y.copyLink}
+        data-anchor-link
+      >#</a>
+    </h2>
     <CharitiesContent />
   </article>
 </Layout>
 
 <style>
-  .intro { margin-bottom: 1.5rem; }
+  .intro { margin-bottom: 1.5rem; position: relative; }
   .currencies {
     display: grid;
     gap: 1.5rem;
@@ -174,5 +188,9 @@ if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donation
     color: var(--color-primary);
     font-family: var(--font-heading);
     margin: 0 0 0.75rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
   }
+  .charities-card h2 > span { flex: 1 1 auto; }
 </style>

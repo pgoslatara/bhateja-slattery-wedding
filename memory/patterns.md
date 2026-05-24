@@ -28,6 +28,14 @@ Non-obvious mechanics learnt while building this codebase. Read first; refer bac
 
 - **The `s = t(lang)` returns a union type** (`Strings = (typeof strings)[Locale]`), not an English-only literal type. Initial drafts that wrote `Strings = (typeof strings)['en']` failed to type-check Hindi returns.
 
+## Anchor / deep-link sections
+
+- Every shareable "section" exposes a stable `id` and a `<a class="anchor-link" data-anchor-link href="#…">#</a>` next to its heading. Pattern is established across `FaqPage`, `SchedulePage`, `DonationsPage`, `PhotosPage`, `HomePage` (`welcome`, `mood-board`).
+- Click handling, hash routing, and pulse animation live in `src/components/Layout.astro` (inline script) and `src/styles/global.css` (`.anchor-link`, `.deep-link-target`, `.anchor-flash`, `@keyframes anchor-target-pulse`).
+- For cards without a natural heading (e.g. intro paragraphs), use `.anchor-link-floating` to pin the `#` to the top-right. The parent must be `position: relative` (already true for `.card`).
+- Markdown H2s/H3s get anchor links automatically via `rehype-slug` + `rehype-autolink-headings` + an inline `rehypeMarkHeadingsAsDeepLinkTargets` plugin in `astro.config.mjs`. Headings get an `id`, `class="deep-link-target"`, and a trailing `<a class="anchor-link" data-anchor-link>#</a>`. Aria-labels are localised at runtime by the Layout script (reads `document.documentElement.lang`).
+- Hindi headings produce Devanagari slugs (e.g. `#दिल्ली-के-लिए-सीधी-उड़ानें`) — browsers percent-encode them on the wire; both ends still resolve correctly.
+
 ## Content collections / i18n parity
 
 - `scripts/i18n-check.mjs` enforces three rules:

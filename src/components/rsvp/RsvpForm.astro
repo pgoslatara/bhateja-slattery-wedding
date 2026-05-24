@@ -123,16 +123,17 @@ const [hintBefore, hintAfter] = s.accommodationHint.split('{venueLink}');
   }
   /* Stacked container for "Other" prompt + free-text input. */
   .rsvp-form label.block { display: block; padding: 0; }
-  /* Dietary + accommodation: stack each option on its own line.
-     The global `input { width: 100%; min-height: 44px }` rule (sized for
-     text inputs) blows checkboxes/radios up to fill the row, so reset
-     them to their natural size inside these stacked fieldsets. */
+  /* Dietary + accommodation: stack each option on its own line. */
   .rsvp-form fieldset.stacked-options label:not(.block) {
     display: flex;
     padding-right: 0;
   }
-  .rsvp-form fieldset.stacked-options input[type="checkbox"],
-  .rsvp-form fieldset.stacked-options input[type="radio"] {
+  /* The global `input { width: 100%; min-height: 44px }` rule (sized for
+     text inputs) blows checkboxes/radios up to fill the row, hiding the
+     adjacent label text on narrow viewports. Reset them to their natural
+     size everywhere in the form. */
+  .rsvp-form input[type="checkbox"],
+  .rsvp-form input[type="radio"] {
     width: auto;
     min-height: 0;
     padding: 0;

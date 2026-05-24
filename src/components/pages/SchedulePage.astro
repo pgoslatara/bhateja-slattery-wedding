@@ -38,7 +38,15 @@ const days = [...byDay.entries()].sort(([a], [b]) => a - b);
 <Layout lang={lang} title={s.nav.schedule}>
   <h1>{s.nav.schedule}</h1>
   <article class="card venue-card deep-link-target" id="venue">
-    <h2>{lang === 'en' ? 'The venue' : 'स्थल'}</h2>
+    <h2>
+      <span>{lang === 'en' ? 'The venue' : 'स्थल'}</span>
+      <a
+        class="anchor-link"
+        href="#venue"
+        aria-label={s.a11y.copyLink}
+        data-anchor-link
+      >#</a>
+    </h2>
     {lang === 'en' ? (
       <>
         <p>
@@ -96,7 +104,13 @@ const days = [...byDay.entries()].sort(([a], [b]) => a - b);
 
 <style>
   .venue-card { margin-bottom: 2rem; }
-  .venue-card h2 { margin-top: 0; }
+  .venue-card h2 {
+    margin-top: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .venue-card h2 > span { flex: 1 1 auto; }
   .days { display: grid; gap: 2rem; }
   .schedule-event { margin-bottom: 1rem; }
   .schedule-event .time { font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-primary); margin: 0 0 0.25rem; }

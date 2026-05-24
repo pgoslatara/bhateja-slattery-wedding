@@ -39,8 +39,16 @@ const countdownMessages = s.home.countdown;
 const weddingISO = site.weddingDate;
 ---
 <Layout lang={lang} title={entry.data.title}>
-  <section class="hero">
-    <h1>{site.coupleNames.partner1} &amp; {site.coupleNames.partner2}</h1>
+  <section class="hero deep-link-target" id="welcome">
+    <h1>
+      <span>{site.coupleNames.partner1} &amp; {site.coupleNames.partner2}</span>
+      <a
+        class="anchor-link"
+        href="#welcome"
+        aria-label={s.a11y.copyLink}
+        data-anchor-link
+      >#</a>
+    </h1>
     <p class="date">{dateLine} · {s.home.locationDisplay}</p>
     <p class="countdown" data-countdown></p>
     <Content />
@@ -49,8 +57,16 @@ const weddingISO = site.weddingDate;
       <a class="button button-secondary" href={localeUrl(lang, '/schedule/')}>{s.nav.schedule}</a>
     </div>
   </section>
-  <aside class="mood-board" aria-label={s.home.moodBoard.title}>
-    <h2>{s.home.moodBoard.title}</h2>
+  <aside class="mood-board deep-link-target" id="mood-board" aria-label={s.home.moodBoard.title}>
+    <h2>
+      <span>{s.home.moodBoard.title}</span>
+      <a
+        class="anchor-link"
+        href="#mood-board"
+        aria-label={s.a11y.copyLink}
+        data-anchor-link
+      >#</a>
+    </h2>
     <div class="mood-grid">
       <div class="mood-col">
         <h3>{s.home.moodBoard.apekshaLabel}</h3>

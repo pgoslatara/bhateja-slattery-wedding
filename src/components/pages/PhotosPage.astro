@@ -38,14 +38,28 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
 ---
 <Layout lang={lang} title={s.nav.photos}>
   <h1>{s.nav.photos}</h1>
-  <article class="card intro">
+  <article class="card intro deep-link-target" id="photos-intro">
+    <a
+      class="anchor-link anchor-link-floating"
+      href="#photos-intro"
+      aria-label={s.a11y.copyLink}
+      data-anchor-link
+    >#</a>
     <Content />
   </article>
   {hasAnyAlbum && (
     <div class="album-platforms">
       {googleQR && albums?.googlePhotos && (
-        <article class="card platform-card">
-          <h3>{s.photos.googleHeader}</h3>
+        <article class="card platform-card deep-link-target" id="google-photos">
+          <h3>
+            <span>{s.photos.googleHeader}</span>
+            <a
+              class="anchor-link"
+              href="#google-photos"
+              aria-label={s.a11y.copyLink}
+              data-anchor-link
+            >#</a>
+          </h3>
           <p class="subtitle">{s.photos.googleHint}</p>
           <div class="qr">
             <div class="qr-svg" set:html={googleQR}></div>
@@ -64,8 +78,16 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
         </article>
       )}
       {icloudQR && albums?.icloud && (
-        <article class="card platform-card">
-          <h3>{s.photos.icloudHeader}</h3>
+        <article class="card platform-card deep-link-target" id="icloud-photos">
+          <h3>
+            <span>{s.photos.icloudHeader}</span>
+            <a
+              class="anchor-link"
+              href="#icloud-photos"
+              aria-label={s.a11y.copyLink}
+              data-anchor-link
+            >#</a>
+          </h3>
           <p class="subtitle">{s.photos.icloudHint}</p>
           <div class="qr">
             <div class="qr-svg" set:html={icloudQR}></div>
@@ -96,11 +118,17 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
   .platform-card {
     text-align: center;
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
   }
   .platform-card h3 {
     color: var(--color-primary);
     font-family: var(--font-heading);
     margin: 0 0 0.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.4rem;
   }
   .platform-card .subtitle {
     margin: 0 0 1rem;
@@ -108,7 +136,8 @@ const hasAnyAlbum = Boolean(googleQR || icloudQR);
   }
   .qr {
     position: relative;
-    margin: 0 auto 1rem;
+    margin: auto auto 1rem;
+    width: 100%;
     max-width: 220px;
     background: #FFFFFF;
     padding: 0.75rem;

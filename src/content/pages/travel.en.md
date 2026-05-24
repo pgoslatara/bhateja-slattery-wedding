@@ -1,5 +1,5 @@
 ---
-title: Travel & Stay
+title: Travel
 ---
 
 The wedding takes place in Gurgaon, just outside Delhi. **Indira Gandhi International Airport (DEL)** is the closest major airport, around 15–25 km from most Gurgaon hotels.
