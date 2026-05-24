@@ -19,7 +19,7 @@ h3 { font-size: 1.25rem; font-weight: 600; font-family: var(--font-heading); col
 a { color: var(--color-primary); }
 a:hover { color: var(--color-primary-dark); }
 
-main { max-width: var(--max-content); margin: 0 auto; padding: 1.5rem 1rem; }
+main { width: 100%; max-width: var(--max-content); margin: 0 auto; padding: 1.5rem 1rem; }
 
 .card {
   background: var(--color-surface);
@@ -27,6 +27,27 @@ main { max-width: var(--max-content); margin: 0 auto; padding: 1.5rem 1rem; }
   border-radius: var(--radius-card);
   padding: 1.25rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.card table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+.card th,
+.card td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+.card th {
+  background: color-mix(in srgb, var(--color-accent-light) 35%, var(--color-surface));
+  font-weight: 600;
+}
+.card tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--color-bg) 50%, var(--color-surface));
 }
 
 .button {

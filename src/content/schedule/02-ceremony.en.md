@@ -7,4 +7,12 @@ endTime: TBD
 dressCode: Formal Indian and Western formal are welcome
 ---
 
-The wedding ceremony followed by reception. Details to follow.
+A short, non-religious ceremony led by a master of ceremony who will speak in both English and Hindi.
+
+Agenda:
+
+- Welcome
+- Vows
+- Rings
+
+Reception follows.

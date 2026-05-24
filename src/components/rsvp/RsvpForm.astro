@@ -26,7 +26,7 @@ const s = t(lang).rsvp;
     <label><input type="radio" name="day2Attending" value="no" /> {s.no}</label>
   </fieldset>
 
-  <fieldset class="field">
+  <fieldset class="field stacked-options">
     <legend>{s.dietary}</legend>
     {Object.entries(s.dietaryOptions).map(([key, label]) => (
       <label><input type="checkbox" name="dietary" value={key} /> {label}</label>
@@ -46,7 +46,7 @@ const s = t(lang).rsvp;
     <input id="departure" name="departure" type="text" maxlength="100" />
   </div>
 
-  <fieldset class="field">
+  <fieldset class="field stacked-options">
     <legend>{s.accommodation}</legend>
     {Object.entries(s.accommodationOptions).map(([key, label]) => (
       <label><input type="radio" name="accommodation" value={key} required /> {label}</label>
@@ -117,6 +117,21 @@ const s = t(lang).rsvp;
   }
   /* Stacked container for "Other" prompt + free-text input. */
   .rsvp-form label.block { display: block; padding: 0; }
+  /* Dietary + accommodation: stack each option on its own line.
+     The global `input { width: 100%; min-height: 44px }` rule (sized for
+     text inputs) blows checkboxes/radios up to fill the row, so reset
+     them to their natural size inside these stacked fieldsets. */
+  .rsvp-form fieldset.stacked-options label:not(.block) {
+    display: flex;
+    padding-right: 0;
+  }
+  .rsvp-form fieldset.stacked-options input[type="checkbox"],
+  .rsvp-form fieldset.stacked-options input[type="radio"] {
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    flex: 0 0 auto;
+  }
   [data-additional-guests] input { margin-bottom: 0.5rem; }
 
   /*

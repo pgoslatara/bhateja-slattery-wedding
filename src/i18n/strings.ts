@@ -37,6 +37,7 @@ export const strings = {
     },
     rsvp: {
       formTitle: 'RSVP',
+      deadline: 'Please RSVP by 31 August 2026.',
       leadName: 'Your name',
       additionalGuests: 'Additional guests on this invitation',
       addGuest: 'Add another guest',
@@ -152,6 +153,7 @@ export const strings = {
     },
     rsvp: {
       formTitle: 'RSVP — कृपया जवाब दें',
+      deadline: 'कृपया 31 अगस्त 2026 तक जवाब दें।',
       leadName: 'आपका नाम',
       additionalGuests: 'इस निमंत्रण पर अन्य अतिथि',
       addGuest: 'एक और अतिथि जोड़ें',

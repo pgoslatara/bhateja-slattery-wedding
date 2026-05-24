@@ -10,6 +10,7 @@ const appsScriptUrl = import.meta.env.PUBLIC_APPS_SCRIPT_URL ?? '';
 ---
 <Layout lang={lang} title={s.nav.rsvp}>
   <h1>{s.rsvp.formTitle}</h1>
+  <p class="subtitle"><strong>{s.rsvp.deadline}</strong></p>
   {appsScriptUrl ? (
     <RsvpForm lang={lang} appsScriptUrl={appsScriptUrl} />
   ) : (
