@@ -2,8 +2,8 @@
 day: 2
 order: 1
 name: Wedding Ceremony
-startTime: TBD
-endTime: TBD
+startTime: Morning
+endTime: Morning
 dressCode: Formal Indian and Western formal are welcome
 ---
 

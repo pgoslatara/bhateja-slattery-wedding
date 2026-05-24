@@ -1,9 +1,12 @@
 ---
 import { t, type Locale } from '../../i18n/strings';
+import { localeUrl } from '../../i18n/urls';
 
 interface Props { lang: Locale; appsScriptUrl: string }
 const { lang, appsScriptUrl } = Astro.props;
 const s = t(lang).rsvp;
+const venueHref = `${localeUrl(lang, '/schedule/')}#venue`;
+const [hintBefore, hintAfter] = s.accommodationHint.split('{venueLink}');
 ---
 <form class="rsvp-form card" data-rsvp data-endpoint={appsScriptUrl} data-lang={lang} novalidate>
   <div class="field">
@@ -48,6 +51,9 @@ const s = t(lang).rsvp;
 
   <fieldset class="field stacked-options">
     <legend>{s.accommodation}</legend>
+    <p class="hint-text">
+      {hintBefore}<a href={venueHref}>{s.accommodationHintLink}</a>{hintAfter}
+    </p>
     {Object.entries(s.accommodationOptions).map(([key, label]) => (
       <label><input type="radio" name="accommodation" value={key} required /> {label}</label>
     ))}
@@ -133,6 +139,11 @@ const s = t(lang).rsvp;
     flex: 0 0 auto;
   }
   [data-additional-guests] input { margin-bottom: 0.5rem; }
+  .rsvp-form .hint-text {
+    margin: -0.25rem 0 0.75rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
 
   /*
     Diya spinner: a tiny oil-lamp icon that's hidden by default and

@@ -2,10 +2,10 @@
 day: 1
 order: 1
 name: Mehendi
-startTime: TBD
-endTime: TBD
+startTime: Evening
+endTime: Evening
 ---
 
 The mehendi is a traditional pre-wedding celebration the evening before the wedding, where guests have intricate henna designs applied to their hands.
 
-A separate invite is required to attend the mehendi.
+By invitation only — close family and friends will receive a separate WhatsApp invite.

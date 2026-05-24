@@ -2,7 +2,7 @@
 title: Photos
 ---
 
-Took photos during the wedding? Please share them with us. We've set up two shared albums — one for Google accounts, one for iCloud — so every guest can upload the moments they captured, whatever phone they're on.
+Took photos during the celebrations? Please share them with us. We've set up two shared albums — one for Google accounts, one for iCloud — so every guest can upload the moments they captured, whatever phone they're on.
 
 ## How to upload
 

@@ -4,8 +4,11 @@ import { createHash } from 'node:crypto';
 
 const CONTENT_ROOT_DEFAULT = new URL('../src/content', import.meta.url).pathname;
 
+// startTime / endTime are intentionally NOT invariant: they may be free-form
+// localised words ("Evening" / "शाम") during the placeholder phase. Once real
+// HH:MM times land, EN and HI naturally match and drift is caught visually.
 const INVARIANT_FIELDS = {
-  schedule: ['day', 'order', 'startTime', 'endTime', 'location'],
+  schedule: ['day', 'order', 'location'],
   faq: ['order'],
   pages: []
 };

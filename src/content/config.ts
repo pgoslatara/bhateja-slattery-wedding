@@ -14,8 +14,8 @@ const schedule = defineCollection({
     day: z.union([z.literal(1), z.literal(2)]),
     order: z.number().int().min(0),
     name: z.string().min(1),
-    startTime: z.union([z.string().regex(/^\d{2}:\d{2}$/), z.literal('TBD')]),
-    endTime: z.union([z.string().regex(/^\d{2}:\d{2}$/), z.literal('TBD')]),
+    startTime: z.string().min(1),
+    endTime: z.string().min(1),
     location: z.string().optional(),
     dressCode: z.string().optional(),
     enHash: z.string().regex(/^[0-9a-f]{64}$/).optional()

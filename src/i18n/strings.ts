@@ -58,6 +58,8 @@ export const strings = {
       arrival: 'Arrival date and time (optional)',
       departure: 'Departure date and time (optional)',
       accommodation: 'Accommodation',
+      accommodationHint: 'See {venueLink} for the venue location.',
+      accommodationHintLink: 'The venue',
       accommodationOptions: {
         sorted: "I've sorted my own",
         recommended: "I'd like to stay at the recommended hotel",
@@ -174,6 +176,8 @@ export const strings = {
       arrival: 'आगमन की तिथि और समय (वैकल्पिक)',
       departure: 'प्रस्थान की तिथि और समय (वैकल्पिक)',
       accommodation: 'ठहरने की व्यवस्था',
+      accommodationHint: 'स्थल का स्थान देखने के लिए {venueLink} देखें।',
+      accommodationHintLink: 'स्थल',
       accommodationOptions: {
         sorted: 'मेरी अपनी व्यवस्था है',
         recommended: 'मुझे सुझाए गए होटल में रहना है',

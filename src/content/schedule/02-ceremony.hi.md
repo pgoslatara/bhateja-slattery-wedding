@@ -2,10 +2,10 @@
 day: 2
 order: 1
 name: विवाह समारोह
-startTime: TBD
-endTime: TBD
+startTime: सुबह
+endTime: सुबह
 dressCode: औपचारिक भारतीय और पश्चिमी औपचारिक पहनावा दोनों का स्वागत है
-enHash: 30b447c05cc9cd4e21c9d32f43ee3dec2b321de74df1f0692a00413ced574e23
+enHash: adbf00511d2be1d5291638c2aba7fbd360f50a3cabe31ef08c2a371e50289be4
 ---
 
 एक संक्षिप्त, ग़ैर-धार्मिक समारोह, जिसका संचालन एक मास्टर ऑफ़ सेरेमनी करेंगे जो अंग्रेज़ी और हिंदी दोनों में बोलेंगे।
