@@ -6,10 +6,9 @@ donations:
     revolutUrl: https://revolut.me/pgslattery
   inr:
     name: Apeksha Bhateja
-    upi: apeksha@upi # Replace with your real UPI ID
+    upi: upi://pay?pa=b.apeksha.91@okhdfcbank&pn=Apeksha%20Bhateja
   usd:
-    # Replace with your real Wise payment link (https://wise.com/pay/me/...)
-    wiseUrl: https://wise.com/pay/me/PADRAICSLATTERY
+    wiseUrl: https://wise.com/pay/me/apekshab12
 weddingDate: '2027-02-27'
 venue:
   name: Rahul's place
