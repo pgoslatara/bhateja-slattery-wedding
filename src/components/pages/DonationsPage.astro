@@ -25,14 +25,6 @@ const { Content: CharitiesContent } = await charitiesEntry.render();
 const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
 const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
 
-const qrOptions = {
-  type: 'svg' as const,
-  width: 220,
-  margin: 1,
-  errorCorrectionLevel: 'H' as const,
-  color: { dark: '#2A1810', light: '#FFFFFF' }
-};
-
 // UPI deep link — opens PhonePe / GPay / Paytm / BHIM with payee prefilled.
 function buildUpiUrl(inr: NonNullable<SiteConfig['donations']>['inr']): string {
   if (!inr) throw new Error('inr block required');
@@ -40,15 +32,33 @@ function buildUpiUrl(inr: NonNullable<SiteConfig['donations']>['inr']): string {
   return `upi://pay?${params.toString()}`;
 }
 
-const eurQR = site.donations?.eur
-  ? await QRCode.toString(site.donations.eur.revolutUrl, qrOptions)
-  : null;
-const inrQR = site.donations?.inr
-  ? await QRCode.toString(buildUpiUrl(site.donations.inr), qrOptions)
-  : null;
-const usdQR = site.donations?.usd
-  ? await QRCode.toString(site.donations.usd.wiseUrl, qrOptions)
-  : null;
+// Collect payloads, then pick a single QR version that fits the longest one —
+// this keeps module density visually consistent across all currency QRs.
+const payloads: { key: 'eur' | 'inr' | 'usd'; data: string }[] = [];
+if (site.donations?.eur) payloads.push({ key: 'eur', data: site.donations.eur.revolutUrl });
+if (site.donations?.inr) payloads.push({ key: 'inr', data: buildUpiUrl(site.donations.inr) });
+if (site.donations?.usd) payloads.push({ key: 'usd', data: site.donations.usd.wiseUrl });
+
+const sharedVersion = payloads.length
+  ? Math.max(...payloads.map(p => QRCode.create(p.data, { errorCorrectionLevel: 'H' }).version))
+  : 1;
+
+const qrOptions = {
+  type: 'svg' as const,
+  width: 220,
+  margin: 1,
+  errorCorrectionLevel: 'H' as const,
+  version: sharedVersion,
+  color: { dark: '#2A1810', light: '#FFFFFF' }
+};
+
+const qrByKey: Partial<Record<'eur' | 'inr' | 'usd', string>> = {};
+for (const p of payloads) {
+  qrByKey[p.key] = await QRCode.toString(p.data, qrOptions);
+}
+const eurQR = qrByKey.eur ?? null;
+const inrQR = qrByKey.inr ?? null;
+const usdQR = qrByKey.usd ?? null;
 
 type Card = { qr: string; label: string; hint: string; symbol: string; anchorId: string };
 const cards: Card[] = [];
@@ -104,6 +114,8 @@ if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donation
   .currency-card {
     text-align: center;
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
   }
   .currency-card h3 {
     color: var(--color-primary);
@@ -120,7 +132,8 @@ if (usdQR) cards.push({ qr: usdQR, label: s.donations.usdLabel, hint: s.donation
   }
   .qr {
     position: relative;
-    margin: 0 auto;
+    margin: auto auto 0;
+    width: 100%;
     max-width: 220px;
     background: #FFFFFF;
     padding: 0.75rem;
