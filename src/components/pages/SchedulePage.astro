@@ -16,8 +16,7 @@ const s = t(lang);
 const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
 const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
 
-const websiteUrl = 'https://theresortinn.in/';
-const instagramUrl = 'https://www.instagram.com/explore/locations/118583789547426/the-resort-inn/';
+const instagramUrl = 'https://www.instagram.com/bigtreevillagurgaon/';
 
 const all = await getCollection('schedule', e => e.id.endsWith(`.${lang}.md`));
 const items = all.sort((a, b) => a.data.day - b.data.day || a.data.order - b.data.order);
@@ -50,19 +49,19 @@ const days = [...byDay.entries()].sort(([a], [b]) => a - b);
     {lang === 'en' ? (
       <>
         <p>
-          Both days take place at <strong><a href={site.venue.mapUrl} target="_blank" rel="noopener">{site.venue.name}</a></strong>, set in the Aravali foothills on the southern edge of Gurgaon (near <strong>Kadarpur</strong>).
+          Both days take place at <strong><a href={site.venue.mapUrl} target="_blank" rel="noopener">{site.venue.name}</a></strong>, on the southern edge of Gurgaon (near <strong>Kadarpur</strong>).
         </p>
         <p>
-          For a preview of the venue, see the <a href={websiteUrl} target="_blank" rel="noopener">official website</a> or <a href={instagramUrl} target="_blank" rel="noopener">Instagram location</a>.
+          For a preview of the venue, see <a href={instagramUrl} target="_blank" rel="noopener">Instagram</a>.
         </p>
       </>
     ) : (
       <>
         <p>
-          दोनों दिन के कार्यक्रम <strong><a href={site.venue.mapUrl} target="_blank" rel="noopener">{site.venue.name}</a></strong> में होंगे — गुड़गांव के दक्षिणी छोर पर अरावली की पहाड़ियों में (<strong>कादरपुर</strong> के पास)।
+          दोनों दिन के कार्यक्रम <strong><a href={site.venue.mapUrl} target="_blank" rel="noopener">{site.venue.name}</a></strong> में होंगे, गुड़गांव के दक्षिणी छोर पर (<strong>कादरपुर</strong> के पास)।
         </p>
         <p>
-          स्थल की झलक देखने के लिए <a href={websiteUrl} target="_blank" rel="noopener">वेबसाइट</a> या <a href={instagramUrl} target="_blank" rel="noopener">Instagram location</a> देखें।
+          स्थल की झलक देखने के लिए <a href={instagramUrl} target="_blank" rel="noopener">Instagram</a> देखें।
         </p>
       </>
     )}

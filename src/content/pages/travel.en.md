@@ -26,6 +26,6 @@ Delhi airport is busy and arrivals can feel overwhelming after a long flight. Th
 - You will receive a two-part receipt with a taxi registration number. Walk to the prepaid taxi lane outside and find the matching car.
 - **Important:** only hand the receipt to the driver **after** you arrive and your bags are out of the boot. The driver needs it to get paid, so it is your guarantee they take you to the right place.
 
-If you have mobile data set up (eSIM or local SIM), **Uber** and **Ola** also work well. The pickup zone is in the **Multi-Level Car Park** opposite Terminal 3 arrivals — follow the "App-Based Cabs" signs (a 3–5 minute walk). Expect ₹500–₹1,500 (~€4–14) to Gurgaon depending on time of day. **BluSmart** (an all-electric service with no surge pricing) is also widely used and recommended.
+If you have mobile data set up (eSIM or local SIM), **Uber** and **Ola** also work well. The pickup zone is in the **Multi-Level Car Park** opposite Terminal 3 arrivals; follow the "App-Based Cabs" signs (a 3–5 minute walk). Expect ₹500–₹1,500 (~€4–14) to Gurgaon depending on time of day.
 
-**Ignore the touts** who approach you outside the terminal offering taxis or "help with your Uber" — only speak to staff standing behind the official counters.
+**Ignore the touts** who approach you outside the terminal offering taxis or "help with your Uber". Only speak to staff standing behind the official counters.

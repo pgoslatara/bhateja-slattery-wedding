@@ -57,3 +57,21 @@ test('passes requiresVisa through unchanged', () => {
   assert.equal(r.ok, true);
   assert.equal(r.value.requiresVisa, 'yes');
 });
+
+test('rejects missing day2Attending selection', () => {
+  const r = validateRsvp({ ...baseValid, day2Attending: '' });
+  assert.equal(r.ok, false);
+  assert.equal(r.errors.day2Attending, 'day2AttendingRequired');
+});
+
+test('rejects missing accommodation selection', () => {
+  const r = validateRsvp({ ...baseValid, accommodation: '' });
+  assert.equal(r.ok, false);
+  assert.equal(r.errors.accommodation, 'accommodationRequired');
+});
+
+test('rejects missing requiresVisa selection', () => {
+  const r = validateRsvp({ ...baseValid, requiresVisa: '' });
+  assert.equal(r.ok, false);
+  assert.equal(r.errors.requiresVisa, 'requiresVisaRequired');
+});

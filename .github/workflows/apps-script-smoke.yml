@@ -1,0 +1,33 @@
+name: Apps Script — smoke test
+
+# Verifies the live web-app deployment matches the current `apps-script/lib.gs`
+# validation contract. Catches the case where `clasp push` ran but no one
+# clicked "Manage deployments → New version" in the editor — the pinned
+# deployment URL stays on the previous version and rejects current payloads.
+#
+# Trigger manually after redeploying, or via the `workflow_run` hook below
+# after the push workflow completes.
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ['Apps Script — push']
+    types: [completed]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    # Skip when the upstream push workflow itself failed — only meaningful if
+    # there was something new to verify.
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - name: Smoke-test deployed endpoint
+        env:
+          PUBLIC_APPS_SCRIPT_URL: ${{ secrets.PUBLIC_APPS_SCRIPT_URL }}
+        run: npm run script:smoke

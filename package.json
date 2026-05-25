@@ -17,6 +17,7 @@
     "i18n:rehash": "node scripts/i18n-rehash.mjs",
     "script:push": "clasp push --force",
     "script:open": "clasp open",
+    "script:smoke": "node --env-file-if-exists=.env scripts/apps-script-smoke.mjs",
     "prepare": "husky"
   },
   "dependencies": {

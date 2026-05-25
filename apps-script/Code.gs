@@ -1,5 +1,11 @@
 var ALLOWED_ORIGINS = [
-  'https://pgoslatara.github.io'  // Replace with the deployed origin once known.
+  'https://pgoslatara.github.io',
+  // Local dev origins — Astro defaults. Astro picks a free port if 4321 is taken,
+  // so 4322 is included for the next-port-up case.
+  'http://127.0.0.1:4321',
+  'http://localhost:4321',
+  'http://127.0.0.1:4322',
+  'http://localhost:4322'
 ];
 var THROTTLE_WINDOW_MS = 10000;
 var SUBMISSIONS_TAB = 'submissions';

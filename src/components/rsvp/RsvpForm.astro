@@ -27,6 +27,7 @@ const [hintBefore, hintAfter] = s.accommodationHint.split('{venueLink}');
     <legend>{s.day2Question}</legend>
     <label><input type="radio" name="day2Attending" value="yes" required /> {s.yes}</label>
     <label><input type="radio" name="day2Attending" value="no" /> {s.no}</label>
+    <p class="error-text" data-error="day2Attending" hidden></p>
   </fieldset>
 
   <fieldset class="field stacked-options">
@@ -57,12 +58,14 @@ const [hintBefore, hintAfter] = s.accommodationHint.split('{venueLink}');
     {Object.entries(s.accommodationOptions).map(([key, label]) => (
       <label><input type="radio" name="accommodation" value={key} required /> {label}</label>
     ))}
+    <p class="error-text" data-error="accommodation" hidden></p>
   </fieldset>
 
   <fieldset class="field">
     <legend>{s.visaQuestion}</legend>
     <label><input type="radio" name="requiresVisa" value="yes" required /> {s.yes}</label>
     <label><input type="radio" name="requiresVisa" value="no" /> {s.no}</label>
+    <p class="error-text" data-error="requiresVisa" hidden></p>
   </fieldset>
 
   <div class="field">

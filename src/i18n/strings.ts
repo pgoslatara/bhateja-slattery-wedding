@@ -22,9 +22,17 @@ export const strings = {
         'Bears. Beets. Battlestar Galactica.',
         'Identity theft is not a joke, Jim.',
         'Love is not blind. We checked.',
-        'On the 27th of February, my whole world will change.',
         'Apeksha will notice if you\'re late.',
-        'We considered Love Is Blind: Gurgaon Edition. Then we remembered we already met.'
+        'We considered Love Is Blind: Gurgaon Edition. Then we remembered we already met.',
+        'Ew, David.',
+        'Bade bade deshon mein choti choti baatein hoti rehti hain, Senorita.',
+        'David, stop acting like a disgruntled pelican!',
+        'I don\'t skate through life. I walk through life... in really nice shoes.',
+        'Love that journey for me.',
+        'Fold in the cheese.',
+        'I like the wine and not the label.',
+        'Best wishes, warmest regards.',
+        'I love your height.'
       ]
     },
     donations: {
@@ -73,16 +81,19 @@ export const strings = {
       submitting: 'Locking you in…',
       successTitle: 'Thank you!',
       successBody:
-        'Got it, {name}. You\'re officially on the list. Try not to be late — Apeksha will notice. Change your answer anytime by resubmitting; we\'ll WhatsApp closer to the date.',
+        'Got it, {name}. You\'re officially on the list. Try not to be late. Apeksha will notice. Change your answer anytime by resubmitting; we\'ll WhatsApp closer to the date.',
       errors: {
         invalid_payload: 'Please check the highlighted fields and resubmit.',
-        throttled: 'Slow down — you just submitted. Try again in a few seconds.',
-        network: 'Something went wrong — please try again, or message us on WhatsApp.',
-        internal: 'Something went wrong — please try again, or message us on WhatsApp.',
-        invalid_origin: 'Something went wrong — please try again, or message us on WhatsApp.',
+        throttled: 'Slow down. You just submitted. Try again in a few seconds.',
+        network: 'Something went wrong. Please try again, or message us on WhatsApp.',
+        internal: 'Something went wrong. Please try again, or message us on WhatsApp.',
+        invalid_origin: 'Something went wrong. Please try again, or message us on WhatsApp.',
         whatsappRequired: 'Please enter your WhatsApp number.',
         whatsappFormat: 'WhatsApp number should start with + and a country code.',
         leadNameRequired: 'Please enter your name.',
+        day2AttendingRequired: 'Please let us know if you can make day 2.',
+        accommodationRequired: 'Please pick an accommodation option.',
+        requiresVisaRequired: 'Please let us know if you need a visa.',
         endpointMissing: 'RSVP endpoint not configured. Set PUBLIC_APPS_SCRIPT_URL.'
       }
     },
@@ -141,7 +152,7 @@ export const strings = {
         'Jim, यह identity theft है। मज़ाक नहीं।',
         'Love is blind नहीं है। हमने जाँच लिया।',
         '27 फ़रवरी को हमारी पूरी दुनिया बदल जाएगी।',
-        'देर मत करना — अपेक्षा देख लेगी।',
+        'देर मत करना। अपेक्षा देख लेगी।',
         'Love Is Blind: Gurgaon Edition पर सोचा था। फिर याद आया कि हम पहले से मिल चुके हैं।'
       ]
     },
@@ -154,7 +165,7 @@ export const strings = {
       inrHint: 'PhonePe, GPay, Paytm या किसी भी UPI ऐप से स्कैन करें।'
     },
     rsvp: {
-      formTitle: 'RSVP — कृपया जवाब दें',
+      formTitle: 'RSVP: कृपया जवाब दें',
       deadline: 'कृपया 31 अगस्त 2026 तक जवाब दें।',
       leadName: 'आपका नाम',
       additionalGuests: 'इस निमंत्रण पर अन्य अतिथि',
@@ -191,16 +202,19 @@ export const strings = {
       submitting: 'आपकी कुर्सी पक्की कर रहे हैं…',
       successTitle: 'धन्यवाद!',
       successBody:
-        'मिल गया, {name}। आप आधिकारिक तौर पर सूची में हैं। देर मत करना — अपेक्षा देख लेगी। कुछ बदलना हो तो फिर से भेज दीजिए; शादी के क़रीब व्हाट्सऐप पर संपर्क करेंगे।',
+        'मिल गया, {name}। आप आधिकारिक तौर पर सूची में हैं। देर मत करना। अपेक्षा देख लेगी। कुछ बदलना हो तो फिर से भेज दीजिए; शादी के क़रीब व्हाट्सऐप पर संपर्क करेंगे।',
       errors: {
         invalid_payload: 'कृपया चिह्नित फ़ील्ड जाँचें और फिर से भेजें।',
-        throttled: 'धीरे-धीरे — आपने अभी-अभी भेजा है। कुछ सेकंड बाद फिर कोशिश करें।',
-        network: 'कुछ गड़बड़ हुई — फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',
-        internal: 'कुछ गड़बड़ हुई — फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',
-        invalid_origin: 'कुछ गड़बड़ हुई — फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',
+        throttled: 'धीरे-धीरे। आपने अभी-अभी भेजा है। कुछ सेकंड बाद फिर कोशिश करें।',
+        network: 'कुछ गड़बड़ हुई। फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',
+        internal: 'कुछ गड़बड़ हुई। फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',
+        invalid_origin: 'कुछ गड़बड़ हुई। फिर कोशिश करें, या व्हाट्सऐप पर संदेश भेजें।',
         whatsappRequired: 'कृपया अपना व्हाट्सऐप नंबर दर्ज करें।',
         whatsappFormat: 'व्हाट्सऐप नंबर + और देश-कोड से शुरू होना चाहिए।',
         leadNameRequired: 'कृपया अपना नाम दर्ज करें।',
+        day2AttendingRequired: 'कृपया बताएँ कि क्या आप दूसरे दिन आ सकते हैं।',
+        accommodationRequired: 'कृपया ठहरने का एक विकल्प चुनें।',
+        requiresVisaRequired: 'कृपया बताएँ कि क्या आपको वीज़ा चाहिए।',
         endpointMissing: 'RSVP एंडपॉइंट कॉन्फ़िगर नहीं है। PUBLIC_APPS_SCRIPT_URL सेट करें।'
       }
     },

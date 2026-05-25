@@ -55,7 +55,7 @@ const currentPath = Astro.url.pathname;
       (function () {
         var uses = document.querySelectorAll('.site-frieze svg use');
         if (!uses.length) return;
-        var symbols = ['#windmill', '#bicycle', '#sunglasses', '#remote', '#book'];
+        var symbols = ['#windmill', '#bicycle', '#sunglasses', '#remote', '#book', '#hurley'];
         for (var i = 0; i < uses.length; i++) {
           var sym = symbols[Math.floor(Math.random() * symbols.length)];
           uses[i].setAttribute('href', sym);
@@ -243,7 +243,7 @@ const currentPath = Astro.url.pathname;
   }
   /*
     Amsterdam-themed scatter (windmills, bicycles, sunglasses, remotes,
-    books — and one hidden stroopwafel) over the upper portion of each
+    books, a hurley — and one hidden stroopwafel) over the upper portion of each
     page. Position-absolute so it doesn't take any layout space (the
     header sits on top of it visually) and so it can never block
     pointer events on the header even when overlapping. Sized in vh so

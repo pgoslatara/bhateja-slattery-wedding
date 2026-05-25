@@ -39,7 +39,10 @@ script-push: ## Push Apps Script via clasp
 script-open: ## Open Apps Script editor for manual deploy
 	npm run script:open
 
+script-smoke: ## Smoke-test deployed Apps Script (needs PUBLIC_APPS_SCRIPT_URL)
+	npm run script:smoke
+
 clean:       ## Remove build artifacts and node_modules
 	rm -rf dist node_modules .astro
 
-.PHONY: help setup dev build preview serve check rehash script-push script-open clean
+.PHONY: help setup dev build preview serve check rehash script-push script-open script-smoke clean

@@ -17,6 +17,9 @@ export type ValidationErrorCode =
   | 'leadNameRequired'
   | 'whatsappRequired'
   | 'whatsappFormat'
+  | 'day2AttendingRequired'
+  | 'accommodationRequired'
+  | 'requiresVisaRequired'
   | 'invalid_payload';
 
 export type Validated =
@@ -39,6 +42,16 @@ export function validateRsvp(raw: RsvpInput): Validated {
   const whatsapp = trim(raw.whatsapp).replace(/\s+/g, '');
   if (!whatsapp) errors.whatsapp = 'whatsappRequired';
   else if (!/^\+\d{10,15}$/.test(whatsapp)) errors.whatsapp = 'whatsappFormat';
+
+  if (raw.day2Attending !== 'yes' && raw.day2Attending !== 'no') {
+    errors.day2Attending = 'day2AttendingRequired';
+  }
+  if (raw.accommodation !== 'sorted' && raw.accommodation !== 'recommended' && raw.accommodation !== 'help') {
+    errors.accommodation = 'accommodationRequired';
+  }
+  if (raw.requiresVisa !== 'yes' && raw.requiresVisa !== 'no') {
+    errors.requiresVisa = 'requiresVisaRequired';
+  }
 
   if (Object.keys(errors).length > 0) return { ok: false, errors };
 

@@ -10,7 +10,7 @@ const appsScriptUrl = import.meta.env.PUBLIC_APPS_SCRIPT_URL ?? '';
 ---
 <Layout lang={lang} title={s.nav.rsvp}>
   <h1>{s.rsvp.formTitle}</h1>
-  <p class="subtitle"><strong>{s.rsvp.deadline}</strong></p>
+  <p class="deadline-callout" role="note">{s.rsvp.deadline}</p>
   {appsScriptUrl ? (
     <RsvpForm lang={lang} appsScriptUrl={appsScriptUrl} />
   ) : (
@@ -20,3 +20,18 @@ const appsScriptUrl = import.meta.env.PUBLIC_APPS_SCRIPT_URL ?? '';
     import '../rsvp/client';
   </script>
 </Layout>
+
+<style>
+  .deadline-callout {
+    margin: 1rem 0 1.5rem;
+    padding: 0.9rem 1.1rem;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: clamp(1.15rem, 1vw + 1rem, 1.5rem);
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    background: color-mix(in srgb, var(--color-accent-light) 45%, var(--color-surface));
+    border: 2px double var(--color-border);
+    border-radius: var(--radius-card);
+  }
+</style>
