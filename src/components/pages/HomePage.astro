@@ -42,12 +42,6 @@ const weddingISO = site.weddingDate;
   <section class="hero deep-link-target" id="welcome">
     <h1>
       <span>{site.coupleNames.partner1} &amp; {site.coupleNames.partner2}</span>
-      <a
-        class="anchor-link"
-        href="#welcome"
-        aria-label={s.a11y.copyLink}
-        data-anchor-link
-      >#</a>
     </h1>
     <p class="date">{dateLine} · {s.home.locationDisplay}</p>
     <p class="countdown" data-countdown></p>
@@ -115,7 +109,12 @@ const weddingISO = site.weddingDate;
   .hero :global(h1) {
     color: var(--color-primary-dark);
     text-shadow: 0 1px 2px rgba(253, 245, 212, 0.7);
+    /* Scale to viewport so the full couple name fits on one line — and small
+       enough at the top end that it doesn't overflow the 720px main container,
+       which would shove the nowrap span off-centre. */
+    font-size: clamp(1rem, 5vw, 2.25rem);
   }
+  .hero :global(h1) span { white-space: nowrap; }
   .date {
     font-family: var(--font-heading);
     font-size: 1.25rem;
