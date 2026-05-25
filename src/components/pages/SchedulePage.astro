@@ -16,8 +16,8 @@ const s = t(lang);
 const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
 const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
 
-const instagramUrl = 'https://www.instagram.com/bigtreevillagurgaon';
-const airbnbUrl = 'https://www.airbnb.co.in/rooms/1049870901643016416';
+const websiteUrl = 'https://theresortinn.in/';
+const instagramUrl = 'https://www.instagram.com/explore/locations/118583789547426/the-resort-inn/';
 
 const all = await getCollection('schedule', e => e.id.endsWith(`.${lang}.md`));
 const items = all.sort((a, b) => a.data.day - b.data.day || a.data.order - b.data.order);
@@ -50,19 +50,19 @@ const days = [...byDay.entries()].sort(([a], [b]) => a - b);
     {lang === 'en' ? (
       <>
         <p>
-          Both days take place at <strong>{site.venue.name}</strong> (also listed as <em>Hideaway by Big Tree</em>), a private farmhouse in <strong>Bhondsi</strong>, on the southern edge of Gurgaon. It sits on a leafy one-acre estate.
+          Both days take place at <strong><a href={site.venue.mapUrl} target="_blank" rel="noopener">{site.venue.name}</a></strong>, set in the Aravali foothills on the southern edge of Gurgaon (near <strong>Kadarpur</strong>).
         </p>
         <p>
-          For a preview of the grounds, see the venue's <a href={instagramUrl} target="_blank" rel="noopener">Instagram</a> or the <a href={airbnbUrl} target="_blank" rel="noopener">Airbnb listing</a>. A precise address and map pin will be shared closer to the date.
+          For a preview of the venue, see the <a href={websiteUrl} target="_blank" rel="noopener">official website</a> or <a href={instagramUrl} target="_blank" rel="noopener">Instagram location</a>.
         </p>
       </>
     ) : (
       <>
         <p>
-          दोनों दिन के कार्यक्रम <strong>{site.venue.name}</strong> (जिसे <em>Hideaway by Big Tree</em> भी कहा जाता है) में होंगे — गुड़गांव के दक्षिणी छोर पर <strong>भोंडसी</strong> में एक प्राइवेट फ़ार्महाउस। यह लगभग एक एकड़ के हरे-भरे परिसर में फैला है।
+          दोनों दिन के कार्यक्रम <strong><a href={site.venue.mapUrl} target="_blank" rel="noopener">{site.venue.name}</a></strong> में होंगे — गुड़गांव के दक्षिणी छोर पर अरावली की पहाड़ियों में (<strong>कादरपुर</strong> के पास)।
         </p>
         <p>
-          स्थल की झलक देखने के लिए वेन्यू का <a href={instagramUrl} target="_blank" rel="noopener">Instagram</a> या <a href={airbnbUrl} target="_blank" rel="noopener">Airbnb listing</a> देखें। सटीक पता और मैप पिन शादी की तारीख़ के नज़दीक साझा कर दिया जाएगा।
+          स्थल की झलक देखने के लिए <a href={websiteUrl} target="_blank" rel="noopener">वेबसाइट</a> या <a href={instagramUrl} target="_blank" rel="noopener">Instagram location</a> देखें।
         </p>
       </>
     )}

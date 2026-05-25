@@ -11,14 +11,11 @@ donations:
     wiseUrl: https://wise.com/pay/me/apekshab12
 weddingDate: '2027-02-27'
 venue:
-  name: Big Tree Villa
-  addressShort: Bhondsi, Gurgaon, India
+  name: The Resort Inn
+  addressShort: Kadarpur, Gurgaon, India
   city: Gurgaon
   country: India
-  # TODO: this search query does not pin the exact farmhouse — replace with a
-  # precise Google Maps share link (goo.gl/maps/... or ?ll=lat,lng) once the
-  # location is confirmed, before sharing the site with guests.
-  mapUrl: 'https://maps.google.com/?q=Big+Tree+Villa+Bhondsi+Gurgaon'
+  mapUrl: 'https://maps.app.goo.gl/jcZVPbHCv6d3HNKv5'
 photoAlbums:
   googlePhotos: 'https://photos.app.goo.gl/uxVKPYMef44jPv8E8'
   icloud: https://www.icloud.com/sharedalbum/#B2AJtdOXm0N8bNu
