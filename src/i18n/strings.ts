@@ -22,7 +22,7 @@ export const strings = {
         'Bears. Beets. Battlestar Galactica.',
         'Identity theft is not a joke, Jim.',
         'Love is not blind. We checked.',
-        'Apeksha will notice if you\'re late.',
+        'Apeksha will not notice if you\'re late, but Padraic will.',
         'We considered Love Is Blind: Gurgaon Edition. Then we remembered we already met.',
         'Ew, David.',
         'Bade bade deshon mein choti choti baatein hoti rehti hain, Senorita.',
