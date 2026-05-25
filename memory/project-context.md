@@ -54,7 +54,7 @@ Implementation complete (27 of 28 plan tasks done). Task 28 is a manual user smo
 - Per-guest invitation codes (designed as a non-breaking later addition)
 - Photo upload by guests
 - Story / about-us page, gift registry, password gate
-- SEO, sitemap, hreflang, analytics
+- SEO, sitemap, hreflang
 
 ## Deliberately deferred
 

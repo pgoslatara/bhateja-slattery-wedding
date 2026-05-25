@@ -1,9 +1,13 @@
 ---
 import '../styles/global.css';
 import { Image } from 'astro:assets';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import yaml from 'js-yaml';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import { t, type Locale } from '../i18n/strings';
+import { siteSchema, type SiteConfig } from '../content/config';
 import siteBackground from '../assets/motifs/hero-mustard-field-couple.jpg';
 import amsterdamFrieze from '../assets/motifs/amsterdam-frieze.svg?raw';
 
@@ -12,6 +16,10 @@ const { lang, title } = Astro.props;
 const s = t(lang);
 const pageTitle = title ? `${title} · Apeksha & Pádraic` : 'Apeksha & Pádraic';
 const currentPath = Astro.url.pathname;
+
+const siteRaw = readFileSync(resolve(process.cwd(), 'src/content/site.yaml'), 'utf8');
+const site = siteSchema.parse(yaml.load(siteRaw)) as SiteConfig;
+const cfToken = import.meta.env.PROD ? site.analytics?.cloudflareToken : undefined;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -45,6 +53,14 @@ const currentPath = Astro.url.pathname;
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Playfair+Display:wght@700&family=Tiro+Devanagari+Hindi&display=swap"
     />
+    {cfToken && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${cfToken}"}`}
+      ></script>
+    )}
   </head>
   <body>
     <a class="skip-link" href="#main">{s.a11y.skipToMain}</a>

@@ -35,6 +35,9 @@ export const collections = { pages, schedule, faq };
 
 // Site-wide config schema (parsed manually from site.yaml — see src/i18n/site.ts).
 export const siteSchema = z.object({
+  analytics: z.object({
+    cloudflareToken: z.string().regex(/^[0-9a-f]{32}$/)
+  }).optional(),
   coupleNames: z.object({
     partner1: z.string().min(1),
     partner2: z.string().min(1)
