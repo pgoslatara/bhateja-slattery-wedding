@@ -1,5 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Layout from '../Layout.astro';
 import { t, type Locale } from '../../i18n/strings';
 import { localeUrl } from '../../i18n/urls';
@@ -7,6 +9,18 @@ import { siteSchema, type SiteConfig } from '../../content/config';
 import yaml from 'js-yaml';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+
+// Photo strip: every image in src/assets/home/ is picked up automatically.
+// Drop new files in or remove them — no other changes needed.
+const photoModules = import.meta.glob<ImageMetadata>(
+  '../../assets/home/*.{jpeg,jpg,png,webp,avif}',
+  { eager: true, import: 'default' }
+);
+const photos = Object.entries(photoModules)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, img]) => img);
+// Render the list twice so a -50% translate loops seamlessly.
+const photoLoop = [...photos, ...photos];
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -45,6 +59,24 @@ const weddingISO = site.weddingDate;
     </h1>
     <p class="date">{dateLine} · {s.home.locationDisplay}</p>
     <p class="countdown" data-countdown></p>
+    {photos.length > 0 && (
+      <div class="photo-strip" aria-hidden="true">
+        <ul class="photo-track" style={`--photo-count: ${photos.length}`}>
+          {photoLoop.map((img, i) => (
+            <li class="photo-slide">
+              <Image
+                src={img}
+                alt=""
+                width={640}
+                quality={75}
+                loading={i < photos.length ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
     <Content />
     <div class="cta-row">
       <a class="button" href={localeUrl(lang, '/rsvp/')}>{s.nav.rsvp}</a>
@@ -117,8 +149,9 @@ const weddingISO = site.weddingDate;
   .hero :global(h1) span { white-space: nowrap; }
   .date {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
-    color: var(--color-text);
+    /* Scales between phone and desktop without competing with the h1 above. */
+    font-size: clamp(1.25rem, 3.2vw, 1.65rem);
+    color: var(--color-primary-dark);
     margin-bottom: 0.5rem;
     transition: transform 0.3s ease, color 0.3s ease, letter-spacing 0.3s ease;
     cursor: default;
@@ -175,5 +208,61 @@ const weddingISO = site.weddingDate;
     color: var(--color-text);
     font-size: 0.95rem;
     line-height: 1.5;
+  }
+
+  /* Continuous photo strip. Track holds two copies of the list and animates
+     from 0 to -50%, so the loop seam lands on identical content and is
+     invisible. Per-slide width sets how many are visible at once. */
+  .photo-strip {
+    margin: 2rem auto 0;
+    max-width: 60rem;
+    overflow: hidden;
+    /* Soft fade at the edges suggests the strip extends past the viewport. */
+    -webkit-mask-image: linear-gradient(
+      to right, transparent, #000 6%, #000 94%, transparent
+    );
+    mask-image: linear-gradient(
+      to right, transparent, #000 6%, #000 94%, transparent
+    );
+  }
+  .photo-track {
+    display: flex;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: max-content;
+    animation: photo-strip-scroll 80s linear infinite;
+  }
+  .photo-strip:hover .photo-track,
+  .photo-strip:focus-within .photo-track {
+    animation-play-state: paused;
+  }
+  .photo-slide {
+    flex: 0 0 auto;
+    /* ~2.4 visible on phone, climbing to 5 on wider screens. */
+    width: 38vw;
+    aspect-ratio: 5 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .photo-slide :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  @media (min-width: 32rem) {
+    .photo-slide { width: 9rem; }
+  }
+  @media (min-width: 48rem) {
+    .photo-slide { width: 10.5rem; }
+  }
+  @keyframes photo-strip-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .photo-track { animation: none; }
   }
 </style>

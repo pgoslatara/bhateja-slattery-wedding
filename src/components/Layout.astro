@@ -236,6 +236,8 @@ const cfToken = import.meta.env.PROD ? site.analytics?.cloudflareToken : undefin
     object-fit: cover;
     object-position: center bottom;
     display: block;
+    /* Softened so the hero date/countdown read cleanly against it. */
+    opacity: 0.55;
   }
   .site-bg::before {
     content: '';
