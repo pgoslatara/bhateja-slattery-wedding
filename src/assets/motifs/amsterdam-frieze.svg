@@ -21,18 +21,26 @@
       <!-- Tower trapezoid -->
       <path d="M -7 9 L 7 9 L 11 34 L -11 34 Z" stroke="none"/>
     </g>
-    <g id="bicycle" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <g id="bicycle" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+      <!--
+        Stylised omafiets (Dutch step-through city bike), redrawn as a
+        minimalist pictogram to match the reference image in
+        _secret_sauce/bicycle-gen-10.jpeg. Centred on origin; the
+        ~50-unit extent matches the other motifs.
+      -->
       <!-- Wheels -->
-      <circle cx="-18" cy="12" r="10"/>
-      <circle cx="18" cy="12" r="10"/>
-      <!-- Frame: top tube + down tube -->
-      <path d="M -18 12 L 0 -2 L 18 12"/>
-      <!-- Seat tube -->
-      <path d="M 0 -2 L -3 12"/>
-      <!-- Handlebar -->
-      <path d="M 18 -2 L 22 -6"/>
-      <!-- Saddle -->
-      <line x1="-6" y1="-6" x2="3" y2="-6" stroke-width="1.8"/>
+      <circle cx="-18" cy="12" r="11"/>
+      <circle cx="18" cy="12" r="11"/>
+      <!-- Step-through top tube: characteristic S-curve from seat to head -->
+      <path d="M -5 -8 C -2 -2, 6 -2, 15 -8"/>
+      <!-- Seat tube + down tube triangle -->
+      <path d="M -5 -8 L -2 12 L 15 -8"/>
+      <!-- Head tube extending up to handlebar -->
+      <line x1="15" y1="-8" x2="19" y2="-14"/>
+      <!-- Handlebar grip with small hook -->
+      <path d="M 19 -14 L 23 -14 L 24 -12"/>
+      <!-- Saddle (thick flat bar) -->
+      <line x1="-9" y1="-10" x2="-2" y2="-10" stroke-width="4"/>
     </g>
     <g id="sunglasses" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <!-- Filled lenses — frame and lens share one colour so the
