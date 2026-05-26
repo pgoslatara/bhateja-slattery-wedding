@@ -10,8 +10,17 @@ type FormState = {
 
 function readForm(form: HTMLFormElement): RsvpInput {
   const fd = new FormData(form);
-  const guests = Array.from(form.querySelectorAll<HTMLInputElement>('input[name="additionalGuests[]"]'))
-    .map(el => el.value.trim());
+  const guests = Array.from(form.querySelectorAll<HTMLElement>('[data-guest-card]')).map(card => {
+    const nameEl = card.querySelector<HTMLInputElement>('[data-guest-name]');
+    const otherEl = card.querySelector<HTMLInputElement>('[data-guest-dietary-other]');
+    const dietary = Array.from(card.querySelectorAll<HTMLInputElement>('[data-guest-dietary]:checked'))
+      .map(el => el.value);
+    return {
+      name: nameEl?.value.trim() ?? '',
+      dietary,
+      dietaryOther: otherEl?.value.trim() ?? ''
+    };
+  });
   return {
     leadName: String(fd.get('leadName') ?? ''),
     additionalGuests: guests,
@@ -107,14 +116,22 @@ async function submit(state: FormState) {
 function bindAddGuest(form: HTMLFormElement) {
   const addBtn = form.querySelector<HTMLButtonElement>('[data-add-guest]');
   const list = form.querySelector<HTMLElement>('[data-additional-guests]');
-  if (!addBtn || !list) return;
+  const template = form.querySelector<HTMLTemplateElement>('[data-guest-template]');
+  if (!addBtn || !list || !template) return;
+
+  function bindRemove(card: HTMLElement) {
+    const removeBtn = card.querySelector<HTMLButtonElement>('[data-remove-guest]');
+    if (!removeBtn) return;
+    removeBtn.addEventListener('click', () => { card.remove(); });
+  }
+
   addBtn.addEventListener('click', () => {
-    const input = document.createElement('input');
-    input.name = 'additionalGuests[]';
-    input.type = 'text';
-    input.maxLength = 100;
-    list.appendChild(input);
-    input.focus();
+    const fragment = template.content.cloneNode(true) as DocumentFragment;
+    const card = fragment.querySelector<HTMLElement>('[data-guest-card]');
+    if (!card) return;
+    list.appendChild(fragment);
+    bindRemove(card);
+    card.querySelector<HTMLInputElement>('[data-guest-name]')?.focus();
   });
 }
 

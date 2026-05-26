@@ -47,9 +47,47 @@ test('honeypot filled means invalid (silently)', () => {
 });
 
 test('strips empty additional guests', () => {
-  const r = validateRsvp({ ...baseValid, additionalGuests: ['', '  ', 'Real Person'] });
+  const r = validateRsvp({
+    ...baseValid,
+    additionalGuests: [
+      { name: '', dietary: [], dietaryOther: '' },
+      { name: '   ', dietary: ['vegetarian'], dietaryOther: '' },
+      { name: 'Real Person', dietary: [], dietaryOther: '' }
+    ]
+  });
   assert.equal(r.ok, true);
-  assert.deepEqual(r.value.additionalGuests, ['Real Person']);
+  assert.equal(r.value.additionalGuests.length, 1);
+  assert.equal(r.value.additionalGuests[0].name, 'Real Person');
+});
+
+test('preserves per-guest dietary preferences', () => {
+  const r = validateRsvp({
+    ...baseValid,
+    additionalGuests: [
+      { name: 'Priya', dietary: ['vegetarian', 'jain'], dietaryOther: 'no garlic' },
+      { name: 'Rohit', dietary: ['glutenFree'], dietaryOther: '' }
+    ]
+  });
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.value.additionalGuests, [
+    { name: 'Priya', dietary: ['vegetarian', 'jain'], dietaryOther: 'no garlic' },
+    { name: 'Rohit', dietary: ['glutenFree'], dietaryOther: '' }
+  ]);
+});
+
+test('trims per-guest dietary values', () => {
+  const r = validateRsvp({
+    ...baseValid,
+    additionalGuests: [
+      { name: '  Asha  ', dietary: [' vegan ', ''], dietaryOther: '  shellfish allergy  ' }
+    ]
+  });
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.value.additionalGuests[0], {
+    name: 'Asha',
+    dietary: ['vegan'],
+    dietaryOther: 'shellfish allergy'
+  });
 });
 
 test('passes requiresVisa through unchanged', () => {

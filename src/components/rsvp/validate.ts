@@ -1,6 +1,12 @@
+export type AdditionalGuest = {
+  name: string;
+  dietary: string[];
+  dietaryOther: string;
+};
+
 export type RsvpInput = {
   leadName: string;
-  additionalGuests: string[];
+  additionalGuests: AdditionalGuest[];
   day2Attending: 'yes' | 'no' | '';
   dietary: string[];
   dietaryOther: string;
@@ -55,7 +61,13 @@ export function validateRsvp(raw: RsvpInput): Validated {
 
   if (Object.keys(errors).length > 0) return { ok: false, errors };
 
-  const additionalGuests = (raw.additionalGuests ?? []).map(trim).filter(Boolean).map(cap);
+  const additionalGuests: AdditionalGuest[] = (raw.additionalGuests ?? [])
+    .map(g => ({
+      name: cap(trim(g?.name ?? '')),
+      dietary: (g?.dietary ?? []).map(trim).filter(Boolean),
+      dietaryOther: cap(trim(g?.dietaryOther ?? ''))
+    }))
+    .filter(g => g.name !== '');
 
   return {
     ok: true,
