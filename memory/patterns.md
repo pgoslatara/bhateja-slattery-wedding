@@ -67,10 +67,13 @@ Non-obvious mechanics learnt while building this codebase. Read first; refer bac
 
 - **Defence-in-depth on RSVP**: client validation (`validate.ts`), server validation (`lib.gs:parsePayload`), `LockService.getScriptLock()` around the throttle-check + append, honeypot field (`favourite_pet`), per-WhatsApp throttle (10s), origin allow-list (sent in body).
 
+- **Sheets parses `+\d+` strings as formulas on write** and stores the bare number, stripping the `+`. So `sheet.appendRow([..., '+353863786316', ...])` lands as `353863786316` (Number). To force text storage, prepend an apostrophe: `appendRow([..., "'+353863786316", ...])` — the apostrophe is consumed by Sheets and `getValues()` reads back `"+353863786316"`. This was masking the throttle dedup: `rows[i][9] === whatsapp` compared a Number against a String and always returned false. The fix is `lib.gs:normalizeWhatsapp` + the apostrophe in `Code.gs:appendRow`. Old rows are still numeric in column J — the normaliser handles both shapes.
+
 ## Google Sheets formulas
 
-- `MATCH(array, array, 0)` does **not** natively iterate over an array first argument in Sheets. Wrap in `ARRAYFORMULA(MATCH(...))` to get an array result.
+- `MATCH(array, array, 0)` does **not** natively iterate over an array first argument in Sheets. `ARRAYFORMULA(MATCH(keys, keys, 0))` *also* silently collapses to a scalar `1` when both arguments are the same vector — the broadcast doesn't happen as expected. Use `MAP(keys, LAMBDA(k, MATCH(k, keys, 0)))` to force per-element iteration. This bit the `latest` view's first-occurrence dedup mask, leaving only the topmost row.
 - `{header; body}` array literals fail with "missing values for one or more rows" when `FILTER` returns a single row (Sheets sometimes returns a 1D vector instead of a 1×N array). Workaround: split across two cells.
+- `INDEX(arr, 0, n)` does **not** reliably return a column vector when `arr` is an in-memory array (the result of `SORT`/`FILTER`/etc) rather than a sheet range — it sometimes returns a 1-row vector, which collapses any downstream mask. Use `CHOOSECOLS(arr, n)` instead for column extraction on array values. This caused the `latest` view in the RSVP sheet to error with "FILTER has mismatched range sizes" once real data landed.
 
 ## Node tooling
 

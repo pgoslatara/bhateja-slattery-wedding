@@ -47,7 +47,7 @@ columns are:
 |---|---|---|
 | 0 | `timestamp` | ISO-8601 string set by the server |
 | 1 | `lead_name` | |
-| 2 | `additional_guests` | JSON array of strings |
+| 2 | `additional_guests` | JSON array of `{ name, dietary, dietaryOther }` objects |
 | 3 | `day2_attending` | `yes` / `no` |
 | 4 | `dietary` | JSON array (e.g. `["vegetarian","glutenFree"]`) |
 | 5 | `dietary_other` | Free text |
@@ -75,29 +75,31 @@ that occurs when stacking the header onto a single-row FILTER result.
 
 **In `A2`** (body — deduped, latest-per-WhatsApp rows, spills downward):
 
+Paste as a single line — multi-line copies from markdown sometimes introduce
+stray whitespace that Sheets rejects:
+
 ```
-=IFERROR(
-  LET(
-    raw,  SORT(FILTER(submissions!A2:M, submissions!A2:A <> ""), 1, FALSE),
-    keys, INDEX(raw, 0, 10),
-    mask, ARRAYFORMULA(MATCH(keys, keys, 0)) = SEQUENCE(ROWS(keys)),
-    FILTER(raw, mask)
-  )
-)
+=IFERROR(LET(sorted,SORT(FILTER(submissions!A2:M,submissions!A2:A<>""),1,FALSE),keys,CHOOSECOLS(sorted,10),first,MAP(keys,LAMBDA(k,MATCH(k,keys,0))),FILTER(sorted,first=SEQUENCE(ROWS(keys)))))
 ```
 
 How it works:
 
-1. `FILTER(submissions!A2:N, ...)` drops empty trailing rows.
+1. `FILTER(submissions!A2:M, ...)` drops empty trailing rows.
 2. `SORT(..., 1, FALSE)` orders all submissions by timestamp **descending** —
    newest first.
-3. `ARRAYFORMULA(MATCH(keys, keys, 0)) = SEQUENCE(ROWS(keys))` is the
-   canonical "first-occurrence" mask. The `ARRAYFORMULA` wrap is required
-   because Sheets' `MATCH` doesn't natively iterate over an array first
-   argument. Because the rows are already sorted newest-first, the first
-   occurrence of each WhatsApp number is its *latest* submission. `INDEX(raw, 0, 10)`
-   keys on column 10 (`whatsapp`); the trailing `requires_visa` column doesn't
-   shift anything.
+3. `CHOOSECOLS(sorted, 10)` extracts the `whatsapp` column as a vertical
+   vector. (Note: `INDEX(sorted, 0, 10)` works on sheet ranges but returns a
+   1-row vector — not a column — when applied to the *result* of `SORT`/`FILTER`,
+   collapsing downstream masks. `CHOOSECOLS` is the reliable column-picker
+   for in-memory arrays.)
+4. `MAP(keys, LAMBDA(k, MATCH(k, keys, 0)))` returns, for each row, the
+   position of the *first* occurrence of that WhatsApp number in the sorted
+   list. `MAP`/`LAMBDA` forces per-element iteration; `ARRAYFORMULA(MATCH(keys,
+   keys, 0))` silently collapses to a single scalar when both arguments are
+   the same vector and leaves only row 1 surviving.
+5. Comparing `first` to `SEQUENCE(ROWS(keys))` yields TRUE only for rows that
+   are themselves the first occurrence of their key. Because rows are sorted
+   newest-first, that is each guest's *latest* submission.
 
 The view updates live as new rows land in `submissions`. If a guest resubmits
 with the same WhatsApp number, their newer row replaces the older one in
