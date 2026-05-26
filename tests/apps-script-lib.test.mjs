@@ -7,7 +7,7 @@ function loadLib() {
   const code = readFileSync(new URL('../apps-script/lib.gs', import.meta.url), 'utf8');
   const sandbox = { module: { exports: {} } };
   // Wrap the .gs file so `var` declarations attach to module.exports.
-  runInNewContext(`${code}\nmodule.exports = { parsePayload, isAllowedOrigin, isThrottled };`, sandbox);
+  runInNewContext(`${code}\nmodule.exports = { parsePayload, isAllowedOrigin, isThrottled, normalizeWhatsapp };`, sandbox);
   return sandbox.module.exports;
 }
 
@@ -64,4 +64,22 @@ test('isThrottled allows after window', () => {
 test('isThrottled allows when no last submission', () => {
   const { isThrottled } = loadLib();
   assert.equal(isThrottled(1_700_000_000_000, null, 10_000), false);
+});
+
+test('normalizeWhatsapp matches text "+digits" against legacy Number rows', () => {
+  const { normalizeWhatsapp } = loadLib();
+  // Old rows: Sheets coerced "+353863786316" to the Number 353863786316.
+  // New rows: stored as text "+353863786316" thanks to the leading-apostrophe write.
+  // Payload value from the client: always "+353863786316".
+  assert.equal(normalizeWhatsapp(353863786316), '353863786316');
+  assert.equal(normalizeWhatsapp('+353863786316'), '353863786316');
+  assert.equal(normalizeWhatsapp(353863786316), normalizeWhatsapp('+353863786316'));
+});
+
+test('normalizeWhatsapp tolerates whitespace and nullish inputs', () => {
+  const { normalizeWhatsapp } = loadLib();
+  assert.equal(normalizeWhatsapp(' +91 9818 009962 '), '919818009962');
+  assert.equal(normalizeWhatsapp(null), '');
+  assert.equal(normalizeWhatsapp(undefined), '');
+  assert.equal(normalizeWhatsapp(''), '');
 });

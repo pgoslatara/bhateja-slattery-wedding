@@ -68,9 +68,13 @@ function createSubmissionsSheet() {
 
 function lookupLastSubmissionMs(sheet, whatsapp) {
   var rows = sheet.getDataRange().getValues();
+  var target = normalizeWhatsapp(whatsapp);
   var lastMs = null;
   for (var i = 1; i < rows.length; i++) {
-    if (rows[i][9] === whatsapp) {
+    // Old rows store the WhatsApp value as a Number (Sheets coerces "+\d+"
+    // strings on write); new rows store text with a leading "+". Normalise
+    // both sides so dedup works regardless of when the row was written.
+    if (normalizeWhatsapp(rows[i][9]) === target) {
       var ts = rows[i][0];
       var ms = ts instanceof Date ? ts.getTime() : Number(ts);
       if (!lastMs || ms > lastMs) lastMs = ms;
@@ -90,7 +94,10 @@ function appendRow(sheet, nowMs, d) {
     d.arrival || '',
     d.departure || '',
     d.accommodation,
-    d.whatsapp,
+    // Leading apostrophe forces Sheets to store the value as text — without
+    // it, Sheets parses "+\d+" as a formula and stores the bare number,
+    // breaking dedup against the original "+\d+" payload value.
+    "'" + d.whatsapp,
     d.notes || '',
     JSON.stringify(d),
     d.requiresVisa || ''

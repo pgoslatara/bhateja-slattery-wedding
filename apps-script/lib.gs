@@ -66,3 +66,19 @@ function isThrottled(nowMs, lastSubmissionMs, windowMs) {
   if (lastSubmissionMs == null) return false;
   return (nowMs - lastSubmissionMs) < windowMs;
 }
+
+/**
+ * Normalise a WhatsApp value for comparison.
+ *
+ * Sheets coerces strings that start with `+` and digits into Numbers, so cells
+ * written before the appendRow fix store `353863786316` while new cells store
+ * the text `+353863786316`. Returning a leading-`+`-stripped, whitespace-free
+ * string lets the dedup lookup match across both shapes.
+ *
+ * @param {string|number|null|undefined} v
+ * @returns {string}
+ */
+function normalizeWhatsapp(v) {
+  if (v == null) return '';
+  return String(v).replace(/\s+/g, '').replace(/^\+/, '');
+}
