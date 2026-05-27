@@ -68,6 +68,74 @@ function isThrottled(nowMs, lastSubmissionMs, windowMs) {
 }
 
 /**
+ * Format a submission as a notification email (subject + plain-text body).
+ * Kept here (rather than in Code.gs) so it can be exercised by Node tests.
+ *
+ * @param {object} data - Parsed payload from parsePayload().
+ * @param {number} nowMs - Submission timestamp in milliseconds.
+ * @returns {{ subject: string, body: string }}
+ */
+function formatNotification(data, nowMs) {
+  var additional = Array.isArray(data.additionalGuests) ? data.additionalGuests : [];
+  var partySize = 1 + additional.length;
+  var leadName = String(data.leadName || '').trim();
+  var subject = 'RSVP: ' + leadName + ' (party of ' + partySize + ')';
+
+  var lines = [];
+  lines.push('New RSVP received.');
+  lines.push('');
+  lines.push('Lead guest: ' + leadName);
+  lines.push('WhatsApp: ' + (data.whatsapp || ''));
+  lines.push('Party size: ' + partySize);
+  if (additional.length > 0) {
+    lines.push('Additional guests:');
+    for (var i = 0; i < additional.length; i++) {
+      var g = additional[i] || {};
+      var name = String(g.name || '').trim() || '(no name)';
+      var diet = formatDietary(g.dietary, g.dietaryOther);
+      lines.push('  - ' + name + (diet ? ' (' + diet + ')' : ''));
+    }
+  }
+  lines.push('');
+  lines.push('Day 2 (Sangeet): ' + (data.day2Attending === 'yes' ? 'Yes' : 'No'));
+  lines.push('Dietary (lead): ' + (formatDietary(data.dietary, data.dietaryOther) || 'None specified'));
+  lines.push('Requires Indian visa: ' + (data.requiresVisa === 'yes' ? 'Yes' : 'No'));
+  lines.push('Arrival: ' + (data.arrival || '(not provided)'));
+  lines.push('Departure: ' + (data.departure || '(not provided)'));
+  lines.push('Accommodation: ' + (data.accommodation || ''));
+  if (data.notes && String(data.notes).trim() !== '') {
+    lines.push('');
+    lines.push('Notes:');
+    lines.push(String(data.notes));
+  }
+  lines.push('');
+  lines.push('Submitted: ' + new Date(nowMs).toISOString());
+  return { subject: subject, body: lines.join('\n') };
+}
+
+/**
+ * Render a dietary selection (array of tags plus free-text "other") as a
+ * comma-separated string. Returns '' when nothing is specified.
+ *
+ * @param {string[]|undefined|null} arr
+ * @param {string|undefined|null} other
+ * @returns {string}
+ */
+function formatDietary(arr, other) {
+  var parts = [];
+  if (Array.isArray(arr)) {
+    for (var i = 0; i < arr.length; i++) {
+      var v = String(arr[i] || '').trim();
+      if (v) parts.push(v);
+    }
+  }
+  if (other && String(other).trim() !== '') {
+    parts.push(String(other).trim());
+  }
+  return parts.join(', ');
+}
+
+/**
  * Normalise a WhatsApp value for comparison.
  *
  * Sheets coerces strings that start with `+` and digits into Numbers, so cells

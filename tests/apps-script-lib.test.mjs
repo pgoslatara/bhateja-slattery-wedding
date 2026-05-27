@@ -7,7 +7,7 @@ function loadLib() {
   const code = readFileSync(new URL('../apps-script/lib.gs', import.meta.url), 'utf8');
   const sandbox = { module: { exports: {} } };
   // Wrap the .gs file so `var` declarations attach to module.exports.
-  runInNewContext(`${code}\nmodule.exports = { parsePayload, isAllowedOrigin, isThrottled, normalizeWhatsapp };`, sandbox);
+  runInNewContext(`${code}\nmodule.exports = { parsePayload, isAllowedOrigin, isThrottled, normalizeWhatsapp, formatNotification, formatDietary };`, sandbox);
   return sandbox.module.exports;
 }
 
@@ -82,4 +82,79 @@ test('normalizeWhatsapp tolerates whitespace and nullish inputs', () => {
   assert.equal(normalizeWhatsapp(null), '');
   assert.equal(normalizeWhatsapp(undefined), '');
   assert.equal(normalizeWhatsapp(''), '');
+});
+
+test('formatDietary joins tags and free-text "other"', () => {
+  const { formatDietary } = loadLib();
+  assert.equal(formatDietary(['vegetarian', 'glutenFree'], ''), 'vegetarian, glutenFree');
+  assert.equal(formatDietary([], 'no peanuts'), 'no peanuts');
+  assert.equal(formatDietary(['vegetarian'], 'no peanuts'), 'vegetarian, no peanuts');
+  assert.equal(formatDietary(null, undefined), '');
+  assert.equal(formatDietary([''], '   '), '');
+});
+
+test('formatNotification builds subject and body for a solo guest', () => {
+  const { formatNotification } = loadLib();
+  const ts = Date.UTC(2026, 4, 27, 9, 30, 0); // 2026-05-27T09:30:00Z
+  const msg = formatNotification(
+    {
+      leadName: 'Padraic Slattery',
+      whatsapp: '+353863786316',
+      day2Attending: 'yes',
+      accommodation: 'sorted',
+      requiresVisa: 'no',
+      additionalGuests: [],
+      dietary: ['vegetarian'],
+      dietaryOther: '',
+      arrival: '2026-05-06 evening',
+      departure: '2026-05-09 morning',
+      notes: '',
+    },
+    ts,
+  );
+  assert.equal(msg.subject, 'RSVP: Padraic Slattery (party of 1)');
+  assert.match(msg.body, /Lead guest: Padraic Slattery/);
+  assert.match(msg.body, /WhatsApp: \+353863786316/);
+  assert.match(msg.body, /Party size: 1/);
+  assert.match(msg.body, /Day 2 \(Sangeet\): Yes/);
+  assert.match(msg.body, /Dietary \(lead\): vegetarian/);
+  assert.match(msg.body, /Requires Indian visa: No/);
+  assert.match(msg.body, /Accommodation: sorted/);
+  assert.match(msg.body, /Submitted: 2026-05-27T09:30:00\.000Z/);
+  // No "Additional guests:" header when none provided.
+  assert.equal(msg.body.includes('Additional guests:'), false);
+  // No notes section when notes is empty.
+  assert.equal(msg.body.includes('Notes:'), false);
+});
+
+test('formatNotification lists additional guests with per-person dietary', () => {
+  const { formatNotification } = loadLib();
+  const msg = formatNotification(
+    {
+      leadName: 'Apeksha Bhateja',
+      whatsapp: '+919818009962',
+      day2Attending: 'no',
+      accommodation: 'help',
+      requiresVisa: 'yes',
+      additionalGuests: [
+        { name: 'Guest One', dietary: ['vegetarian'], dietaryOther: '' },
+        { name: 'Guest Two', dietary: [], dietaryOther: 'no shellfish' },
+        { name: '', dietary: [], dietaryOther: '' },
+      ],
+      dietary: [],
+      dietaryOther: '',
+      arrival: '',
+      departure: '',
+      notes: 'Need an early check-in if possible.',
+    },
+    0,
+  );
+  assert.equal(msg.subject, 'RSVP: Apeksha Bhateja (party of 4)');
+  assert.match(msg.body, /Additional guests:\n {2}- Guest One \(vegetarian\)\n {2}- Guest Two \(no shellfish\)\n {2}- \(no name\)/);
+  assert.match(msg.body, /Day 2 \(Sangeet\): No/);
+  assert.match(msg.body, /Dietary \(lead\): None specified/);
+  assert.match(msg.body, /Requires Indian visa: Yes/);
+  assert.match(msg.body, /Arrival: \(not provided\)/);
+  assert.match(msg.body, /Departure: \(not provided\)/);
+  assert.match(msg.body, /Notes:\nNeed an early check-in if possible\./);
 });

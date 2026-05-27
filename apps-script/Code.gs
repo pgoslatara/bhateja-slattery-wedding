@@ -1,14 +1,26 @@
-var ALLOWED_ORIGINS = [
-  'https://pgoslatara.github.io',
-  // Local dev origins — Astro defaults. Astro picks a free port if 4321 is taken,
-  // so 4322 is included for the next-port-up case.
+// Origins that represent the deployed site. Submissions from these origins
+// trigger notification emails; submissions from DEV_ORIGINS do not.
+var PROD_ORIGINS = [
+  'https://pgoslatara.github.io'
+];
+// Local dev origins — Astro defaults. Astro picks a free port if 4321 is taken,
+// so 4322 is included for the next-port-up case.
+var DEV_ORIGINS = [
   'http://127.0.0.1:4321',
   'http://localhost:4321',
   'http://127.0.0.1:4322',
   'http://localhost:4322'
 ];
+var ALLOWED_ORIGINS = PROD_ORIGINS.concat(DEV_ORIGINS);
 var THROTTLE_WINDOW_MS = 10000;
 var SUBMISSIONS_TAB = 'submissions';
+// Recipients of the per-submission notification email. MailApp has a daily
+// quota (~100 messages/day for consumer Google accounts); each recipient
+// counts separately against it.
+var NOTIFY_EMAILS = [
+  'padraic.slattery@xebia.com',
+  'b.apeksha.91@gmail.com'
+];
 
 function doPost(e) {
   var rawBody = e && e.postData && e.postData.contents;
@@ -28,19 +40,38 @@ function doPost(e) {
   try { lock.waitLock(5000); } catch (lockErr) {
     return jsonResponse({ status: 'error', code: 'internal' });
   }
+  var nowMs;
+  var wroteRow = false;
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SUBMISSIONS_TAB);
     if (!sheet) sheet = createSubmissionsSheet();
-    var nowMs = new Date().getTime();
+    nowMs = new Date().getTime();
     var lastMs = lookupLastSubmissionMs(sheet, data.whatsapp);
     if (isThrottled(nowMs, lastMs, THROTTLE_WINDOW_MS)) {
       return jsonResponse({ status: 'error', code: 'throttled' });
     }
     appendRow(sheet, nowMs, data);
+    wroteRow = true;
   } finally {
     lock.releaseLock();
   }
+  if (wroteRow && isAllowedOrigin(data.origin || '', PROD_ORIGINS)) {
+    // Mail failure must not break the RSVP write — the row is already saved.
+    try { sendNotification(data, nowMs); } catch (mailErr) {
+      Logger.log('Notification email failed: ' + mailErr);
+    }
+  }
   return jsonResponse({ status: 'ok' });
+}
+
+function sendNotification(data, nowMs) {
+  if (!NOTIFY_EMAILS || NOTIFY_EMAILS.length === 0) return;
+  var msg = formatNotification(data, nowMs);
+  MailApp.sendEmail({
+    to: NOTIFY_EMAILS.join(','),
+    subject: msg.subject,
+    body: msg.body
+  });
 }
 
 function doGet() {

@@ -106,6 +106,29 @@ with the same WhatsApp number, their newer row replaces the older one in
 `latest` automatically. The full audit trail is always preserved in
 `submissions`.
 
+## Email notifications
+
+After every successful write to `submissions` **from a production origin**,
+the script sends a plain-text notification email to each address in
+`NOTIFY_EMAILS` (top of `Code.gs`) using `MailApp.sendEmail`. Submissions from
+`DEV_ORIGINS` (local Astro dev server) are written to the sheet but do **not**
+trigger notifications, so you can smoke-test the form without spamming
+inboxes. To add or remove recipients, edit the array and run `make
+script-push` followed by a new deployment version (see *Re-deploying after
+Code.gs changes* above). Likewise, adding a new production origin (e.g. a
+custom domain) means appending to `PROD_ORIGINS`.
+
+The mail send is wrapped in `try/catch` — if MailApp throws (quota exceeded,
+transient error), the RSVP row is still saved and the failure is recorded via
+`Logger.log`. Consumer Google accounts have a daily quota of ~100 messages
+across all recipients; each address in `NOTIFY_EMAILS` counts separately.
+
+The first time the deployment runs after this change is applied, Apps Script
+will prompt the script owner to re-authorize the project (the `MailApp` scope
+was not previously requested). Open the editor (`make script-open`), run
+`doPost` manually once, and accept the new permission. Subsequent submissions
+will go through without further interaction.
+
 ## Manual smoke test
 
 After every redeploy, post a test payload from the terminal:
