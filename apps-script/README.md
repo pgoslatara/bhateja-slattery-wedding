@@ -48,7 +48,7 @@ columns are:
 | 0 | `timestamp` | ISO-8601 string set by the server |
 | 1 | `lead_name` | |
 | 2 | `additional_guests` | JSON array of `{ name, dietary, dietaryOther }` objects |
-| 3 | `day2_attending` | `yes` / `no` |
+| 3 | `wedding_attending` | `yes` / `no` |
 | 4 | `dietary` | JSON array (e.g. `["vegetarian","glutenFree"]`) |
 | 5 | `dietary_other` | Free text |
 | 6 | `arrival` | Free text |
@@ -136,7 +136,7 @@ After every redeploy, post a test payload from the terminal:
 ```bash
 curl -L -X POST "$PUBLIC_APPS_SCRIPT_URL" \
   -H "Content-Type: text/plain" \
-  -d '{"leadName":"Test","whatsapp":"+919999999999","day2Attending":"yes","accommodation":"sorted","requiresVisa":"no","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":"","origin":"https://pgoslatara.github.io"}'
+  -d '{"leadName":"Test","whatsapp":"+919999999999","weddingAttending":"yes","accommodation":"sorted","requiresVisa":"no","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":"","origin":"https://pgoslatara.github.io"}'
 ```
 
 Expected: `{"status":"ok"}` and a new row in the `submissions` tab. The

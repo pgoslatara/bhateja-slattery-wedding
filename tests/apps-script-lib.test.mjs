@@ -13,7 +13,7 @@ function loadLib() {
 
 test('parsePayload returns ok for valid JSON', () => {
   const { parsePayload } = loadLib();
-  const r = parsePayload('{"leadName":"X","whatsapp":"+919999999999","day2Attending":"no","accommodation":"sorted","requiresVisa":"no","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":""}');
+  const r = parsePayload('{"leadName":"X","whatsapp":"+919999999999","weddingAttending":"no","accommodation":"sorted","requiresVisa":"no","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":""}');
   assert.equal(r.ok, true);
   assert.equal(r.value.leadName, 'X');
   assert.equal(r.value.requiresVisa, 'no');
@@ -21,7 +21,7 @@ test('parsePayload returns ok for valid JSON', () => {
 
 test('parsePayload returns invalid_payload when requiresVisa missing', () => {
   const { parsePayload } = loadLib();
-  const r = parsePayload('{"leadName":"X","whatsapp":"+919999999999","day2Attending":"no","accommodation":"sorted","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":""}');
+  const r = parsePayload('{"leadName":"X","whatsapp":"+919999999999","weddingAttending":"no","accommodation":"sorted","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":""}');
   assert.equal(r.ok, false);
   assert.equal(r.code, 'invalid_payload');
 });
@@ -35,7 +35,7 @@ test('parsePayload returns invalid_payload for missing required fields', () => {
 
 test('parsePayload returns invalid_payload for filled honeypot', () => {
   const { parsePayload } = loadLib();
-  const r = parsePayload('{"leadName":"X","whatsapp":"+919999999999","day2Attending":"no","accommodation":"sorted","honeypot":"spam","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":""}');
+  const r = parsePayload('{"leadName":"X","whatsapp":"+919999999999","weddingAttending":"no","accommodation":"sorted","honeypot":"spam","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":""}');
   assert.equal(r.ok, false);
   assert.equal(r.code, 'invalid_payload');
 });
@@ -100,7 +100,7 @@ test('formatNotification builds subject and body for a solo guest', () => {
     {
       leadName: 'Padraic Slattery',
       whatsapp: '+353863786316',
-      day2Attending: 'yes',
+      weddingAttending: 'yes',
       accommodation: 'sorted',
       requiresVisa: 'no',
       additionalGuests: [],
@@ -116,7 +116,7 @@ test('formatNotification builds subject and body for a solo guest', () => {
   assert.match(msg.body, /Lead guest: Padraic Slattery/);
   assert.match(msg.body, /WhatsApp: \+353863786316/);
   assert.match(msg.body, /Party size: 1/);
-  assert.match(msg.body, /Day 2 \(Sangeet\): Yes/);
+  assert.match(msg.body, /Wedding: Yes/);
   assert.match(msg.body, /Dietary \(lead\): vegetarian/);
   assert.match(msg.body, /Requires Indian visa: No/);
   assert.match(msg.body, /Accommodation: sorted/);
@@ -133,7 +133,7 @@ test('formatNotification lists additional guests with per-person dietary', () =>
     {
       leadName: 'Apeksha Bhateja',
       whatsapp: '+919818009962',
-      day2Attending: 'no',
+      weddingAttending: 'no',
       accommodation: 'help',
       requiresVisa: 'yes',
       additionalGuests: [
@@ -151,7 +151,7 @@ test('formatNotification lists additional guests with per-person dietary', () =>
   );
   assert.equal(msg.subject, 'RSVP: Apeksha Bhateja (party of 4)');
   assert.match(msg.body, /Additional guests:\n {2}- Guest One \(vegetarian\)\n {2}- Guest Two \(no shellfish\)\n {2}- \(no name\)/);
-  assert.match(msg.body, /Day 2 \(Sangeet\): No/);
+  assert.match(msg.body, /Wedding: No/);
   assert.match(msg.body, /Dietary \(lead\): None specified/);
   assert.match(msg.body, /Requires Indian visa: Yes/);
   assert.match(msg.body, /Arrival: \(not provided\)/);

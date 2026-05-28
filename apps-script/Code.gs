@@ -58,7 +58,8 @@ function doPost(e) {
   if (wroteRow && isAllowedOrigin(data.origin || '', PROD_ORIGINS)) {
     // Mail failure must not break the RSVP write — the row is already saved.
     try { sendNotification(data, nowMs); } catch (mailErr) {
-      Logger.log('Notification email failed: ' + mailErr);
+      // console.error surfaces in the Executions panel; Logger.log does not.
+      console.error('Notification email failed: ' + mailErr);
     }
   }
   return jsonResponse({ status: 'ok' });
@@ -72,6 +73,34 @@ function sendNotification(data, nowMs) {
     subject: msg.subject,
     body: msg.body
   });
+}
+
+/**
+ * Manual diagnostic — run from the Apps Script editor (function dropdown →
+ * runNotificationTest → Run). First run triggers the MailApp scope consent
+ * prompt; subsequent runs send a test email to NOTIFY_EMAILS and report the
+ * remaining daily quota. Delete or ignore once notifications are confirmed.
+ */
+function runNotificationTest() {
+  var quota = MailApp.getRemainingDailyQuota();
+  console.log('MailApp remaining daily quota: ' + quota);
+  sendNotification(
+    {
+      leadName: 'Test Notification',
+      whatsapp: '+353000000000',
+      weddingAttending: 'yes',
+      accommodation: 'sorted',
+      requiresVisa: 'no',
+      additionalGuests: [],
+      dietary: [],
+      dietaryOther: '',
+      arrival: '',
+      departure: '',
+      notes: 'Sent from runNotificationTest() in the Apps Script editor.'
+    },
+    new Date().getTime()
+  );
+  console.log('Test email dispatched to: ' + NOTIFY_EMAILS.join(', '));
 }
 
 function doGet() {
@@ -90,7 +119,7 @@ function createSubmissionsSheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.insertSheet(SUBMISSIONS_TAB);
   sheet.appendRow([
-    'timestamp', 'lead_name', 'additional_guests', 'day2_attending',
+    'timestamp', 'lead_name', 'additional_guests', 'wedding_attending',
     'dietary', 'dietary_other', 'arrival', 'departure', 'accommodation', 'whatsapp', 'notes', 'raw_json',
     'requires_visa'
   ]);
@@ -119,7 +148,7 @@ function appendRow(sheet, nowMs, d) {
     new Date(nowMs).toISOString(),
     d.leadName,
     JSON.stringify(d.additionalGuests || []),
-    d.day2Attending,
+    d.weddingAttending,
     JSON.stringify(d.dietary || []),
     d.dietaryOther || '',
     d.arrival || '',

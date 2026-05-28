@@ -26,7 +26,7 @@ function parsePayload(rawBody) {
   if (typeof data.whatsapp !== 'string' || !/^\+\d{10,15}$/.test(data.whatsapp)) {
     return { ok: false, code: 'invalid_payload' };
   }
-  if (data.day2Attending !== 'yes' && data.day2Attending !== 'no') {
+  if (data.weddingAttending !== 'yes' && data.weddingAttending !== 'no') {
     return { ok: false, code: 'invalid_payload' };
   }
   if (['sorted', 'recommended', 'help'].indexOf(data.accommodation) === -1) {
@@ -97,7 +97,7 @@ function formatNotification(data, nowMs) {
     }
   }
   lines.push('');
-  lines.push('Day 2 (Sangeet): ' + (data.day2Attending === 'yes' ? 'Yes' : 'No'));
+  lines.push('Wedding: ' + (data.weddingAttending === 'yes' ? 'Yes' : 'No'));
   lines.push('Dietary (lead): ' + (formatDietary(data.dietary, data.dietaryOther) || 'None specified'));
   lines.push('Requires Indian visa: ' + (data.requiresVisa === 'yes' ? 'Yes' : 'No'));
   lines.push('Arrival: ' + (data.arrival || '(not provided)'));

@@ -59,7 +59,7 @@ Non-obvious mechanics learnt while building this codebase. Read first; refer bac
 
 - **POSTs return a 302 redirect** to `script.googleusercontent.com/...` — `curl` needs `-L` to follow it. Browsers follow automatically.
 
-- **Sheet schema**: 14 columns. `A=timestamp, B=lead_name, C=additional_guests, D=day1_attending, E=day2_attending, F=dietary, G=dietary_other, H=arrival, I=departure, J=accommodation, K=whatsapp, L=notes, M=raw_json, N=requires_visa`. New columns are appended at the end to preserve existing-row alignment. **WhatsApp is at column K (index 10)** — that's the dedup key referenced by `lookupLastSubmissionMs` in `Code.gs` and the `latest`-view formula.
+- **Sheet schema**: 13 columns. `A=timestamp, B=lead_name, C=additional_guests, D=wedding_attending, E=dietary, F=dietary_other, G=arrival, H=departure, I=accommodation, J=whatsapp, K=notes, L=raw_json, M=requires_visa`. New columns are appended at the end to preserve existing-row alignment. **WhatsApp is at column J (index 9)** — that's the dedup key referenced by `lookupLastSubmissionMs` in `Code.gs` and the `latest`-view formula (`CHOOSECOLS(sorted, 10)` using 1-based indexing).
 
 - **`latest` view formula** lives in `apps-script/README.md`. Use the **two-cell version** (`A1` for header, `A2` for body) — the single-cell version chokes with "ARRAY_LITERAL was missing values for one or more rows" because `FILTER` sometimes returns a 1D vector that doesn't stack with the 1×N header.
 

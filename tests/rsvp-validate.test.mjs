@@ -5,7 +5,7 @@ import { validateRsvp } from '../src/components/rsvp/validate.ts';
 const baseValid = {
   leadName: 'Sandeep',
   additionalGuests: [],
-  day2Attending: 'yes',
+  weddingAttending: 'yes',
   dietary: [],
   dietaryOther: '',
   arrival: '',
@@ -96,10 +96,10 @@ test('passes requiresVisa through unchanged', () => {
   assert.equal(r.value.requiresVisa, 'yes');
 });
 
-test('rejects missing day2Attending selection', () => {
-  const r = validateRsvp({ ...baseValid, day2Attending: '' });
+test('rejects missing weddingAttending selection', () => {
+  const r = validateRsvp({ ...baseValid, weddingAttending: '' });
   assert.equal(r.ok, false);
-  assert.equal(r.errors.day2Attending, 'day2AttendingRequired');
+  assert.equal(r.errors.weddingAttending, 'weddingAttendingRequired');
 });
 
 test('rejects missing accommodation selection', () => {

@@ -24,7 +24,7 @@ function readForm(form: HTMLFormElement): RsvpInput {
   return {
     leadName: String(fd.get('leadName') ?? ''),
     additionalGuests: guests,
-    day2Attending: (fd.get('day2Attending') as RsvpInput['day2Attending']) ?? '',
+    weddingAttending: (fd.get('weddingAttending') as RsvpInput['weddingAttending']) ?? '',
     dietary: fd.getAll('dietary').map(v => String(v)),
     dietaryOther: String(fd.get('dietaryOther') ?? ''),
     arrival: String(fd.get('arrival') ?? ''),

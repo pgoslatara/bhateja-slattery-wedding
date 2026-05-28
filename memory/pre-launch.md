@@ -12,6 +12,7 @@ Items marked ✅ have already been done.
 - [ ] Copy the resulting `https://script.google.com/macros/s/.../exec` URL — that's `PUBLIC_APPS_SCRIPT_URL`
 - [ ] After the first real submission lands in `submissions`, manually create the `latest` tab using the **two-cell formula** in `apps-script/README.md` (single-cell variant fails with an array-literal error)
 - [ ] If an older Sheet header already exists from a previous deployment (with `day1_attending` between columns C and E), delete column D from `submissions` and rerun `make script-push` — the column count and `whatsapp` index shifted when the Mehendi event was dropped
+- [ ] If the live `submissions` sheet still has a `day2_attending` header in column D, rename it manually to `wedding_attending`. `createSubmissionsSheet` only writes the header on first creation, so existing sheets keep the old label until edited by hand. Data values are unchanged.
 
 ## GitHub setup
 
@@ -139,7 +140,7 @@ After every Apps Script redeploy, post a test payload from the terminal:
 ```bash
 curl -L -X POST "$PUBLIC_APPS_SCRIPT_URL" \
   -H "Content-Type: text/plain" \
-  -d '{"leadName":"Smoke Test","whatsapp":"+919999999999","day1Attending":"yes","day2Attending":"no","accommodation":"sorted","requiresVisa":"no","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":"","origin":"https://pgoslatara.github.io"}'
+  -d '{"leadName":"Smoke Test","whatsapp":"+919999999999","weddingAttending":"no","accommodation":"sorted","requiresVisa":"no","additionalGuests":[],"dietary":[],"dietaryOther":"","arrival":"","departure":"","notes":"","honeypot":"","origin":"https://pgoslatara.github.io"}'
 ```
 
 Expected: `{"status":"ok"}` and a new row in `submissions`. Note `-L` to follow the 302 to `script.googleusercontent.com`.

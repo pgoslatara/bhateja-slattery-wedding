@@ -7,7 +7,7 @@ export type AdditionalGuest = {
 export type RsvpInput = {
   leadName: string;
   additionalGuests: AdditionalGuest[];
-  day2Attending: 'yes' | 'no' | '';
+  weddingAttending: 'yes' | 'no' | '';
   dietary: string[];
   dietaryOther: string;
   arrival: string;
@@ -23,7 +23,7 @@ export type ValidationErrorCode =
   | 'leadNameRequired'
   | 'whatsappRequired'
   | 'whatsappFormat'
-  | 'day2AttendingRequired'
+  | 'weddingAttendingRequired'
   | 'accommodationRequired'
   | 'requiresVisaRequired'
   | 'invalid_payload';
@@ -49,8 +49,8 @@ export function validateRsvp(raw: RsvpInput): Validated {
   if (!whatsapp) errors.whatsapp = 'whatsappRequired';
   else if (!/^\+\d{10,15}$/.test(whatsapp)) errors.whatsapp = 'whatsappFormat';
 
-  if (raw.day2Attending !== 'yes' && raw.day2Attending !== 'no') {
-    errors.day2Attending = 'day2AttendingRequired';
+  if (raw.weddingAttending !== 'yes' && raw.weddingAttending !== 'no') {
+    errors.weddingAttending = 'weddingAttendingRequired';
   }
   if (raw.accommodation !== 'sorted' && raw.accommodation !== 'recommended' && raw.accommodation !== 'help') {
     errors.accommodation = 'accommodationRequired';
@@ -74,7 +74,7 @@ export function validateRsvp(raw: RsvpInput): Validated {
     value: {
       leadName: cap(leadName),
       additionalGuests,
-      day2Attending: raw.day2Attending,
+      weddingAttending: raw.weddingAttending,
       dietary: (raw.dietary ?? []).map(trim).filter(Boolean),
       dietaryOther: cap(trim(raw.dietaryOther)),
       arrival: cap(trim(raw.arrival)),
