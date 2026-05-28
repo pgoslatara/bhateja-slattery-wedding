@@ -18,7 +18,7 @@ var SUBMISSIONS_TAB = 'submissions';
 // quota (~100 messages/day for consumer Google accounts); each recipient
 // counts separately against it.
 var NOTIFY_EMAILS = [
-  'padraic.slattery@xebia.com',
+  'padraicslattery@gmail.com',
   'b.apeksha.91@gmail.com'
 ];
 
