@@ -107,6 +107,27 @@ const weddingISO = site.weddingDate;
 </Layout>
 
 <script is:inline define:vars={{ messages: countdownMessages, weddingISO }}>
+  // Shuffle the photo strip on each page load. SSR emits the list twice for the
+  // seamless -50% scroll loop; we shuffle the first half, then rebuild the
+  // second half as clones in the same new order so the seam still lines up.
+  (function () {
+    var track = document.querySelector('.photo-track');
+    if (!track) return;
+    var slides = Array.prototype.slice.call(track.children);
+    var half = slides.length / 2;
+    if (!half || half !== Math.floor(half)) return;
+    var firstHalf = slides.slice(0, half);
+    for (var i = firstHalf.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = firstHalf[i];
+      firstHalf[i] = firstHalf[j];
+      firstHalf[j] = tmp;
+    }
+    track.replaceChildren();
+    firstHalf.forEach(function (el) { track.appendChild(el); });
+    firstHalf.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
+  })();
+
   (function () {
     var target = document.querySelector('[data-countdown]');
     if (!target) return;
