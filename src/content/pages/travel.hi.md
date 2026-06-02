@@ -1,6 +1,6 @@
 ---
 title: यात्रा
-enHash: 1dfb782119bc76afe3d60f87692650c8eb520feca8dafffdfb2be8d24e8db8d7
+enHash: 5992d48272dcf618d4016712dc79b02c27febea7a747af2731002e240b8e6b4d
 ---
 
 शादी गुड़गांव में, दिल्ली के बिल्कुल बाहर हो रही है। निकटतम बड़ा हवाई अड्डा **इंदिरा गांधी अंतर्राष्ट्रीय हवाई अड्डा (DEL)** है, जो गुड़गांव के अधिकांश होटलों से लगभग 15–25 किमी दूर है।
@@ -30,3 +30,24 @@ enHash: 1dfb782119bc76afe3d60f87692650c8eb520feca8dafffdfb2be8d24e8db8d7
 अगर आपके पास मोबाइल डेटा है (eSIM या लोकल सिम), तो **Uber** और **Ola** भी अच्छे से चलते हैं। पिकअप ज़ोन टर्मिनल 3 अराइवल के सामने **मल्टी-लेवल कार पार्क** में है; "App-Based Cabs" के साइन फ़ॉलो करें (3–5 मिनट पैदल)। समय के हिसाब से गुड़गांव तक ₹500–₹1,500 (लगभग €4–14) की उम्मीद रखें।
 
 टर्मिनल के बाहर टैक्सी या "Uber में मदद" का प्रस्ताव देने वाले **टाउट्स को अनदेखा करें**। सिर्फ़ आधिकारिक काउंटर के पीछे खड़े स्टाफ़ से ही बात करें।
+
+## होटल
+
+गुड़गांव कोई बहुत बड़ा शहर नहीं है, पर यहाँ का ट्रैफिक आपके धैर्य की परीक्षा ले सकता है। अगर आप सिर्फ़ शादी के लिए शहर में हैं, तो वेन्यू के पास ही रुकने की कोशिश करें। मैंने ये तीन होटल चुने हैं, लेकिन ऐसे और भी कई हैं (मुझे ख़ुद ट्राइडेंट और ले मेरिडियन बहुत पसंद हैं, पर वे वेन्यू से काफ़ी दूर हैं)।
+
+* [लेमन ट्री होटल](https://www.google.com/maps/place/Lemon+Tree+Hotel,+Sohna+Road,+Sector+68,+Gurgaon/@28.3705677,77.0547909,17z/data=!4m11!3m10!1s0x390d23077dde346f:0xbaaa6e80e1bfdf59!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.370563!4d77.0573712!16s%2Fg%2F11gfkgb_lt?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
+* [हिल्टन होटल बानी स्क्वायर](https://www.google.com/maps/place/Grand+Hyatt+Gurgaon/@28.4391444,77.0188787,12z/data=!4m11!3m10!1s0x390d21ff296b94b3:0x128c2a084d47aa02!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.4145664!4d77.1025965!16s%2Fg%2F11l2n4_lx9?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
+* [ग्रैंड हयात](https://www.google.com/maps/place/Grand+Hyatt+Gurgaon/@28.4391444,77.0188787,12z/data=!4m11!3m10!1s0x390d21ff296b94b3:0x128c2a084d47aa02!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.4145664!4d77.1025965!16s%2Fg%2F11l2n4_lx9?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
+
+## रेस्तरां और अन्य जगहें
+
+शादी का वेन्यू, द बिग ट्री विला, मेरे बचपन के दोस्त राहुल अरोड़ा का है (उनका बहुत-बहुत शुक्रिया)। गुड़गांव में उनके रेस्तरां भी हैं, तो अगर मन हो, तो [The Big Tree Cafe on Golf Course](https://www.facebook.com/bigtreecafegurgaon/) ज़रूर हो आइए।
+
+गुड़गांव में मेरी पसंदीदा जगहों में से एक है [IFC](https://maps.app.goo.gl/xtq3ZNdZuKn44ihBA)। यहाँ खाने-पीने की जगहें, नाइटलाइफ़, कैफ़े, सब कुछ है। दरियागंज का बटर चिकन ज़रूर ट्राई करें, बहुत मशहूर है। यूरोप शिफ़्ट होने से पहले (और स्टारबक्स को बायकॉट करने से पहले) मैं यहाँ के स्टारबक्स से ही काम किया करती थी। यहाँ का स्टाफ़ अब भी बहुत प्यारा है और मुझे पहचानता है। यहीं [Levon Spa](https://www.instagram.com/levospalon/?hl=en) भी है, जो आराम से मसाज या मैनीक्योर करवाना चाहें उनके लिए।
+
+* [Espresso Anyday](https://www.instagram.com/espressosanyday/?hl=en) बहुत बढ़िया है।
+* मोमो के लिए [Yeti Himalayan Kitchen](https://yetithehimalayankitchen.com/crosspoint-mall-yeti/)।
+* गैलेरिया मार्केट में [Bahrisons Bookshop](https://www.instagram.com/bahrisons_booksellers/?hl=en)।
+* साउथ इंडियन खाने के लिए [Naivedyam](https://www.naivedyamrestaurants.in/) और [Kanjivaram](https://www.instagram.com/kanjivaraam/?hl=en)।
+
+शॉपिंग के शौक़ीनों के लिए: [Ambience](https://ambiencegroup.in/mall/ambience-mall-gurugram) जाइए और हर तरह, हर रेंज, हर बजट के ब्रांड्स के बीच घंटों बिताइए। UNIQLO यहीं है, हमें UNIQLO बहुत पसंद है, और आपको भी पसंद आएगा।

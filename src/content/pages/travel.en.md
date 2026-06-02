@@ -29,3 +29,24 @@ Delhi airport is busy and arrivals can feel overwhelming after a long flight. Th
 If you have mobile data set up (eSIM or local SIM), **Uber** and **Ola** also work well. The pickup zone is in the **Multi-Level Car Park** opposite Terminal 3 arrivals; follow the "App-Based Cabs" signs (a 3–5 minute walk). Expect ₹500–₹1,500 (~€4–14) to Gurgaon depending on time of day.
 
 **Ignore the touts** who approach you outside the terminal offering taxis or "help with your Uber". Only speak to staff standing behind the official counters.
+
+## Hotels
+
+Gurgaon is not a big city, but the traffic can test your patience. If you’re in the city just for the wedding, try to stay close to the venue. I picked out these three hotels, but there are many, many more (I personally love Trident and Le Meridien, but they’re far from the venue). 
+
+* [Lemontree Hotel](https://www.google.com/maps/place/Lemon+Tree+Hotel,+Sohna+Road,+Sector+68,+Gurgaon/@28.3705677,77.0547909,17z/data=!4m11!3m10!1s0x390d23077dde346f:0xbaaa6e80e1bfdf59!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.370563!4d77.0573712!16s%2Fg%2F11gfkgb_lt?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
+* [Hilton Hotel Baani Square](https://www.google.com/maps/place/Grand+Hyatt+Gurgaon/@28.4391444,77.0188787,12z/data=!4m11!3m10!1s0x390d21ff296b94b3:0x128c2a084d47aa02!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.4145664!4d77.1025965!16s%2Fg%2F11l2n4_lx9?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
+* [Grand Hyatt](https://www.google.com/maps/place/Grand+Hyatt+Gurgaon/@28.4391444,77.0188787,12z/data=!4m11!3m10!1s0x390d21ff296b94b3:0x128c2a084d47aa02!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.4145664!4d77.1025965!16s%2Fg%2F11l2n4_lx9?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
+
+## Restaurants & More
+
+The Big Tree Villa, the wedding venue, is owned by my childhood friend, Rahul Arora (big shout out to him). He also owns restaurants in Gurgaon, so I recommend dropping by at [The Big Tree Cafe on Golf Course](https://www.facebook.com/bigtreecafegurgaon/) if you want. 
+
+One of my favorite places to hangout in Gurgaon is [IFC](https://maps.app.goo.gl/xtq3ZNdZuKn44ihBA). It has food, nightlife, cafes. Try butter chicken at Daryaganj is legendary. I used to work out of a Starbucks here before I moved to Europe (and before we blacklisted Starbucks). The staff here are still very sweet and remember me. There’s [Levon Spa](https://www.instagram.com/levospalon/?hl=en) here, too, for anyone who wants a relaxing massage or a manicure. 
+
+* [Espresso Anyday](https://www.instagram.com/espressosanyday/?hl=en) is wonderful.
+* [Yeti Himalayan Kitchen](https://yetithehimalayankitchen.com/crosspoint-mall-yeti/) for momos.
+* [Bahrisons Bookshop](https://www.instagram.com/bahrisons_booksellers/?hl=en) at Galleria market.
+* [Naivedyam](https://www.naivedyamrestaurants.in/) and [Kanjivaram](https://www.instagram.com/kanjivaraam/?hl=en) for South Indian food.
+
+Shopping fans: go to [Ambience](https://ambiencegroup.in/mall/ambience-mall-gurugram) and spend hours browsing through brands of all type, kinds, and pockets. UNIQLO is here, we love UNIQLO and so do you.
