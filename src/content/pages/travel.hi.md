@@ -36,7 +36,7 @@ enHash: b22559afd2bef8454e6360329f6095495155626bee6b6b4e95a5ed484c098a4e
 गुड़गांव कोई बहुत बड़ा शहर नहीं है, पर यहाँ का ट्रैफिक आपके धैर्य की परीक्षा ले सकता है। अगर आप सिर्फ़ शादी के लिए शहर में हैं, तो वेन्यू के पास ही रुकने की कोशिश करें। मैंने ये तीन होटल चुने हैं, लेकिन ऐसे और भी कई हैं (मुझे ख़ुद ट्राइडेंट और ले मेरिडियन बहुत पसंद हैं, पर वे वेन्यू से काफ़ी दूर हैं)।
 
 * [लेमन ट्री होटल](https://www.google.com/maps/place/Lemon+Tree+Hotel,+Sohna+Road,+Sector+68,+Gurgaon/@28.3705677,77.0547909,17z/data=!4m11!3m10!1s0x390d23077dde346f:0xbaaa6e80e1bfdf59!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.370563!4d77.0573712!16s%2Fg%2F11gfkgb_lt?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
-* [हिल्टन होटल बानी स्क्वायर](https://www.google.com/maps/place/Grand+Hyatt+Gurgaon/@28.4391444,77.0188787,12z/data=!4m11!3m10!1s0x390d21ff296b94b3:0x128c2a084d47aa02!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.4145664!4d77.1025965!16s%2Fg%2F11l2n4_lx9?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
+* [हिल्टन होटल बानी स्क्वायर](https://maps.app.goo.gl/BctPybeiTTMwQGET9)
 * [ग्रैंड हयात](https://www.google.com/maps/place/Grand+Hyatt+Gurgaon/@28.4391444,77.0188787,12z/data=!4m11!3m10!1s0x390d21ff296b94b3:0x128c2a084d47aa02!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.4145664!4d77.1025965!16s%2Fg%2F11l2n4_lx9?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
 
 ## रेस्तरां और अन्य जगहें
