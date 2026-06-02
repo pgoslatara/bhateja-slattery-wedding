@@ -42,7 +42,7 @@ Gurgaon is not a big city, but the traffic can test your patience. If you’re i
 
 The Big Tree Villa, the wedding venue, is owned by my childhood friend, Rahul Arora (big shout out to him). He also owns restaurants in Gurgaon, so I recommend dropping by at [The Big Tree Cafe on Golf Course](https://www.facebook.com/bigtreecafegurgaon/) if you want. 
 
-One of my favorite places to hangout in Gurgaon is [IFC](https://maps.app.goo.gl/xtq3ZNdZuKn44ihBA). It has food, nightlife, cafes. Try butter chicken at Daryaganj is legendary. I used to work out of a Starbucks here before I moved to Europe (and before we blacklisted Starbucks). The staff here are still very sweet and remember me. There’s [Levon Spa](https://www.instagram.com/levospalon/?hl=en) here, too, for anyone who wants a relaxing massage or a manicure. 
+One of my favorite places to hangout in Gurgaon is [IFC](https://maps.app.goo.gl/xtq3ZNdZuKn44ihBA). It has food, nightlife, cafes. Try butter chicken at Daryaganj is legendary. I used to work out of a Starbucks here before I moved to Europe (and before we blacklisted Starbucks). The staff here are still very sweet and remember me. There’s [Levo Spa](https://www.instagram.com/levospalon/?hl=en) here, too, for anyone who wants a relaxing massage or a manicure. 
 
 * [Espresso Anyday](https://www.instagram.com/espressosanyday/?hl=en) is wonderful.
 * [Yeti Himalayan Kitchen](https://yetithehimalayankitchen.com/crosspoint-mall-yeti/) for momos.
