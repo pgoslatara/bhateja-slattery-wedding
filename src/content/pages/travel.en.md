@@ -35,7 +35,7 @@ If you have mobile data set up (eSIM or local SIM), **Uber** and **Ola** also wo
 Gurgaon is not a big city, but the traffic can test your patience. If you’re in the city just for the wedding, try to stay close to the venue. I picked out these three hotels, but there are many, many more (I personally love Trident and Le Meridien, but they’re far from the venue). 
 
 * [Lemontree Hotel](https://www.google.com/maps/place/Lemon+Tree+Hotel,+Sohna+Road,+Sector+68,+Gurgaon/@28.3705677,77.0547909,17z/data=!4m11!3m10!1s0x390d23077dde346f:0xbaaa6e80e1bfdf59!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.370563!4d77.0573712!16s%2Fg%2F11gfkgb_lt?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
-* [Hilton Hotel Baani Square](https://www.google.com/maps/place/Grand+Hyatt+Gurgaon/@28.4391444,77.0188787,12z/data=!4m11!3m10!1s0x390d21ff296b94b3:0x128c2a084d47aa02!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.4145664!4d77.1025965!16s%2Fg%2F11l2n4_lx9?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
+* [Hilton Hotel Baani Square](https://maps.app.goo.gl/BctPybeiTTMwQGET9)
 * [Grand Hyatt](https://www.google.com/maps/place/Grand+Hyatt+Gurgaon/@28.4391444,77.0188787,12z/data=!4m11!3m10!1s0x390d21ff296b94b3:0x128c2a084d47aa02!5m4!1s2026-08-14!2i12!4m1!1i2!8m2!3d28.4145664!4d77.1025965!16s%2Fg%2F11l2n4_lx9?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D)
 
 ## Restaurants & More
