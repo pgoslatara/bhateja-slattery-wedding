@@ -9,7 +9,8 @@ export const strings = {
       rsvp: 'RSVP',
       donations: 'Donations',
       faq: 'FAQ',
-      photos: 'Photos'
+      photos: 'Photos',
+      thanks: 'Thanks'
     },
     a11y: {
       skipToMain: 'Skip to main content',
@@ -42,6 +43,22 @@ export const strings = {
       usdHint: 'Scan to open a Wise transfer link.',
       inrLabel: 'INR (Indian Rupee)',
       inrHint: 'Scan with PhonePe, GPay, Paytm or any UPI app.'
+    },
+    thanks: {
+      visitWebsite: 'Visit website',
+      instagram: 'Instagram',
+      categories: {
+        photography: 'Photography',
+        videography: 'Videography',
+        decor: 'Decor',
+        florals: 'Florals',
+        catering: 'Catering',
+        dj: 'DJ',
+        mehendi: 'Mehendi',
+        makeup: 'Makeup',
+        planning: 'Planning',
+        other: 'Other'
+      }
     },
     rsvp: {
       formTitle: 'RSVP',
@@ -140,7 +157,8 @@ export const strings = {
       rsvp: 'जवाब दें',
       donations: 'दान',
       faq: 'सामान्य प्रश्न',
-      photos: 'तस्वीरें'
+      photos: 'तस्वीरें',
+      thanks: 'धन्यवाद'
     },
     a11y: {
       skipToMain: 'मुख्य सामग्री पर जाएँ',
@@ -165,6 +183,22 @@ export const strings = {
       usdHint: 'Wise ट्रांसफ़र लिंक खोलने के लिए स्कैन करें।',
       inrLabel: 'INR (भारतीय रुपया)',
       inrHint: 'PhonePe, GPay, Paytm या किसी भी UPI ऐप से स्कैन करें।'
+    },
+    thanks: {
+      visitWebsite: 'वेबसाइट देखें',
+      instagram: 'इंस्टाग्राम',
+      categories: {
+        photography: 'फ़ोटोग्राफी',
+        videography: 'वीडियोग्राफी',
+        decor: 'सजावट',
+        florals: 'फूलों की सजावट',
+        catering: 'कैटरिंग',
+        dj: 'डीजे',
+        mehendi: 'मेहंदी',
+        makeup: 'मेकअप',
+        planning: 'योजना',
+        other: 'अन्य'
+      }
     },
     rsvp: {
       formTitle: 'RSVP: कृपया जवाब दें',
