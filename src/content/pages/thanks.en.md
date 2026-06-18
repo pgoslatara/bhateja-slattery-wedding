@@ -5,7 +5,7 @@ vendors:
     name: Chom Chom Pantry
     category: Cookies
     # website: https://example.com
-    instagram: https://www.instagram.com/chomchompantry/
+    instagram: https://www.instagram.com/chomchompantry
     note: See those cookies in your gift, they're from here.
   - slug: shaadiboys
     name: Shaadiboys-Wedding photography & Films

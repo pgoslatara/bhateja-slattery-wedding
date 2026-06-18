@@ -1,12 +1,12 @@
 ---
 title: धन्यवाद
-enHash: a5b2efea753a5e9d7e0013b1da4191516b9fbdb26e9ac5efc8cae7ce4ad9f903
+enHash: 2f5b0ed64f2aff78a7db897cb7e4f07554332f6d6b80004ff179be97199a7f99
 vendors:
   - slug: chom-chom-pantry
     name: Chom Chom Pantry
     category: कुकीज़
     # website: https://example.com
-    instagram: https://www.instagram.com/chomchompantry/
+    instagram: https://www.instagram.com/chomchompantry
     note: आपके उपहार में जो कुकीज़ हैं, वे यहीं से हैं।
   - slug: shaadiboys
     name: Shaadiboys-Wedding photography & Films
