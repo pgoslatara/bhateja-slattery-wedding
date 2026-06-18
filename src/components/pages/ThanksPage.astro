@@ -1,0 +1,118 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../Layout.astro';
+import { t, type Locale } from '../../i18n/strings';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const s = t(lang);
+
+// Astro 5 i18n routing strips locale dots from slugs — use getCollection + filter.
+const pages = await getCollection('pages');
+const entry = pages.find(p => p.id === `thanks.${lang}.md`);
+if (!entry) throw new Error(`Missing pages/thanks.${lang}.md`);
+const { Content } = await entry.render();
+
+const vendors = entry.data.vendors ?? [];
+---
+<Layout lang={lang} title={entry.data.title}>
+  <h1>{entry.data.title}</h1>
+  <article class="card intro deep-link-target" id="thanks-intro">
+    <a
+      class="anchor-link anchor-link-floating"
+      href="#thanks-intro"
+      aria-label={s.a11y.copyLink}
+      data-anchor-link
+    >#</a>
+    <Content />
+  </article>
+
+  {vendors.length > 0 && (
+    <ul class="vendor-grid" role="list">
+      {vendors.map(v => (
+        <li class="card vendor-card deep-link-target" id={`vendor-${v.slug}`}>
+          <a
+            class="anchor-link anchor-link-floating"
+            href={`#vendor-${v.slug}`}
+            aria-label={s.a11y.copyLink}
+            data-anchor-link
+          >#</a>
+          <p class="vendor-category">{s.thanks.categories[v.category]}</p>
+          <h2 class="vendor-name">{v.name}</h2>
+          <p class="vendor-note">{v.note}</p>
+          {(v.website || v.instagram) && (
+            <p class="vendor-links">
+              {v.website && (
+                <a
+                  href={v.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${v.name}, ${s.thanks.visitWebsite}`}
+                >{s.thanks.visitWebsite} ↗</a>
+              )}
+              {v.instagram && (
+                <a
+                  href={v.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${v.name}, ${s.thanks.instagram}`}
+                >{s.thanks.instagram} ↗</a>
+              )}
+            </p>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
+</Layout>
+
+<style>
+  .vendor-grid {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .vendor-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .vendor-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .vendor-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .vendor-category {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+  .vendor-name {
+    font-family: var(--font-display);
+    color: var(--color-primary);
+    margin: 0;
+    font-size: 1.4rem;
+    line-height: 1.2;
+  }
+  .vendor-note {
+    margin: 0;
+    color: var(--color-text);
+  }
+  .vendor-links {
+    margin: auto 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    padding-top: 0.25rem;
+  }
+  .vendor-links a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+</style>
