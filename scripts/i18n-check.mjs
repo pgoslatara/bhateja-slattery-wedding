@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
+import yaml from 'js-yaml';
 
 const CONTENT_ROOT_DEFAULT = new URL('../src/content', import.meta.url).pathname;
 
@@ -75,6 +76,54 @@ export function sha256(text) {
   return createHash('sha256').update(text).digest('hex');
 }
 
+const INVARIANT_VENDOR_FIELDS = ['slug', 'name', 'category', 'website', 'instagram'];
+
+// Parse the full YAML frontmatter (structured). Returns {} when no frontmatter
+// or when YAML parsing fails. Used only for collections that may contain
+// non-scalar frontmatter (currently: the `pages` collection's `vendors` array).
+function parseFrontmatterStructured(text) {
+  const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
+  if (!m) return {};
+  try {
+    const parsed = yaml.load(m[1]);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function checkVendorsParity(enFm, hiFm, hiFile, errors) {
+  const enList = Array.isArray(enFm.vendors) ? enFm.vendors : null;
+  const hiList = Array.isArray(hiFm.vendors) ? hiFm.vendors : null;
+  if (!enList && !hiList) return;
+  if (!enList || !hiList || enList.length !== hiList.length) {
+    errors.push({
+      code: 'invariant_mismatch',
+      path: hiFile,
+      field: 'vendors.length',
+      enValue: enList ? enList.length : null,
+      hiValue: hiList ? hiList.length : null
+    });
+    return;
+  }
+  for (let i = 0; i < enList.length; i++) {
+    for (const field of INVARIANT_VENDOR_FIELDS) {
+      const a = enList[i]?.[field];
+      const b = hiList[i]?.[field];
+      if (a === b) continue;
+      // Treat undefined === undefined as equal; treat undefined vs defined as a mismatch.
+      if (a === undefined && b === undefined) continue;
+      errors.push({
+        code: 'invariant_mismatch',
+        path: hiFile,
+        field: `vendors[${i}].${field}`,
+        enValue: a,
+        hiValue: b
+      });
+    }
+  }
+}
+
 export function runCheck({ contentRoot = CONTENT_ROOT_DEFAULT } = {}) {
   const errors = [];
   for (const file of localizedFiles(contentRoot)) {
@@ -111,6 +160,13 @@ export function runCheck({ contentRoot = CONTENT_ROOT_DEFAULT } = {}) {
           errors.push({ code: 'invariant_mismatch', path: hiFile, field, enValue: enFm[field], hiValue: hiFm[field] });
         }
       }
+    }
+
+    // Vendor-array parity (pages collection only)
+    if (collection === 'pages') {
+      const enFmFull = parseFrontmatterStructured(enText);
+      const hiFmFull = parseFrontmatterStructured(hiText);
+      checkVendorsParity(enFmFull, hiFmFull, hiFile, errors);
     }
   }
   return errors;

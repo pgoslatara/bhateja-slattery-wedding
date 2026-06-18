@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeContentDir } from './helpers/tmpdir.mjs';
-import { runCheck } from '../scripts/i18n-check.mjs';
+import { runCheck, sha256 } from '../scripts/i18n-check.mjs';
 
 test('reports missing Hindi pair', () => {
   const dir = makeContentDir();
@@ -88,6 +88,114 @@ test('clean tree with valid hash returns no errors', async () => {
     dir.write('schedule/01-event.hi.md', `---\nday: 1\norder: 1\nname: B\nstartTime: TBD\nendTime: TBD\nenHash: ${enHash}\n---\nbody hindi\n`);
     const errors = runCheck({ contentRoot: dir.root });
     assert.equal(errors.length, 0);
+  } finally {
+    dir.cleanup();
+  }
+});
+
+test('vendors array parity: passes when only note differs', () => {
+  const dir = makeContentDir();
+  try {
+    const en = `---
+title: Thanks
+vendors:
+  - slug: studio-x
+    name: Studio X
+    category: photography
+    website: https://studiox.example
+    note: Captured every quiet moment.
+---
+Intro paragraph.
+`;
+    const enHash = sha256(en);
+    const hi = `---
+title: धन्यवाद
+enHash: ${enHash}
+vendors:
+  - slug: studio-x
+    name: Studio X
+    category: photography
+    website: https://studiox.example
+    note: हर शांत पल को कैद किया।
+---
+परिचय।
+`;
+    dir.write('pages/thanks.en.md', en);
+    dir.write('pages/thanks.hi.md', hi);
+    const errors = runCheck({ contentRoot: dir.root });
+    assert.equal(errors.length, 0, JSON.stringify(errors));
+  } finally {
+    dir.cleanup();
+  }
+});
+
+test('vendors array parity: reports mismatched slug', () => {
+  const dir = makeContentDir();
+  try {
+    const en = `---
+title: Thanks
+vendors:
+  - slug: studio-x
+    name: Studio X
+    category: photography
+    note: a.
+---
+i.
+`;
+    const enHash = sha256(en);
+    const hi = `---
+title: धन्यवाद
+enHash: ${enHash}
+vendors:
+  - slug: studio-y
+    name: Studio X
+    category: photography
+    note: b.
+---
+i.
+`;
+    dir.write('pages/thanks.en.md', en);
+    dir.write('pages/thanks.hi.md', hi);
+    const errors = runCheck({ contentRoot: dir.root });
+    assert.ok(errors.some(e => e.code === 'invariant_mismatch' && e.field === 'vendors[0].slug'));
+  } finally {
+    dir.cleanup();
+  }
+});
+
+test('vendors array parity: reports length mismatch', () => {
+  const dir = makeContentDir();
+  try {
+    const en = `---
+title: Thanks
+vendors:
+  - slug: a
+    name: A
+    category: photography
+    note: a.
+  - slug: b
+    name: B
+    category: decor
+    note: b.
+---
+i.
+`;
+    const enHash = sha256(en);
+    const hi = `---
+title: धन्यवाद
+enHash: ${enHash}
+vendors:
+  - slug: a
+    name: A
+    category: photography
+    note: क.
+---
+i.
+`;
+    dir.write('pages/thanks.en.md', en);
+    dir.write('pages/thanks.hi.md', hi);
+    const errors = runCheck({ contentRoot: dir.root });
+    assert.ok(errors.some(e => e.code === 'invariant_mismatch' && e.field === 'vendors.length'));
   } finally {
     dir.cleanup();
   }
