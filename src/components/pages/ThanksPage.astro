@@ -47,7 +47,7 @@ const vendors = entry.data.vendors ?? [];
                   href={v.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${v.name}, ${s.thanks.visitWebsite}`}
+                  aria-label={`${v.name}, ${s.thanks.visitWebsite} (${s.a11y.opensInNewTab})`}
                 >{s.thanks.visitWebsite} ↗</a>
               )}
               {v.instagram && (
@@ -55,7 +55,7 @@ const vendors = entry.data.vendors ?? [];
                   href={v.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${v.name}, ${s.thanks.instagram}`}
+                  aria-label={`${v.name}, ${s.thanks.instagram} (${s.a11y.opensInNewTab})`}
                 >{s.thanks.instagram} ↗</a>
               )}
             </p>

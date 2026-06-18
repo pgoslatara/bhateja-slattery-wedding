@@ -200,3 +200,32 @@ i.
     dir.cleanup();
   }
 });
+
+test('vendors array parity: reports asymmetry when one side omits the array', () => {
+  const dir = makeContentDir();
+  try {
+    const en = `---
+title: Thanks
+vendors:
+  - slug: a
+    name: A
+    category: photography
+    note: a.
+---
+i.
+`;
+    const enHash = sha256(en);
+    const hi = `---
+title: धन्यवाद
+enHash: ${enHash}
+---
+i.
+`;
+    dir.write('pages/thanks.en.md', en);
+    dir.write('pages/thanks.hi.md', hi);
+    const errors = runCheck({ contentRoot: dir.root });
+    assert.ok(errors.some(e => e.code === 'invariant_mismatch' && e.field === 'vendors.length'));
+  } finally {
+    dir.cleanup();
+  }
+});

@@ -15,7 +15,8 @@ export const strings = {
     a11y: {
       skipToMain: 'Skip to main content',
       menu: 'Menu',
-      copyLink: 'Copy link to this section'
+      copyLink: 'Copy link to this section',
+      opensInNewTab: 'opens in a new tab'
     },
     footer: {
       contactPrefix: 'Questions, complaints, or marriage advice? WhatsApp us',
@@ -163,7 +164,8 @@ export const strings = {
     a11y: {
       skipToMain: 'मुख्य सामग्री पर जाएँ',
       menu: 'मेनू',
-      copyLink: 'इस सेक्शन का लिंक कॉपी करें'
+      copyLink: 'इस सेक्शन का लिंक कॉपी करें',
+      opensInNewTab: 'नए टैब में खुलता है'
     },
     footer: {
       contactPrefix: 'कोई सवाल, शिकायत, या शादी की सलाह? व्हाट्सऐप करें:',
