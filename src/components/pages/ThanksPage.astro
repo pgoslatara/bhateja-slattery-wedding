@@ -37,7 +37,7 @@ const vendors = entry.data.vendors ?? [];
             aria-label={s.a11y.copyLink}
             data-anchor-link
           >#</a>
-          <p class="vendor-category">{s.thanks.categories[v.category]}</p>
+          <p class="vendor-category">{v.category}</p>
           <h2 class="vendor-name">{v.name}</h2>
           <p class="vendor-note">{v.note}</p>
           {(v.website || v.instagram) && (

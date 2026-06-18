@@ -76,7 +76,7 @@ export function sha256(text) {
   return createHash('sha256').update(text).digest('hex');
 }
 
-const INVARIANT_VENDOR_FIELDS = ['slug', 'name', 'category', 'website', 'instagram'];
+const INVARIANT_VENDOR_FIELDS = ['slug', 'name', 'website', 'instagram'];
 
 // Parse the full YAML frontmatter (structured). Returns {} when no frontmatter
 // or when YAML parsing fails. Used only for collections that may contain

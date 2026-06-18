@@ -47,19 +47,7 @@ export const strings = {
     },
     thanks: {
       visitWebsite: 'Visit website',
-      instagram: 'Instagram',
-      categories: {
-        photography: 'Photography',
-        videography: 'Videography',
-        decor: 'Decor',
-        florals: 'Florals',
-        catering: 'Catering',
-        dj: 'DJ',
-        mehendi: 'Mehendi',
-        makeup: 'Makeup',
-        planning: 'Planning',
-        other: 'Other'
-      }
+      instagram: 'Instagram'
     },
     rsvp: {
       formTitle: 'RSVP',
@@ -188,19 +176,7 @@ export const strings = {
     },
     thanks: {
       visitWebsite: 'वेबसाइट देखें',
-      instagram: 'इंस्टाग्राम',
-      categories: {
-        photography: 'फ़ोटोग्राफी',
-        videography: 'वीडियोग्राफी',
-        decor: 'सजावट',
-        florals: 'फूलों की सजावट',
-        catering: 'कैटरिंग',
-        dj: 'डीजे',
-        mehendi: 'मेहंदी',
-        makeup: 'मेकअप',
-        planning: 'योजना',
-        other: 'अन्य'
-      }
+      instagram: 'इंस्टाग्राम'
     },
     rsvp: {
       formTitle: 'RSVP: कृपया जवाब दें',

@@ -1,14 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 
-const vendorCategory = z.enum([
-  'photography', 'videography', 'decor', 'florals', 'catering',
-  'dj', 'mehendi', 'makeup', 'planning', 'other'
-]);
-
 const vendor = z.object({
   slug: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   name: z.string().min(1),
-  category: vendorCategory,
+  category: z.string().min(1),
   website: z.string().url().optional(),
   instagram: z.string().url().optional(),
   note: z.string().min(1)
