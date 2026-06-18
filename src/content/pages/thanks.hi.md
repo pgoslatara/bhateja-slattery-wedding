@@ -1,6 +1,6 @@
 ---
 title: धन्यवाद
-enHash: 72856409f8f5c855c894c882ed745acddf2f690c90eb01b42578660d08ad7b4e
+enHash: a5b2efea753a5e9d7e0013b1da4191516b9fbdb26e9ac5efc8cae7ce4ad9f903
 vendors:
   - slug: chom-chom-pantry
     name: Chom Chom Pantry
@@ -32,6 +32,18 @@ vendors:
     # website: https://example.com
     instagram: https://www.instagram.com/example
     note: नोट।
+  - slug: claude
+    name: Claude Code
+    category: वेबसाइट डिज़ाइन
+    website: https://claude.ai/
+    # instagram: https://www.instagram.com/example
+    note: यह वेबसाइट Claude के बिना संभव नहीं होती।
+  - slug: google-drive
+    name: Google Drive
+    category: आयोजन
+    website: https://drive.google.com
+    # instagram: https://www.instagram.com/example
+    note: यह शादी बहुत सारी Google Sheets के बिना संभव नहीं होती।
 ---
 
 ये वे लोग हैं जिन्होंने हमारे दिन को संभव बनाया। हम इन्हें दिल से सुझाते हैं।

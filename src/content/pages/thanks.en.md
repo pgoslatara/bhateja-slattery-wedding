@@ -31,6 +31,18 @@ vendors:
     # website: https://example.com
     instagram: https://www.instagram.com/example
     note: Note.
+  - slug: claude
+    name: Claude Code
+    category: Website design
+    website: https://claude.ai/
+    # instagram: https://www.instagram.com/example
+    note: This website would not be possible without Claude.
+  - slug: google-drive
+    name: Google Drive
+    category: Organisation
+    website: https://drive.google.com
+    # instagram: https://www.instagram.com/example
+    note: This wedding would not be possible without many many Google Sheets.
 ---
 
 These are the people who made our day happen. We can't recommend them enough.
