@@ -1,6 +1,6 @@
 ---
 title: धन्यवाद
-enHash: 2f5b0ed64f2aff78a7db897cb7e4f07554332f6d6b80004ff179be97199a7f99
+enHash: e994ed045bdf90c1ca68345abb55107cff975510db7c235432ae8e7922000bdf
 vendors:
   - slug: chom-chom-pantry
     name: Chom Chom Pantry
@@ -14,12 +14,12 @@ vendors:
     # website: https://example.com
     instagram: https://www.instagram.com/shaadiboys
     note: हमारे बड़े दिन की फ़ोटोग्राफी और सिनेमैटोग्राफी। मुस्कुराना मत भूलिए!
-  - slug: placeholder
-    name: Placeholder
-    category: बाल और मेकअप
+  - slug: decor
+    name: Décor
+    category: फूल और व्यवस्था
     # website: https://example.com
-    instagram: https://www.instagram.com/example
-    note: नोट।
+    instagram: https://www.instagram.com/nuviflowersofficial
+    note: फूल ताज़े हैं, क्या आप उनकी खुशबू महसूस कर सकते हैं?!
   - slug: placeholder2
     name: Placeholder
     category: सजावट

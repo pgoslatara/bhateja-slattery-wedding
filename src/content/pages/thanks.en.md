@@ -13,12 +13,12 @@ vendors:
     # website: https://example.com
     instagram: https://www.instagram.com/shaadiboys
     note: Photography and cinematography for our big day. Make sure you smile!
-  - slug: placeholder
-    name: Placeholder
-    category: Hair & Makeup
+  - slug: decor
+    name: Décor
+    category: Flowers and arrangements
     # website: https://example.com
-    instagram: https://www.instagram.com/example
-    note: Note.
+    instagram: https://www.instagram.com/nuviflowersofficial
+    note: The flowers are fresh, can you smell them?!
   - slug: placeholder2
     name: Placeholder
     category: Decor

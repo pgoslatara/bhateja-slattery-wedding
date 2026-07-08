@@ -40,7 +40,7 @@ Non-obvious mechanics learnt while building this codebase. Read first; refer bac
 
 - `scripts/i18n-check.mjs` enforces three rules:
   1. **File pairing**: every `*.en.md` requires a matching `*.hi.md` and vice versa.
-  2. **Invariant frontmatter**: language-invariant fields (`day`, `order`, `startTime`, `endTime`, `location` for schedule entries; `order` for FAQ) must match between paired files.
+  2. **Invariant frontmatter**: language-invariant fields (`day`, `order`, `startTime`, `endTime`, `location` for schedule entries; `order` for FAQ; `name` for thanks-page `vendors[]`) must match between paired files. So a vendor's `name` is **not** translated in `thanks.hi.md` — only `category` and `note` are. Copy `name` verbatim (including accents, e.g. `Décor`); `category`/`note` get Hindi.
   3. **Source-hash freshness**: each `*.hi.md` carries an `enHash: <sha256>` field that must match the SHA256 of the matching `*.en.md`.
 
 - After editing English content, run `make rehash NAME=<basename>` to bump the hash on the matching Hindi file.
