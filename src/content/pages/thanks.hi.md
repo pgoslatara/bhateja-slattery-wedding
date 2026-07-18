@@ -1,6 +1,6 @@
 ---
 title: धन्यवाद
-enHash: e994ed045bdf90c1ca68345abb55107cff975510db7c235432ae8e7922000bdf
+enHash: 0d4974a87242bcb33f85c11aaa5ec0cd88d8b5fe22402e1f9fac8668395bc5f6
 vendors:
   - slug: chom-chom-pantry
     name: Chom Chom Pantry
@@ -26,12 +26,12 @@ vendors:
     # website: https://example.com
     instagram: https://www.instagram.com/example
     note: नोट।
-  - slug: placeholder3
-    name: Placeholder
-    category: डीजे
-    # website: https://example.com
-    instagram: https://www.instagram.com/example
-    note: नोट।
+  - slug: apeksha
+    name: Apeksha
+    category: सब कुछ
+    website: https://viadelhi.in
+    # instagram: https://www.instagram.com/example
+    note: सब कुछ आयोजित करने के लिए। क्योंकि Pádraic ने कुछ नहीं किया!
   - slug: claude
     name: Claude Code
     category: वेबसाइट डिज़ाइन

@@ -25,12 +25,12 @@ vendors:
     # website: https://example.com
     instagram: https://www.instagram.com/example
     note: Note.
-  - slug: placeholder3
-    name: Placeholder
-    category: DJ
-    # website: https://example.com
-    instagram: https://www.instagram.com/example
-    note: Note.
+  - slug: apeksha
+    name: Apeksha
+    category: Everything
+    website: https://viadelhi.in
+    # instagram: https://www.instagram.com/example
+    note: For organising everything. Because Pádraic did nothing!
   - slug: claude
     name: Claude Code
     category: Website design
