@@ -49,9 +49,17 @@ export const strings = {
       visitWebsite: 'Visit website',
       instagram: 'Instagram'
     },
+    rsvpClosed: {
+      title: 'You are fashionably late.',
+      lead:
+        'RSVPs officially closed on 30 June 2026. The deadline came, it went, Pádraic closed the spreadsheet, and Apeksha noticed.',
+      contact:
+        'Still hoping to join us? We would genuinely love that. WhatsApp Apeksha and Pádraic directly and we will sort you out.'
+    },
     rsvp: {
       formTitle: 'RSVP',
-      deadline: 'Please RSVP by 30 June 2026.',
+      deadline:
+        'The RSVP deadline (30 June 2026) has passed, but since you found your way here, you can still let us know.',
       leadName: 'Your name',
       additionalGuests: 'Additional guests on this invitation',
       addGuest: 'Add a guest',
@@ -178,9 +186,17 @@ export const strings = {
       visitWebsite: 'वेबसाइट देखें',
       instagram: 'इंस्टाग्राम'
     },
+    rsvpClosed: {
+      title: 'आप थोड़ा फ़ैशनेबली देर से आए।',
+      lead:
+        'जवाब देने की आख़िरी तारीख़ 30 जून 2026 थी। वह आई, चली गई, पैड्रिक ने स्प्रेडशीट बंद कर दी, और अपेक्षा ने नोट कर लिया।',
+      contact:
+        'फिर भी हमारे साथ आना चाहते हैं? हमें सचमुच बहुत ख़ुशी होगी। अपेक्षा और पैड्रिक को सीधे व्हाट्सऐप करें, हम व्यवस्था कर देंगे।'
+    },
     rsvp: {
       formTitle: 'RSVP: कृपया जवाब दें',
-      deadline: 'कृपया 30 जून 2026 तक जवाब दें।',
+      deadline:
+        'जवाब देने की आख़िरी तारीख़ (30 जून 2026) निकल चुकी है, लेकिन आप यहाँ तक पहुँच ही गए हैं, तो अब भी हमें बता सकते हैं।',
       leadName: 'आपका नाम',
       additionalGuests: 'इस निमंत्रण पर अन्य अतिथि',
       addGuest: 'अतिथि जोड़ें',

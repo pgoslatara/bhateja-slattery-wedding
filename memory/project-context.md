@@ -48,6 +48,8 @@ The user is **Padraic Slattery** (the groom — `partner2` in `site.yaml`). Data
 
 Implementation complete (27 of 28 plan tasks done). Task 28 is a manual user smoke test on the deployed site. See [`pre-launch.md`](pre-launch.md) for the remaining manual actions before going live.
 
+**Post-deadline RSVP (Aug 2026):** the RSVP deadline (30 June 2026) has passed. `/rsvp/` (and `/hi/rsvp/`) now serve a light-hearted "you're too late, WhatsApp us" landing page (`RsvpClosedPage.astro`, strings under `rsvpClosed`). The actual form moved to the **unlinked** `/rsvp-late/` (and `/hi/rsvp-late/`) — reachable by direct URL only for genuine late guests. The RSVP nav item, the homepage RSVP CTA, and the 404-page RSVP link were all removed. The form's `rsvp.deadline` note now reads as a late-RSVP message.
+
 ## Deliberate non-goals (v1)
 
 - "Edit my RSVP" UI — guests resubmit the form to update answers
