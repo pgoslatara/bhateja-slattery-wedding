@@ -1,0 +1,36 @@
+---
+import Layout from '../Layout.astro';
+import { t, type Locale } from '../../i18n/strings';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+<Layout lang={lang} title={s.rsvpClosed.title}>
+  <section class="rsvp-closed">
+    <h1>{s.rsvpClosed.title}</h1>
+    <p class="lead">{s.rsvpClosed.lead}</p>
+    <p class="contact">{s.rsvpClosed.contact}</p>
+  </section>
+</Layout>
+
+<style>
+  .rsvp-closed {
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+  .rsvp-closed h1 {
+    color: var(--color-primary);
+    text-shadow: 0 1px 2px rgba(253, 245, 212, 0.7);
+  }
+  .rsvp-closed .lead {
+    margin-top: 1.25rem;
+    font-size: 1.1rem;
+  }
+  .rsvp-closed .contact {
+    margin-top: 1rem;
+    color: var(--color-text-muted);
+  }
+</style>
