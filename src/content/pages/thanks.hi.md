@@ -1,6 +1,6 @@
 ---
 title: धन्यवाद
-enHash: 0d4974a87242bcb33f85c11aaa5ec0cd88d8b5fe22402e1f9fac8668395bc5f6
+enHash: a102522b8b02f003f0bf55896ed2fb71bf3d36079ccb6f55778b3d97bbef465c
 vendors:
   - slug: chom-chom-pantry
     name: Chom Chom Pantry
@@ -20,12 +20,12 @@ vendors:
     # website: https://example.com
     instagram: https://www.instagram.com/nuviflowersofficial
     note: फूल ताज़े हैं, क्या आप उनकी खुशबू महसूस कर सकते हैं?!
-  - slug: placeholder2
-    name: Placeholder
-    category: सजावट
+  - slug: houseofdee
+    name: House of Dee
+    category: वेडिंग प्लानर
     # website: https://example.com
-    instagram: https://www.instagram.com/example
-    note: नोट।
+    instagram: https://www.instagram.com/houseofdee.events
+    note: बेहतरीन प्लानर, जिन्होंने शादी के दिन का सारा तनाव दूर किया।
   - slug: apeksha
     name: Apeksha
     category: सब कुछ

@@ -19,12 +19,12 @@ vendors:
     # website: https://example.com
     instagram: https://www.instagram.com/nuviflowersofficial
     note: The flowers are fresh, can you smell them?!
-  - slug: placeholder2
-    name: Placeholder
-    category: Decor
+  - slug: houseofdee
+    name: House of Dee
+    category: Wedding Planner
     # website: https://example.com
-    instagram: https://www.instagram.com/example
-    note: Note.
+    instagram: https://www.instagram.com/houseofdee.events
+    note: Planner extraordinaire and reliever of wedding day stress.
   - slug: apeksha
     name: Apeksha
     category: Everything
