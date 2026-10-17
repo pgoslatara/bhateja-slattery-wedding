@@ -3,14 +3,15 @@ import Layout from '../Layout.astro';
 import RsvpForm from '../rsvp/RsvpForm.astro';
 import { t, type Locale } from '../../i18n/strings';
 
-interface Props { lang: Locale }
-const { lang } = Astro.props;
+// showDeadline: false hides the late-RSVP note (used by the unlinked /rsvp-new/ page).
+interface Props { lang: Locale; showDeadline?: boolean }
+const { lang, showDeadline = true } = Astro.props;
 const s = t(lang);
 const appsScriptUrl = import.meta.env.PUBLIC_APPS_SCRIPT_URL ?? '';
 ---
 <Layout lang={lang} title={s.nav.rsvp}>
   <h1>{s.rsvp.formTitle}</h1>
-  <p class="deadline-callout" role="note">{s.rsvp.deadline}</p>
+  {showDeadline && <p class="deadline-callout" role="note">{s.rsvp.deadline}</p>}
   {appsScriptUrl ? (
     <RsvpForm lang={lang} appsScriptUrl={appsScriptUrl} />
   ) : (
